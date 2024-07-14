@@ -8,15 +8,6 @@ public class StatsManager : Singleton<StatsManager>
 
     //Stats to keep
 
-    //Number of levels completed
-    //Highest level achieved
-    //Total Number of Runs
-    //Total points scored
-    //Highest points scored
-    //Total number of moves usedd
-    //Highst Number of moves achieved
-    //Total number of upgrades used
-
     //Total Number of purple spawned
     //Total number of red items spawned
     //total number of gold items spawned 

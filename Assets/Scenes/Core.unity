@@ -201,7 +201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1680, y: -1936}
+  m_AnchoredPosition: {x: -1680, y: -1850}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!43 &284212726
@@ -481,7 +481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1674, y: -1924}
+  m_AnchoredPosition: {x: 1674, y: -1850}
   m_SizeDelta: {x: 635.526, y: 139.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341640175
@@ -1476,6 +1476,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98203cc3cb5055443bc2b2e793119392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _LevelsCompleted: 0
+  _HighestLevelAchieved: 0
+  _TotalNumberOfRuns: 0
+  _TotalPointsScored: 0
+  _HighestPointTotal: 0
+  _TotalNumberOfMovesUsed: 0
+  _HighestMovesNumberAchieved: 0
+  _TotalNumberOfUpgrades: 0
 --- !u!4 &1437359924
 Transform:
   m_ObjectHideFlags: 0

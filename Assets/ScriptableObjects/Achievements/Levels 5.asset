@@ -9,15 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b8af34c6a407944d96bfe99b26fd4e2, type: 3}
-  m_Name: BuildData
+  m_Script: {fileID: 11500000, guid: b778739fcd91435468cb2acd7e902a50, type: 3}
+  m_Name: Levels 5
   m_EditorClassIdentifier: 
-  uploadBuild: 1
-  studioName: spaceshepherd
-  projectName: space-shepherd
-  zipFileName: 
-  updateBuildInfo: 1
-  buildNumber: 58
-  useGit: 1
-  branchName: "\r"
-  sha: "\r"
+  _Sprite: {fileID: 0}
+  _Name: Got 5 levels
+  _Description: Get to Level 5
+  _LevelRequirement: 5
