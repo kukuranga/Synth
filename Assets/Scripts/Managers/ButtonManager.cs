@@ -1099,9 +1099,12 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
         }
         if(RewardsManager.Instance.RollForRewards()) 
         {
-            RewardsManager.Instance.SetRewards(_RewardButton1, _RewardButton2, _RewardButton3);
-            int a = GetNormalItem();
-            _ButtonsRow[a].SetTreasureItem();
+            if (GameManager.Instance._TreasureItemUnlocked)
+            {
+                RewardsManager.Instance.SetRewards(_RewardButton1, _RewardButton2, _RewardButton3);
+                int a = GetNormalItem();
+                _ButtonsRow[a].SetTreasureItem();
+            }
         }
     }
 

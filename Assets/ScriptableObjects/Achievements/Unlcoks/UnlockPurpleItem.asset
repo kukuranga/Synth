@@ -9,15 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b8af34c6a407944d96bfe99b26fd4e2, type: 3}
-  m_Name: BuildData
+  m_Script: {fileID: 11500000, guid: 92acc17861009d54f9dce8a1845ecdec, type: 3}
+  m_Name: UnlockPurpleItem
   m_EditorClassIdentifier: 
-  uploadBuild: 1
-  studioName: spaceshepherd
-  projectName: space-shepherd
-  zipFileName: 
-  updateBuildInfo: 1
-  buildNumber: 60
-  useGit: 1
-  branchName: "\r"
-  sha: "\r"
+  _Description: Heavy Gravity Planet Unlocked

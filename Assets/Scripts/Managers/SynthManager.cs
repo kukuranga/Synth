@@ -4,6 +4,9 @@ using UnityEngine;
 
     public class SynthManager : Singleton<SynthManager>
     {
+
+        //TODO: Change the values to the saved values when save system is implemented
+        
         //-----Upgrade Values---------------
         public int _TotalUpgradePoints;
         public int _UsedUpgradePoints;

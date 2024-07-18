@@ -51,6 +51,14 @@ public class GameManager : Singleton<GameManager>
     public Color _RedItemColorChange;
     public Color _PurpleItemColorChange;
 
+    //Item Unlock Bools
+    public bool _GoldItemUnclocked = false;
+    public bool _PurpleItemUnlocked = false;
+    public bool _RedItemUnlocked = false;
+    public bool _YellowItemUnlocked = false;
+    public bool _FrozenItemUnlocked = false;
+    public bool _TreasureItemUnlocked = false;
+
 
     private void Update()
     {
@@ -128,7 +136,7 @@ public class GameManager : Singleton<GameManager>
     private  void AddBonusesToGame()
     {
         _StartingMoves += (_StartMoveBonus * _StartMoveBonusMultiplier);
-        _MovesToGive += (_RoundWonBonus * _StartMoveBonusMultiplier);
+        _MovesToGive += (_RoundWonBonus * _RoundsMoveBonusMultiplier);
         _GoldenItemChance += (_GoldItemChanceBonus * _GoldItemChanceBonusMultiplier);
         RewardsManager.Instance._RewardsChance += (_TreasureItemChanceBonus * _TreasureItemChanceMultiplier);
         RewardsManager.Instance._Luck += Mathf.RoundToInt(_LuckBonus * _LuckBonusMultiplier);
@@ -177,12 +185,14 @@ public class GameManager : Singleton<GameManager>
     private int _SpawnDecay = 1;
     public bool SpawnGoldenItem()
     {
-        Debug.Log("Spawn decay = :" + _SpawnDecay);
-        float c = Random.Range(0f, 1f);
-        if (c <= (_GoldenItemChance / _SpawnDecay))
+        if (_GoldItemUnclocked)
         {
-            _SpawnDecay++;
-            return true;
+            float c = Random.Range(0f, 1f);
+            if (c <= (_GoldenItemChance / _SpawnDecay))
+            {
+                _SpawnDecay++;
+                return true;
+            }
         }
 
         return false;
@@ -190,10 +200,13 @@ public class GameManager : Singleton<GameManager>
 
     public bool SpawnPurpleItem()
     {
-        float c = Random.Range(0f, 1f);
-        if(c <= _PurpleItemChance)
+        if (_PurpleItemUnlocked)
         {
-            return true;
+            float c = Random.Range(0f, 1f);
+            if (c <= _PurpleItemChance)
+            {
+                return true;
+            }
         }
 
         return false;
@@ -201,10 +214,13 @@ public class GameManager : Singleton<GameManager>
 
     public bool SpawnYellowItem()
     {
-        float c = Random.Range(0f, 1f);
-        if (c <= _YellowItemChance)
+        if (_YellowItemUnlocked)
         {
-            return true;
+            float c = Random.Range(0f, 1f);
+            if (c <= _YellowItemChance)
+            {
+                return true;
+            }
         }
 
         return false;
@@ -212,20 +228,26 @@ public class GameManager : Singleton<GameManager>
 
     public bool SpawnRedItem()
     {
-        float c = Random.Range(0f, 1f);
-        if(c <= _RedItemChance)
+        if (_RedItemUnlocked)
         {
-            return true;
+            float c = Random.Range(0f, 1f);
+            if (c <= _RedItemChance)
+            {
+                return true;
+            }
         }
         return false;
     }
 
     public bool SpawnFrozenItem()
     {
-        float c = Random.Range(0f, 1f);
-        if(c <= _FrozenItemChance)
+        if (_FrozenItemUnlocked)
         {
-            return true;
+            float c = Random.Range(0f, 1f);
+            if (c <= _FrozenItemChance)
+            {
+                return true;
+            }
         }
         return false;
     }

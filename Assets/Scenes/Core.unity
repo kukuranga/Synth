@@ -1141,6 +1141,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab4bbc670357d046b5a965973b298e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _AllAchievements:
+  - {fileID: 11400000, guid: fa605f5e8791f1a41a4ebdd987553f66, type: 2}
+  - {fileID: 11400000, guid: f22967b9f56acdf449c579629a32c96b, type: 2}
+  - {fileID: 11400000, guid: 07c6e5ef845fee742a6a223a02c6539d, type: 2}
+  - {fileID: 11400000, guid: 11df4aac51755584fa34938addcdc070, type: 2}
+  - {fileID: 11400000, guid: 2c94461deca48f748af75c73372bf889, type: 2}
+  - {fileID: 11400000, guid: fa605f5e8791f1a41a4ebdd987553f66, type: 2}
+  - {fileID: 11400000, guid: f22967b9f56acdf449c579629a32c96b, type: 2}
+  - {fileID: 11400000, guid: 07c6e5ef845fee742a6a223a02c6539d, type: 2}
+  - {fileID: 11400000, guid: 11df4aac51755584fa34938addcdc070, type: 2}
+  - {fileID: 11400000, guid: 2c94461deca48f748af75c73372bf889, type: 2}
+  - {fileID: 11400000, guid: fa605f5e8791f1a41a4ebdd987553f66, type: 2}
+  - {fileID: 11400000, guid: f22967b9f56acdf449c579629a32c96b, type: 2}
+  - {fileID: 11400000, guid: 07c6e5ef845fee742a6a223a02c6539d, type: 2}
+  - {fileID: 11400000, guid: 11df4aac51755584fa34938addcdc070, type: 2}
+  - {fileID: 11400000, guid: 2c94461deca48f748af75c73372bf889, type: 2}
+  _NotCompleatedAchievements: []
+  _PendingAchievements: []
+  _CompletedAchievements: []
 --- !u!4 &1156024472
 Transform:
   m_ObjectHideFlags: 0
@@ -1477,7 +1496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LevelsCompleted: 0
-  _HighestLevelAchieved: 0
+  _HighestLevelAchieved: 5
   _TotalNumberOfRuns: 0
   _TotalPointsScored: 0
   _HighestPointTotal: 0
@@ -1715,6 +1734,12 @@ MonoBehaviour:
   _StartingMoves: 8
   _RedItemColorChange: {r: 0.6603774, g: 0.021804927, b: 0.021804927, a: 0}
   _PurpleItemColorChange: {r: 0.6364209, g: 0.03524386, b: 0.6792453, a: 0}
+  _GoldItemUnclocked: 0
+  _PurpleItemUnlocked: 0
+  _RedItemUnlocked: 0
+  _YellowItemUnlocked: 0
+  _FrozenItemUnlocked: 0
+  _TreasureItemUnlocked: 0
 --- !u!4 &1541434362
 Transform:
   m_ObjectHideFlags: 0
