@@ -42,6 +42,7 @@ public class NodeAchievement : MonoBehaviour
         {
             _Image.sprite = _NotUnlockedImage;
             _Background.color = _NotCompletedColor;
+            _Name.text = "";
         }
         
     }
