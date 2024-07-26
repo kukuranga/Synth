@@ -19,6 +19,7 @@ public class SynthOptions : MonoBehaviour
     private void Start()
     {
         _slider = GetComponent<Slider>();
+
     }
 
     public void OnClickSliderPicker()

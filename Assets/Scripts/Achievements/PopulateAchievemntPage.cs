@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PopulateAchievemntPage : MonoBehaviour
 {
-    //TODO: on start get all achievements, Instatiate a new object for each achievement and set the achievement correctly
+
     public GameObject _Prefab;
     public GameObject _Parent;
 

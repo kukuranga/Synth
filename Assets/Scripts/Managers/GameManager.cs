@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     public int _Level = 1;
     public SceneReference _Homepage;
     public SceneReference _GameOverScene;
+
     //Set scene to load when the game starts
     public SceneReference _LevelToLoad;
     public int _RowsToGive = 1;
@@ -24,7 +25,6 @@ public class GameManager : Singleton<GameManager>
     public int _YellowItemsSpawned = 0;
 
     //Synth Upgrade Stats;
-
     [SerializeField] int _StartMoveBonusMultiplier = 1;
     [SerializeField] int _RoundsMoveBonusMultiplier = 1;
     [SerializeField] float _GoldItemChanceBonusMultiplier = 0.01f;
@@ -60,6 +60,13 @@ public class GameManager : Singleton<GameManager>
     public bool _TreasureItemUnlocked = false;
 
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic("Music");
+        OnStartSetRunValues();
+        SaveManager.Instance.LoadGame();
+    }
+
     private void Update()
     {
         if(_Debugger)
@@ -69,9 +76,43 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void FirstGame()
+    //Base Values used to reset
+    private float _BaseGoldenItemChance;
+    private int _BaseGoldenItemBonus;
+    private float _BasePurpleItemChance;
+    private float _BaseRedItemChance;
+    private float _BaseYellowItemChance;
+    private float _BaseFrozenItemChance;
+    private int _BaseStartingMoves;
+    private float _BaseRewardChance;
+
+    //resets the values after a failed run attempt
+    public void ResetRunValues()
     {
-        CheckLevel();
+        _TotalPurpleItemsToSpawn = 1;
+        _RowsToGive = 1;
+        _MovesToGive = _StartingMoves;
+        _GoldenItemChance = _BaseGoldenItemChance;
+        _GoldenItemBonus = _BaseGoldenItemBonus;
+        _PurpleItemChance = _BasePurpleItemChance;
+        _RedItemChance = _BaseRedItemChance;
+        _YellowItemChance = _BaseYellowItemChance;
+        _FrozenItemChance = _BaseFrozenItemChance;
+        _StartingMoves = _BaseStartingMoves;
+        RewardsManager.Instance._RewardsChance = _BaseRewardChance;
+    }
+
+    private void OnStartSetRunValues()
+    {
+        //Set the default values to be reset on game load
+        _BaseGoldenItemChance = _GoldenItemChance;
+        _BaseGoldenItemBonus = _GoldenItemBonus;
+        _BasePurpleItemChance = _PurpleItemChance;
+        _BaseRedItemChance = _RedItemChance;
+        _BaseYellowItemChance = _YellowItemChance;
+        _BaseFrozenItemChance = _FrozenItemChance;
+        _BaseStartingMoves = _StartingMoves;
+        _BaseRewardChance = RewardsManager.Instance._RewardsChance;
     }
 
     private void CheckLevel()
@@ -80,11 +121,8 @@ public class GameManager : Singleton<GameManager>
         switch (_Level)
         {
             case 1:
-                _TotalPurpleItemsToSpawn = 1;
-                _RowsToGive = 1;
-                _MovesToGive = _StartingMoves;
+                ResetRunValues();
                 AddBonusesToGame();
-                //ToDo: Put the logic to reset the game here
                 break;
             case 2:
                 _MovesToGive = 5;
@@ -241,7 +279,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool SpawnFrozenItem()
     {
-        if (_FrozenItemUnlocked)
+        if (_FrozenItemUnlocked && _RowsToGive > 1)
         {
             float c = Random.Range(0f, 1f);
             if (c <= _FrozenItemChance)
@@ -271,6 +309,7 @@ public class GameManager : Singleton<GameManager>
     
     public void GameOver()
     {
+        SaveManager.Instance.SaveGame();
         if (!_GameOver)
         {
             ResetGame();
@@ -282,7 +321,7 @@ public class GameManager : Singleton<GameManager>
     {
         SetMoves();
         IncreasePurpleItemChance(0.001f);
-        IncreaseRedItemChance(0.001f);
+        IncreaseRedItemChance(0.002f);
         _purpleItemsSpawned = 0;
         _YellowItemsSpawned = 0;
         _SpawnDecay = 1;

@@ -64,6 +64,7 @@ public class AchievementManager : Singleton<AchievementManager>
         foreach(Achievement _ach in _CompletedAchievements)
         {
             _ach._Unlock.Bonus();
+            _ach._Unlocked = true;
         }
     }
 }

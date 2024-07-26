@@ -17,5 +17,5 @@ MonoBehaviour:
   _Description: Get to Level 6
   _Difficulty: 0
   _Unlock: {fileID: 11400000, guid: dfac5d9add3777e47923c00248c348f0, type: 2}
-  _Unlocked: 1
+  _Unlocked: 0
   _LevelRequirement: 6
