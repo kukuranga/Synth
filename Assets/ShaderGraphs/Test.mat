@@ -53,7 +53,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _ShokeWaveStrength: 3.3
     - _Size: 0.1
-    - _Wave: 1
+    - _Wave: 0
     - _WaveDistanceFromCenter: 0.962
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

@@ -328,6 +328,7 @@ public class GameManager : Singleton<GameManager>
         StatsManager.Instance.AddToLevelsCompleted(1);
         StatsManager.Instance.CheckHighestLevelCompleted(_Level);
         _Level++;
+        SynthManager.Instance.GrowSynth();
         CheckLevel();
     }
 
@@ -341,6 +342,7 @@ public class GameManager : Singleton<GameManager>
         _purpleItemsSpawned = 0;
         _YellowItemsSpawned = 0;
         PointsManager.Instance.ResetPoints();
+        SynthManager.Instance.ResetSynth();
         CheckLevel();
     }
 }

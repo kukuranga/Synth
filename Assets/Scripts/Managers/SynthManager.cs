@@ -4,8 +4,6 @@ using UnityEngine;
 
     public class SynthManager : Singleton<SynthManager>
     {
-
-        //TODO: Change the values to the saved values when save system is implemented
         
         //-----Upgrade Values---------------
         public int _TotalUpgradePoints;
@@ -18,7 +16,9 @@ using UnityEngine;
         public int _Cu2P = 1;//curves 2 points
         public int _Cu3P = 1;//curves 3 points
 
-        //----------------------------------
+    //----------------------------------
+        public bool _Dance = true;
+        public bool _Pulse = true;
 
         public float _ChaosMaxRange = 0.2f;
 
@@ -32,6 +32,8 @@ using UnityEngine;
         public Curved _Curved1;
         public Curved _Curved2;
         public Curved _Curved3;
+
+        public float _PreviousChangeA = 10;    
 
         //method to add a random amount to a field 
 
@@ -88,9 +90,29 @@ using UnityEngine;
 
     private void Dance()
     {
+
         float offsetY = _amplitude * Mathf.Sin(Time.time * _frequency);
 
+        if(_Dance)
         _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, _originalYPosition + offsetY);
+        
+        if (_Pulse)
+        {
+            _Circle1.Impact = (offsetY * 2);
+            _Curved1.Impact = (offsetY * 2);
+        }
+    }
+
+    public void GrowSynth()
+    {
+        _Animator.Change_A = _PreviousChangeA + 10;
+        _PreviousChangeA = _Animator.Change_A;
+    }
+
+    public void ResetSynth()
+    {
+        _Animator.Change_A = 10;
+        _PreviousChangeA = 10;
     }
 
     public void AddBonusesToGame()
