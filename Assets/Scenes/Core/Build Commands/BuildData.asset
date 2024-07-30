@@ -17,7 +17,7 @@ MonoBehaviour:
   projectName: space-shepherd
   zipFileName: 
   updateBuildInfo: 1
-  buildNumber: 60
+  buildNumber: 61
   useGit: 1
   branchName: "\r"
   sha: "\r"

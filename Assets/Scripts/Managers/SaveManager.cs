@@ -5,10 +5,10 @@ using System.IO;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    public SaveData data;
 
     public void SaveGame()
     {
-        SaveData data = new SaveData();
         data.Save();
         string json = JsonUtility.ToJson(data);
 
@@ -22,10 +22,8 @@ public class SaveManager : Singleton<SaveManager>
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            data = JsonUtility.FromJson<SaveData>(json);
             data.Load();
-            //player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-            //player.score = data.score;
 
             Debug.Log("Game Loaded");
         }
