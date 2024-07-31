@@ -33,26 +33,37 @@ using UnityEngine;
         public Curved _Curved2;
         public Curved _Curved3;
 
-        public float _PreviousChangeA = 10;    
+        public float _PreviousChangeA = 100;
 
-        //method to add a random amount to a field 
+    //method to add a random amount to a field 
 
 
 
-        //maybe add a ref to each material preset 
+    //maybe add a ref to each material preset 
 
-        public void RandomUpgrade()
+    public void RandomUpgrade()
+    {
+        int r = Random.Range(1, 5);
+        Debug.Log("synth upgrade: " + r);
+        switch (r)
         {
-            int r = Random.Range(1, 2);
-            Debug.Log("synth upgrade: " + r);
-            switch(r)
-            {
-                case 1: WholeCircle();
-                    break;
-                case 2: WholeCurve();
-                    break;
-            }
+            case 1:
+                WholeCircle(_Circle1);
+                break;
+            case 2:
+                WholeCurve(_Curved1);
+                break;
+            case 3:
+                WholeCurve(_Curved2);
+                break;
+            case 4:
+                WholeCircle(_Circle2);
+                break;
+            case 5:
+                WholeCurve(_Curved3);
+                break;
         }
+    }
 
     //Dance
     private float _originalYPosition;
@@ -91,28 +102,38 @@ using UnityEngine;
     private void Dance()
     {
 
-        float offsetY = _amplitude * Mathf.Sin(Time.time * _frequency);
 
-        if(_Dance)
-        _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, _originalYPosition + offsetY);
-        
+        if (_Dance)
+        {
+            float offsetY = _amplitude * Mathf.Sin(Time.time * _frequency);
+            _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, _originalYPosition + offsetY);
+        }
         if (_Pulse)
         {
-            _Circle1.Impact = (offsetY * 2);
-            _Curved1.Impact = (offsetY * 2);
+            float offsetP = Mathf.Sin(Time.time * (_frequency * 1.5f));
+            _Circle1.Impact = (offsetP / 2) + 1;
+            _Circle2.Impact = (offsetP / 2) + 1;
+            _Curved1.Impact = (offsetP / 2) + 1;
+            _Curved2.Impact = (offsetP / 2) + 1;
+            _Curved3.Impact = (offsetP / 2) + 1;
         }
     }
 
     public void GrowSynth()
     {
-        _Animator.Change_A = _PreviousChangeA + 10;
-        _PreviousChangeA = _Animator.Change_A;
+        //_Mixer.a += 10;
+        //_PreviousChangeA = _Mixer.a;
+        if (_Mixer.Radius < 10) //&& GameManager.Instance._Level > 5)
+        {
+            _Mixer.Radius += 0.1f;
+        }
     }
 
     public void ResetSynth()
     {
-        _Animator.Change_A = 10;
-        _PreviousChangeA = 10;
+        //_Mixer.a = 100;
+        //_PreviousChangeA = 100;
+        _Mixer.Radius = 0.5f;
     }
 
     public void AddBonusesToGame()
@@ -127,58 +148,22 @@ using UnityEngine;
     }
 
     //---------------------------------------------------------------------------Functions To Call---------------------------------------------------------------
-    public void WholeCircle()
+    public void WholeCircle(Circle _c)
         {
             //bool Rand = GetRandomBoolean();
             //if(Rand)
-             AddToCircle(_Circle1, 0,  1);
+             AddToCircle(_c, 0,  1);
             //else            
             //    AddToCircle(_Circle1, 0, -1);            
         } 
 
-        public void FractCircle()
-        {
-            //bool Rand = GetRandomBoolean();
-            //if(Rand)
-                AddToCircle(_Circle2, 0,  0.1f);
-            //else            
-                //AddToCircle(_Circle2, 0, -0.1f);            
-        }
-
-        public void ChaosCircle()
-        {
-            float fl = GetRandomFloat();
-            //bool bl = GetRandomBoolean();
-
-            //if (bl)
-                AddToCircle(_Circle1, 0, fl);
-            //else
-            //    AddToCircle(_Circle2, 0, fl);
-        }
-
-        public void WholeCurve()
+        public void WholeCurve(Curved _c)
         {
             //bool Rand = GetRandomBoolean();
             //if (Rand)
-                AddToCurve(_Curved1, 0, 1);
+                AddToCurve(_c, 0, 1);
             //else
             //    AddToCurve(_Curved1, 0, -0.5f);
-        }
-
-        public void FractCurve()
-        {
-            //bool Rand = GetRandomBoolean();
-            //if (Rand)
-               AddToCurve(_Curved2, 0, 0.1f);
-
-            //else
-            //    AddToCurve(_Curved2, 0, -0.1f);
-        }
-
-        public void ChaosCurve()
-        {
-            float fl = GetRandomFloat();
-            AddToCurve(_Curved3, 0, fl);
         }
         //-----------------------------------------------------------------------------------------------------------------------
 
