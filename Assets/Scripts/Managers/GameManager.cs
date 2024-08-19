@@ -6,6 +6,9 @@ public class GameManager : Singleton<GameManager>
 {
     //Todo: add logic to persist the number of moves available and add the moves on each level up
 
+    public bool _SetColors;
+    public List<Color> colors;
+
     public bool _Debugger;
     public float _SwipeSensitivity;
     public int _Level = 1;
@@ -309,7 +312,6 @@ public class GameManager : Singleton<GameManager>
     
     public void GameOver()
     {
-        SaveManager.Instance.SaveGame();
         if (!_GameOver)
         {
             ResetGame();
@@ -329,6 +331,7 @@ public class GameManager : Singleton<GameManager>
         StatsManager.Instance.CheckHighestLevelCompleted(_Level);
         _Level++;
         SynthManager.Instance.GrowSynth();
+        SaveManager.Instance.SaveGame();
         CheckLevel();
     }
 
@@ -343,6 +346,7 @@ public class GameManager : Singleton<GameManager>
         _YellowItemsSpawned = 0;
         PointsManager.Instance.ResetPoints();
         SynthManager.Instance.ResetSynth();
+        SaveManager.Instance.SaveGame();
         CheckLevel();
     }
 }

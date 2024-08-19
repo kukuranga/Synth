@@ -73,8 +73,14 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
         _Image = GetComponent<Image>();
         _rect = GetComponent<RectTransform>();
         CheckItem(); //Checks the item type to give this item
+        if(GameManager.Instance._SetColors)
+            SetColor();
     }
 
+    public void SetColor()
+    {
+        _Image.color =  GameManager.Instance.colors[_CorrectPosition];
+    }
 
     //Checks the item type to give this item
     private void CheckItem()
@@ -168,6 +174,8 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
                  break;
             
         }
+        if (GameManager.Instance._SetColors) 
+            _Image.color =  GameManager.Instance.colors[_CorrectPosition];
     }
 
     public bool IsCorrect()

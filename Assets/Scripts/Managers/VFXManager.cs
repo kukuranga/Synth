@@ -8,6 +8,7 @@ public class VFXManager : Singleton<VFXManager>
 
     public Image _LevelImage;
     public Image _MovesImage;
+    public ParticleSystem _RainPS;
 
     private bool _InUse = false;
 
@@ -28,6 +29,20 @@ public class VFXManager : Singleton<VFXManager>
             StartCoroutine(Fade(_c, _Alpha, duration, _MovesImage));
         }
     }
+
+    #region Rain
+
+    public void RainEnable()
+    {
+        _RainPS.gameObject.SetActive(true);
+    }
+
+    public void RainDisable()
+    {
+        _RainPS?.gameObject.SetActive(false);
+    }
+
+    #endregion
 
     IEnumerator Fade(Color _col, float _Alpha, float duration, Image _Image)
     {

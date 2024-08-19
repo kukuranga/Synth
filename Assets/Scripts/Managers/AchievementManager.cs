@@ -40,8 +40,14 @@ public class AchievementManager : Singleton<AchievementManager>
                 _PendingAchievements.Add(_Ach);
         }
 
-        CheckPendingAchievements();
+        //CheckPendingAchievements();
         CheckUpgrades();
+    }
+
+    //To be called when the achievement tab is opened
+    public void OpenAchievementsTab()
+    {
+        CheckPendingAchievements();
     }
 
     public void CheckPendingAchievements()
@@ -66,5 +72,15 @@ public class AchievementManager : Singleton<AchievementManager>
             _ach._Unlock.Bonus();
             _ach._Unlocked = true;
         }
+    }
+
+    public bool HasPendingAchievements()
+    {
+        if(_PendingAchievements.Count > 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

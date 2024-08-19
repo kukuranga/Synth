@@ -101,8 +101,6 @@ using UnityEngine;
 
     private void Dance()
     {
-
-
         if (_Dance)
         {
             float offsetY = _amplitude * Mathf.Sin(Time.time * _frequency);
@@ -110,7 +108,7 @@ using UnityEngine;
         }
         if (_Pulse)
         {
-            float offsetP = Mathf.Sin(Time.time * (_frequency * 1.5f));
+            float offsetP = Mathf.Sin(Time.time * (_frequency * 0.5f));
             _Circle1.Impact = (offsetP / 2) + 1;
             _Circle2.Impact = (offsetP / 2) + 1;
             _Curved1.Impact = (offsetP / 2) + 1;

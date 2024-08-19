@@ -16,6 +16,6 @@ MonoBehaviour:
   _Name: Lemon Squeezy
   _Description: Get to Level 6
   _Difficulty: 0
-  _Unlock: {fileID: 11400000, guid: dfac5d9add3777e47923c00248c348f0, type: 2}
+  _Unlock: {fileID: 11400000, guid: 15f02bc9ccb6585438111f19a12a0949, type: 2}
   _Unlocked: 0
   _LevelRequirement: 6

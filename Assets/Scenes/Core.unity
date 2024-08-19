@@ -342,8 +342,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading ...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fc22af41ebdd9c344b7762836c7fd998, type: 2}
+  m_sharedMaterial: {fileID: 3079814859734222528, guid: fc22af41ebdd9c344b7762836c7fd998, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -908,8 +908,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading  Loading
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b5b6e626db298114ea4efe4a1f464060, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b5b6e626db298114ea4efe4a1f464060, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1133,6 +1133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _AllAchievements:
   - {fileID: 11400000, guid: fa605f5e8791f1a41a4ebdd987553f66, type: 2}
+  - {fileID: 11400000, guid: f22967b9f56acdf449c579629a32c96b, type: 2}
+  - {fileID: 11400000, guid: 07c6e5ef845fee742a6a223a02c6539d, type: 2}
+  - {fileID: 11400000, guid: 11df4aac51755584fa34938addcdc070, type: 2}
+  - {fileID: 11400000, guid: 2c94461deca48f748af75c73372bf889, type: 2}
+  - {fileID: 11400000, guid: d7ebbe3464127a74c82469f9ad7af462, type: 2}
   _NotCompleatedAchievements: []
   _PendingAchievements: []
   _CompletedAchievements: []
@@ -1736,8 +1741,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading  Loading
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1840,7 +1845,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f165d7e7775b8924f86d716183baf907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Debugger: 0
+  _SetColors: 1
+  colors:
+  - {r: 0.8086346, g: 0.9811321, b: 0.72659314, a: 1}
+  - {r: 0.60272604, g: 0.9622642, b: 0.43120328, a: 1}
+  - {r: 0.31937924, g: 0.9622642, b: 0.013616921, a: 1}
+  - {r: 1, g: 0.7122642, b: 0.7841981, a: 1}
+  - {r: 1, g: 0.504717, b: 0.6268416, a: 1}
+  - {r: 1, g: 0.1273585, b: 0.3425304, a: 1}
+  - {r: 0.6839622, g: 0.98252445, b: 1, a: 1}
+  - {r: 0.5330188, g: 0.97697973, b: 1, a: 1}
+  - {r: 0.08962262, g: 0.95504314, b: 1, a: 1}
+  _Debugger: 1
   _SwipeSensitivity: 2
   _Level: 1
   _Homepage:
@@ -1853,8 +1869,8 @@ MonoBehaviour:
     sceneName: 
   _LevelToLoad:
     sceneAsset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-    scenePath: Assets/Scenes/SampleScene.unity
-    sceneName: SampleScene
+    scenePath: Assets/Scenes/Game.unity
+    sceneName: Game
   _RowsToGive: 1
   _GameOver: 0
   _TotalPurpleItemsToSpawn: 1
@@ -1973,8 +1989,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading  Loading
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b5b6e626db298114ea4efe4a1f464060, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b5b6e626db298114ea4efe4a1f464060, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

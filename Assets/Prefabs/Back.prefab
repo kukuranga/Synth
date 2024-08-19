@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Index: 0
+  _ColorSprite: {fileID: 21300000, guid: f486c368b5ca8624e98d0a171e12f1ef, type: 3}
   _CorrectGO: {fileID: 5416131526361173330}
   _Material: {fileID: 2100000, guid: 0486cd27849bd75499fc6bcb83bb8e88, type: 2}
 --- !u!1 &5416131526361173330

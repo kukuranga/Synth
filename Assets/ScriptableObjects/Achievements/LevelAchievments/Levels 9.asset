@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Sprite: {fileID: 21300000, guid: d8995e4327c45a34fbb4f3f7e9974775, type: 3}
   _Name: Yooooooo!!!!!!!
-  _Description: Get to Level 6
+  _Description: Get to Level 9
   _Difficulty: 3
-  _Unlock: {fileID: 11400000, guid: dfac5d9add3777e47923c00248c348f0, type: 2}
+  _Unlock: {fileID: 11400000, guid: 9a1b52b313c90574c8c7ef6111865d2e, type: 2}
   _Unlocked: 0
-  _LevelRequirement: 6
+  _LevelRequirement: 9
