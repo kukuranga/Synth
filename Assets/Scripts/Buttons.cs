@@ -73,8 +73,6 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
         _Image = GetComponent<Image>();
         _rect = GetComponent<RectTransform>();
         CheckItem(); //Checks the item type to give this item
-        if(GameManager.Instance._SetColors)
-            SetColor();
     }
 
     public void SetColor()
@@ -105,7 +103,9 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
             SetRedItem();
         else if (GameManager.Instance.SpawnFrozenItem())
             SetFrozenItem();
-        
+
+        if (GameManager.Instance._SetColors && _ItemType == ItemType.NormalItem)
+            _Image.color =  GameManager.Instance.colors[_CorrectPosition];
     }
 
     private bool _CheckedAlready = false;
@@ -174,8 +174,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
                  break;
             
         }
-        if (GameManager.Instance._SetColors) 
-            _Image.color =  GameManager.Instance.colors[_CorrectPosition];
+        
     }
 
     public bool IsCorrect()

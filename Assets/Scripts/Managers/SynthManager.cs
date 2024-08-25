@@ -108,12 +108,13 @@ using UnityEngine;
         }
         if (_Pulse)
         {
+            int _add = 2;
             float offsetP = Mathf.Sin(Time.time * (_frequency * 0.5f));
-            _Circle1.Impact = (offsetP / 2) + 1;
-            _Circle2.Impact = (offsetP / 2) + 1;
-            _Curved1.Impact = (offsetP / 2) + 1;
-            _Curved2.Impact = (offsetP / 2) + 1;
-            _Curved3.Impact = (offsetP / 2) + 1;
+            _Circle1.Impact = (offsetP / 2) + _add;
+            _Circle2.Impact = (offsetP / 2) + _add;
+            _Curved1.Impact = (offsetP / 2) + _add;
+            _Curved2.Impact = (offsetP / 2) + _add;    
+            _Curved3.Impact = (offsetP / 2) + _add;
         }
     }
 
