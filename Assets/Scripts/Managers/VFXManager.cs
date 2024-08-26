@@ -9,6 +9,23 @@ public class VFXManager : Singleton<VFXManager>
     public Image _LevelImage;
     public Image _MovesImage;
     public ParticleSystem _RainPS;
+    public GameObject _VFXRain;
+    public GameObject _VFXDust;
+    public GameObject _VFXParticles;
+    public GameObject _VFXSynthBackground;
+
+    //TODO: Have different presets of items to spawn with a unique background
+
+
+    private void Start()
+    {
+        _VFXDust.SetActive(false);
+        _VFXParticles.SetActive(false);
+        _VFXRain.SetActive(true);
+        _VFXSynthBackground.SetActive(true);
+
+        OverwierManager.Instance.FadeIn(Color.cyan, 0.2f, 0.1f);
+    }
 
     private bool _InUse = false;
 

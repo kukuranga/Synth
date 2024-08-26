@@ -27,6 +27,8 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
     public Sprite _RedItemSprite;
     public Sprite _YellowItemSprite;
 
+    public Image _ColorSprite;
+
     public int _Index = 0;
     public int _CorrectPosition = 0;
     public bool _Pressed = false;
@@ -77,7 +79,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
 
     public void SetColor()
     {
-        _Image.color =  GameManager.Instance.colors[_CorrectPosition];
+        _ColorSprite.color =  GameManager.Instance.colors[_CorrectPosition];
     }
 
     //Checks the item type to give this item
@@ -105,7 +107,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
             SetFrozenItem();
 
         if (GameManager.Instance._SetColors && _ItemType == ItemType.NormalItem)
-            _Image.color =  GameManager.Instance.colors[_CorrectPosition];
+            _ColorSprite.color =  GameManager.Instance.colors[_CorrectPosition];
     }
 
     private bool _CheckedAlready = false;

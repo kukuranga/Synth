@@ -17,9 +17,9 @@ public class SpriteManager : Singleton<SpriteManager>
     void LoadSprites()
     {
         // Load all sprites from the specified folder path
-        if(GameManager.Instance._SetColors)
-            _MageloadedSprites = Resources.LoadAll<Sprite>(_ColorlessPatrh);
-        else
+        //if(GameManager.Instance._SetColors)
+            //_MageloadedSprites = Resources.LoadAll<Sprite>(_ColorlessPatrh);
+        //else
             _MageloadedSprites = Resources.LoadAll<Sprite>(_MageSpritePath);
 
         if (_MageloadedSprites.Length > 0)
