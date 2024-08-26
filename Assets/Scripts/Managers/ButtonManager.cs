@@ -1017,7 +1017,7 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
             int val = Random.Range(0, uniqueNumbers.Count);
             btn._CorrectPosition = uniqueNumbers[val];
             uniqueNumbers.RemoveAt(val);
-            if (GameManager.Instance._SetColors && btn._ItemType == ItemType.NormalItem)
+            if (GameManager.Instance._SetColors && btn._ItemType == ItemType.NormalItem)  //Might remove if special items should have background colors
                 btn.SetColor();
         }
         SetCorrectNumbers();

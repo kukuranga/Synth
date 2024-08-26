@@ -8,9 +8,11 @@ public class Container : MonoBehaviour
     //This script will contain an index number to   
 
     public int _Index;
-    public Sprite _ColorSprite;
+    //public Sprite _ColorSprite;
     public GameObject _CorrectGO;
     public Material _Material;
+
+    public Image _ColorImage;
 
     private RectTransform _rect;
     private Image _Image;
@@ -23,8 +25,8 @@ public class Container : MonoBehaviour
         _Image = GetComponent<Image>();
         if (GameManager.Instance._SetColors)
         {
-            _Image.color = GameManager.Instance.colors[_Index];
-            _Image.sprite = _ColorSprite;
+            _ColorImage.color = GameManager.Instance.colors[_Index];
+            //_Image.sprite = _ColorSprite;
         }
     }
 
