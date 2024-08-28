@@ -1,10 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum LevelPreSet
+{
+    Normal,
+    Rain,
+    Dust,
+    lava,
+    gold
+}
 public class GameManager : Singleton<GameManager>
 {
     //Todo: add logic to persist the number of moves available and add the moves on each level up
+
+    //TODO  Today: add different value presets to load for each level and determin the ammount dependant on level
+    // eg a frozen level and a lava level preset
+    
+    //Todo: Use this to add to the level preset and add on differnt values to roll for when spawning the planets
+    // eg: rain planet will have a 0% chance to spawn lava but a 60% to spawn frozen planets
+    public LevelPreSet _levelPreSet;
+   
+    //possible presets: Rain level(more ice planets), lava level(more red planets), gold levels(more golden planets)
+    
+
+    //add here: Preset values for all planets, a save method to save the planets original values on normal levels,
+
+    //add here values for each of the different planet presets depending on the _levelpreset selected
+
+    //Figure out the different how the level presets would be required.
+    
 
     public bool _SetColors;
     public List<Color> colors;
@@ -62,12 +86,21 @@ public class GameManager : Singleton<GameManager>
     public bool _FrozenItemUnlocked = false;
     public bool _TreasureItemUnlocked = false;
 
+    //Reset Values post unlocks
+    private float _GoldItemPreset = 0f;
+    private float _PurpleItemPreset = 0f;
+    private float _RedItemPreset = 0f;
+    private float _YellowItemPreset = 0f;
+    private float _FrozenItemPreset = 0f;
+    private float _TreasureItemPreset = 0f;
+
 
     private void Start()
     {
         AudioManager.Instance.PlayMusic("Music");
         OnStartSetRunValues();
         SaveManager.Instance.LoadGame();
+        CheckLevelPreset();//Test here 
     }
 
     private void Update()
@@ -75,7 +108,7 @@ public class GameManager : Singleton<GameManager>
         if(_Debugger)
         {
             _RowsToGive = 3;
-            _MovesToGive = 9999;
+            _MovesToGive = 9001;
         }
     }
 
@@ -137,6 +170,10 @@ public class GameManager : Singleton<GameManager>
                 break;
             case 10:
                 _MovesToGive += 3;
+                _levelPreSet = LevelPreSet.gold;
+                break;
+            case 11:
+                _levelPreSet = LevelPreSet.Normal;
                 break;
             case 15:
                 _MovesToGive += 2;
@@ -148,6 +185,10 @@ public class GameManager : Singleton<GameManager>
                 IncreaseFrozenItemChance(0.2f);
                 IncreaseYellowItemChance(0.1f);
                 _RowsToGive = 3;
+                _levelPreSet = LevelPreSet.lava;
+                break;
+            case 26:
+                _levelPreSet = LevelPreSet.Normal;
                 break;
             case 30:
                 IncreaseFrozenItemChance(0.1f);
@@ -163,6 +204,76 @@ public class GameManager : Singleton<GameManager>
                 //_MovesToGive--;
                 break;
         }
+    }
+
+    public void CheckLevelPreset()
+    {
+        //this will check the level preset selected and change the spawn values to accomodate for that
+        //it will than run the new level editor with the values selected 
+
+        //Check this when loading a new level
+
+        //Set the preset amounts
+        if (_levelPreSet != LevelPreSet.Normal)
+        {
+            _GoldItemPreset = _GoldenItemChance;
+            _PurpleItemPreset = _PurpleItemChance;
+            _RedItemPreset = _RedItemChance;
+            _YellowItemPreset = _YellowItemChance;
+            _FrozenItemPreset = _FrozenItemChance;
+        }
+
+        //load the preset heres here
+
+
+        switch(_levelPreSet)
+        {
+            case LevelPreSet.Normal:
+                //nothing changes
+                break;
+            case LevelPreSet.Dust:
+                _GoldenItemChance = 0f;
+                _PurpleItemChance = 0f;
+                _RedItemChance = 0f;
+                _YellowItemChance = 0.6f;
+                _FrozenItemChance = 0f;
+                break;
+            case LevelPreSet.Rain:
+                _GoldenItemChance = 0f;
+                _PurpleItemChance = 0f;
+                _RedItemChance = 0f;
+                _YellowItemChance = 0.1f;
+                _FrozenItemChance = 0.5f;
+                break;
+            case LevelPreSet.lava:
+                _GoldenItemChance = 0f;
+                _PurpleItemChance = 0f;
+                _RedItemChance = 0.6f;
+                _YellowItemChance = 0f;
+                _FrozenItemChance = 0f;
+                break;
+            case LevelPreSet.gold:
+                _GoldenItemChance = 0.6f;
+                _PurpleItemChance = 0f;
+                _RedItemChance = 0f;
+                _YellowItemChance = 0f;
+                _FrozenItemChance = 0f;
+                break;
+        }
+}
+
+    public void ResetValuesAfterLevelPreset()
+    {
+        //this will reset the values to the stored values from before
+        //do this after the new level is finished loading
+        //make sure the added values for the new system arent added until after this is called
+
+        _GoldenItemChance = _GoldItemPreset;
+        _PurpleItemChance = _PurpleItemPreset;
+        _RedItemChance = _RedItemPreset;
+        _YellowItemChance = _YellowItemPreset;
+        _FrozenItemChance = _FrozenItemPreset;
+
     }
 
     public void SetSynthBonuses(int _StartMoves, int _Move, int _GoldItems, int _TreasureItems, int _Luck)
@@ -321,12 +432,14 @@ public class GameManager : Singleton<GameManager>
 
     public void GameWon()
     {
+
         SetMoves();
         IncreasePurpleItemChance(0.001f);
         IncreaseRedItemChance(0.002f);
         _purpleItemsSpawned = 0;
         _YellowItemsSpawned = 0;
         _SpawnDecay = 1;
+        CheckLevelPreset();
         StatsManager.Instance.AddToLevelsCompleted(1);
         StatsManager.Instance.CheckHighestLevelCompleted(_Level);
         _Level++;

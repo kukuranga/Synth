@@ -9,7 +9,12 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveGame()
     {
-        data.Save();
+        if (data == null)
+        {
+            data = new SaveData(); // Ensure that 'data' is instantiated
+        }
+
+        data.Save(); // Call the Save method on the data object
         string json = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
@@ -23,13 +28,16 @@ public class SaveManager : Singleton<SaveManager>
         {
             string json = File.ReadAllText(path);
             data = JsonUtility.FromJson<SaveData>(json);
-            data.Load();
+            data.Load(); // Call the Load method on the data object
 
             Debug.Log("Game Loaded");
         }
         else
         {
             Debug.LogWarning("Save file not found");
+
+            // Instantiate 'data' if the file doesn't exist, to prevent null reference issues later
+            data = new SaveData();
         }
     }
 

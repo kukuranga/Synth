@@ -8,11 +8,19 @@ public class VFXManager : Singleton<VFXManager>
 
     public Image _LevelImage;
     public Image _MovesImage;
+    public GameObject _SynthBackground;
     public ParticleSystem _RainPS;
     public GameObject _VFXRain;
     public GameObject _VFXDust;
     public GameObject _VFXParticles;
     public GameObject _VFXSynthBackground;
+    public Color _BaseBackgroundColor;
+    public Color _DustBackgroundColor;
+    public Color _RainBackgroundColor;
+    public Color _GoldBackgroundColor;
+    public Color _RedBackgroundColor;
+
+
 
     //TODO: Have different presets of items to spawn with a unique background
 
@@ -21,10 +29,54 @@ public class VFXManager : Singleton<VFXManager>
     {
         _VFXDust.SetActive(false);
         _VFXParticles.SetActive(false);
-        _VFXRain.SetActive(true);
+        _VFXRain.SetActive(false);
         _VFXSynthBackground.SetActive(true);
 
-        OverwierManager.Instance.FadeIn(Color.cyan, 0.2f, 0.1f);
+        //Figure out how the acctivated backgrounds will work with gameplay
+
+        if(GameManager.Instance._levelPreSet != LevelPreSet.Normal)
+        {
+            //_SynthBackground.SetActive(false);
+        }
+
+        switch(GameManager.Instance._levelPreSet)
+        {
+            case LevelPreSet.Normal:
+                _VFXDust.SetActive(false);
+                _VFXParticles.SetActive(false);
+                _VFXRain.SetActive(false);
+                _VFXSynthBackground.SetActive(false);
+                OverwierManager.Instance._MainCamera.backgroundColor = _BaseBackgroundColor;
+                break;
+            case LevelPreSet.Dust:
+                _VFXDust.SetActive(true);
+                _VFXParticles.SetActive(false);
+                _VFXRain.SetActive(false);
+                _VFXSynthBackground.SetActive(false);
+                OverwierManager.Instance._MainCamera.backgroundColor = _DustBackgroundColor;
+                break;
+            case LevelPreSet.gold:
+                _VFXDust.SetActive(false);
+                _VFXParticles.SetActive(false);
+                _VFXRain.SetActive(false);
+                _VFXSynthBackground.SetActive(false);
+                OverwierManager.Instance._MainCamera.backgroundColor = _GoldBackgroundColor;
+                break;
+            case LevelPreSet.lava:
+                _VFXDust.SetActive(false);
+                _VFXParticles.SetActive(true);
+                _VFXRain.SetActive(false);
+                _VFXSynthBackground.SetActive(false);
+                OverwierManager.Instance._MainCamera.backgroundColor = _RedBackgroundColor;
+                break;
+            case LevelPreSet.Rain:
+                _VFXDust.SetActive(false);
+                _VFXParticles.SetActive(false);
+                _VFXRain.SetActive(true);
+                _VFXSynthBackground.SetActive(false);
+                OverwierManager.Instance._MainCamera.backgroundColor = _RainBackgroundColor;
+                break;
+        }
     }
 
     private bool _InUse = false;

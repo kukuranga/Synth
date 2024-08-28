@@ -944,7 +944,6 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
             _GameWonScreen.SetActive(true);
             SynthManager.Instance.RandomUpgrade();
 
-
             GameManager.Instance.StoreMoves(_MovesLeft);
             _Containers[0].SetWave(true);
             GameManager.Instance.GameWon();

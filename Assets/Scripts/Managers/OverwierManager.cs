@@ -19,7 +19,12 @@ public class OverwierManager : Singleton<OverwierManager>
         tempColor.a = 0f;
         _Image.color = tempColor;
         _MainBackgroundColor = _MainCamera.backgroundColor;
-        CameraFadeIn(Color.red, 5f);
+        //CameraFadeIn(Color.red, 5f);
+    }
+
+    public void ChangeBackgroundColor(Color _c)
+    {
+        _MainCamera.backgroundColor = _c;
     }
 
     public void FadeIn(Color _c , float _Alpha, float duration)
