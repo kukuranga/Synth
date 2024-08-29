@@ -50,6 +50,8 @@ public class GameManager : Singleton<GameManager>
     public int _TotalPurpleItemsToSpawn = 0;
     public int _purpleItemsSpawned = 0;
     public int _YellowItemsSpawned = 0;
+    public int _FrozenItemLimit = 5;
+    public int _FrozenItemsSpawned = 0;
 
     //Synth Upgrade Stats;
     [SerializeField] int _StartMoveBonusMultiplier = 1;
@@ -242,8 +244,8 @@ public class GameManager : Singleton<GameManager>
                 _GoldenItemChance = 0f;
                 _PurpleItemChance = 0f;
                 _RedItemChance = 0f;
-                _YellowItemChance = 0.1f;
-                _FrozenItemChance = 0.5f;
+                _YellowItemChance = 0.2f;
+                _FrozenItemChance = 0.85f;
                 break;
             case LevelPreSet.lava:
                 _GoldenItemChance = 0f;
@@ -438,6 +440,7 @@ public class GameManager : Singleton<GameManager>
         IncreaseRedItemChance(0.002f);
         _purpleItemsSpawned = 0;
         _YellowItemsSpawned = 0;
+        _FrozenItemsSpawned = 0;
         _SpawnDecay = 1;
         CheckLevelPreset();
         StatsManager.Instance.AddToLevelsCompleted(1);
@@ -457,6 +460,7 @@ public class GameManager : Singleton<GameManager>
         _GameOver = false;
         _purpleItemsSpawned = 0;
         _YellowItemsSpawned = 0;
+        _FrozenItemsSpawned = 0;
         PointsManager.Instance.ResetPoints();
         SynthManager.Instance.ResetSynth();
         SaveManager.Instance.SaveGame();

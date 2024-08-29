@@ -641,7 +641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 841}
+  m_AnchoredPosition: {x: 10, y: 857}
   m_SizeDelta: {x: 506.2, y: 367.2926}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &226983237
@@ -673,8 +673,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281734912
+  m_fontColor: {r: 0, g: 0.09019608, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -691,8 +691,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 210
-  m_fontSizeBase: 210
+  m_fontSize: 220
+  m_fontSizeBase: 220
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -727,7 +727,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -129.36829, y: 0, z: -108.20469, w: 0}
+  m_margin: {x: -34.476593, y: -5.7164764, z: -12.771095, w: 74.31315}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2275,10 +2275,10 @@ MonoBehaviour:
   _VFXParticles: {fileID: 766914679345784957}
   _VFXSynthBackground: {fileID: 9011448392385291012}
   _BaseBackgroundColor: {r: 0, g: 0.09019608, b: 0.21176472, a: 1}
-  _DustBackgroundColor: {r: 0.74509805, g: 0.49411765, b: 0.29803923, a: 1}
-  _RainBackgroundColor: {r: 0.078431375, g: 0.52156866, b: 0.42352945, a: 1}
-  _GoldBackgroundColor: {r: 0.76862746, g: 0.78431374, b: 0.30588236, a: 1}
-  _RedBackgroundColor: {r: 0.6313726, g: 0.09803922, b: 0.14509805, a: 1}
+  _DustBackgroundColor: {r: 0, g: 0.09019608, b: 0.21176471, a: 1}
+  _RainBackgroundColor: {r: 0, g: 0.09019608, b: 0.21176471, a: 1}
+  _GoldBackgroundColor: {r: 0, g: 0.09019608, b: 0.21176471, a: 1}
+  _RedBackgroundColor: {r: 0, g: 0.09019608, b: 0.21176471, a: 1}
 --- !u!4 &472362336
 Transform:
   m_ObjectHideFlags: 0
@@ -2716,7 +2716,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.6320754, g: 0.09838911, b: 0.14529946, a: 1}
+  m_BackGroundColor: {r: 0, g: 0.09019608, b: 0.21176471, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3575,7 +3575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200.69, y: -222}
+  m_AnchoredPosition: {x: -200.69, y: -297}
   m_SizeDelta: {x: 479.37, y: 150.3741}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &700603062
@@ -3661,7 +3661,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -3.2968597, y: 0, z: -1.4271545, w: 0}
+  m_margin: {x: -71.36693, y: 0, z: -42.269226, w: -95.29826}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4455,7 +4455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 158.73, y: -336}
+  m_AnchoredPosition: {x: 158.73, y: -384}
   m_SizeDelta: {x: 506.2, y: 367.2926}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881834609
@@ -5880,7 +5880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 257, y: -270}
+  m_AnchoredPosition: {x: 257, y: -277}
   m_SizeDelta: {x: 498.3927, y: 367.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1179072916
@@ -9055,7 +9055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19, y: -60}
+  m_AnchoredPosition: {x: -19, y: -87}
   m_SizeDelta: {x: 116, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1866761368
@@ -9141,7 +9141,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -362.23935, y: 0, z: -131.86008, w: 0}
+  m_margin: {x: -362.23935, y: 0, z: -50.17611, w: -95.29785}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

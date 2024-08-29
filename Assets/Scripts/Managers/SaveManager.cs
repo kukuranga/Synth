@@ -5,8 +5,6 @@ using System.IO;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    //WORK
-
     public SaveData data;
 
     public void SaveGame()

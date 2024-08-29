@@ -89,7 +89,6 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
 
         if (GameManager.Instance.SpawnPurpleItem() && GameManager.Instance._purpleItemsSpawned < GameManager.Instance._TotalPurpleItemsToSpawn)
         {
-            //TODO: Check if more than 1 purple item has been spawned and check if the yellow item has spwaned before spawning a second purple item
             if (GameManager.Instance._YellowItemsSpawned > 0 && GameManager.Instance._purpleItemsSpawned > 0)
                 SetPurpleItem();
             else if (GameManager.Instance._purpleItemsSpawned < 1)
@@ -103,7 +102,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
             SetGoldenItem();
         else if (GameManager.Instance.SpawnRedItem())
             SetRedItem();
-        else if (GameManager.Instance.SpawnFrozenItem())
+        else if (GameManager.Instance.SpawnFrozenItem() && GameManager.Instance._FrozenItemsSpawned < GameManager.Instance._FrozenItemLimit)
             SetFrozenItem();
 
         if (GameManager.Instance._SetColors && _ItemType == ItemType.NormalItem)
@@ -173,8 +172,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
                 break;
             case ItemType.SemiMotionItem:
                 _Image.sprite = _YellowItemSprite;
-                 break;
-            
+                 break;            
         }
         
     }
@@ -257,6 +255,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
     private void SetFrozenItem()
     {
         _ItemType  = ItemType.FrozenItem;
+        GameManager.Instance._FrozenItemsSpawned++;
         _FrozenImage.SetActive(true);
     }
 
