@@ -196,11 +196,25 @@ public class GameManager : Singleton<GameManager>
                 IncreaseFrozenItemChance(0.1f);
                 _MovesToGive += 3;
                 _RowsToGive = 3;
+                _levelPreSet = LevelPreSet.Dust;
+                break;
+            case 31:
+                _levelPreSet = LevelPreSet.Normal;
+                break;
+            case 40:
+                _levelPreSet = LevelPreSet.Rain;
+                break;
+            case 41:
+                _levelPreSet = LevelPreSet.Normal;
                 break;
             case 50:
                 IncreaseYellowItemChance(0.1f);
                 _MovesToGive -= 5;
                 _RowsToGive = 3;
+                _levelPreSet = LevelPreSet.Dust;
+                break;
+            case 51:
+                _levelPreSet = LevelPreSet.Normal;
                 break;
             default:
                 //_MovesToGive--;
@@ -210,11 +224,6 @@ public class GameManager : Singleton<GameManager>
 
     public void CheckLevelPreset()
     {
-        //this will check the level preset selected and change the spawn values to accomodate for that
-        //it will than run the new level editor with the values selected 
-
-        //Check this when loading a new level
-
         //Set the preset amounts
         if (_levelPreSet != LevelPreSet.Normal)
         {
@@ -224,9 +233,6 @@ public class GameManager : Singleton<GameManager>
             _YellowItemPreset = _YellowItemChance;
             _FrozenItemPreset = _FrozenItemChance;
         }
-
-        //load the preset heres here
-
 
         switch(_levelPreSet)
         {
@@ -266,16 +272,11 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetValuesAfterLevelPreset()
     {
-        //this will reset the values to the stored values from before
-        //do this after the new level is finished loading
-        //make sure the added values for the new system arent added until after this is called
-
         _GoldenItemChance = _GoldItemPreset;
         _PurpleItemChance = _PurpleItemPreset;
         _RedItemChance = _RedItemPreset;
         _YellowItemChance = _YellowItemPreset;
         _FrozenItemChance = _FrozenItemPreset;
-
     }
 
     public void SetSynthBonuses(int _StartMoves, int _Move, int _GoldItems, int _TreasureItems, int _Luck)
@@ -406,7 +407,6 @@ public class GameManager : Singleton<GameManager>
         return false;
     }
 
-
     public int GetMovesToGive()
     {
         return _MovesToGive;
@@ -434,7 +434,6 @@ public class GameManager : Singleton<GameManager>
 
     public void GameWon()
     {
-
         SetMoves();
         IncreasePurpleItemChance(0.001f);
         IncreaseRedItemChance(0.002f);

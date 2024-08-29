@@ -19,7 +19,6 @@ public class OverwierManager : Singleton<OverwierManager>
         tempColor.a = 0f;
         _Image.color = tempColor;
         _MainBackgroundColor = _MainCamera.backgroundColor;
-        //CameraFadeIn(Color.red, 5f);
     }
 
     public void ChangeBackgroundColor(Color _c)
@@ -63,7 +62,6 @@ public class OverwierManager : Singleton<OverwierManager>
         }
 
         _Image.color = _c; // Ensure we reach the exact target color
-        //originalColorTransitionCoroutine = null; // Reset the original coroutine reference
 
         elapsedTime = 0;
 

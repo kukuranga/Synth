@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class Container : MonoBehaviour
 {
-    //This script will contain an index number to   
 
     public int _Index;
-    //public Sprite _ColorSprite;
     public GameObject _CorrectGO;
     public Material _Material;
 
@@ -26,7 +24,6 @@ public class Container : MonoBehaviour
         if (GameManager.Instance._SetColors)
         {
             _ColorImage.color = GameManager.Instance.colors[_Index];
-            //_Image.sprite = _ColorSprite;
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class ButtonManager : Singleton<ButtonManager>
 {
     private int _BtnIndex = -1;
     private int _ContIndex = -1;
@@ -28,7 +28,6 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
 
     public Buttons _FirstClicked;
     public Buttons _SecondClicked;
-    //public bool _AlreadySpawnedPurpleItem = false;
 
     private bool _IsFirstActiveFrame = true;
     public float _ItemMoveSpeed = 2300f;
@@ -45,7 +44,6 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
 
     private void Start()
     {
-        //GameManager.Instance.FirstGame();
         _MovesLeft = GameManager.Instance.SetMoves();
         RandomizeAndSetCorrectPositions();
     }
@@ -72,12 +70,10 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
     //TODO: FIX LOGIC TO RESET THE GAME WITHOUT THE NEED FOR RELOADING THE SCENE -------------------------------------------------------------------------------------
     public void ResetGame()
     {
-        //TODO: - clear all previously spwned buttons
-        //      - set all ui elements to inactive
         foreach(GameObject g in _InstatiatedButtons)
         {
             g.SetActive(false);
-        }// ToDo: FIX ----------------------------------------------------------------------------------------------------------------
+        }
 
         CreateButtons();
         _MovesLeft = GameManager.Instance.SetMoves();
@@ -116,7 +112,6 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
 
         if (_CanMove)
         {
-            //st first & second click than move them
             _FirstClicked = btn;
             _FirstClicked.SetUnSelected();
             _FirstClicked.Zoom(1f);
@@ -139,6 +134,7 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
             else if (_FirstClicked._ItemType == ItemType.FrozenItem || _SecondClicked._ItemType == ItemType.FrozenItem)
             {
                 //Todo: add a tell (ANIMATION OR SFX) to show its not interactable
+                //ToDo: add audio clip for frozen item not being able to move
                 _MovesLeft++;
             }
             else if (_FirstClicked._ItemType == ItemType.RedItem || _SecondClicked._ItemType == ItemType.RedItem)
@@ -356,7 +352,6 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
     {
         if (_PurpleCanMove)
         {
-            //OverwierManager.Instance.FadeIn(GameManager.Instance._PurpleItemColorChange,0.2f, 0.4f);
 
             _PurpleCanMove = false;
             OrderButtonList();
@@ -946,6 +941,7 @@ public class ButtonManager : Singleton<ButtonManager>//, IPointerDownHandler, IP
 
             GameManager.Instance.StoreMoves(_MovesLeft);
             _Containers[0].SetWave(true);
+
             GameManager.Instance.GameWon();
         }
 

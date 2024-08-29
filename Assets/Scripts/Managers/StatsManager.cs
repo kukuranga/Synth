@@ -5,15 +5,6 @@ using UnityEngine;
 public class StatsManager : Singleton<StatsManager>
 {
     //This scriipt keeps track of all stats in the game.
-
-    //Stats to keep
-
-    //Total Number of purple spawned
-    //Total number of red items spawned
-    //total number of gold items spawned 
-    //total number of yellow items spawned
-    //total number of blue planets spawned
-
     public int _LevelsCompleted;
     public int _HighestLevelAchieved;
     public long _TotalNumberOfRuns;
@@ -22,8 +13,6 @@ public class StatsManager : Singleton<StatsManager>
     public long _TotalNumberOfMovesUsed;
     public int _HighestMovesNumberAchieved;
     public int _TotalNumberOfUpgrades;
-
-    //TODO:ADD item checks
 
     public void AddToLevelsCompleted(int _val)
     {

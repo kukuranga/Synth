@@ -14,7 +14,7 @@ public class SaveManager : Singleton<SaveManager>
             data = new SaveData(); // Ensure that 'data' is instantiated
         }
 
-        data.Save(); // Call the Save method on the data object
+        data.Save();
         string json = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
@@ -28,7 +28,7 @@ public class SaveManager : Singleton<SaveManager>
         {
             string json = File.ReadAllText(path);
             data = JsonUtility.FromJson<SaveData>(json);
-            data.Load(); // Call the Load method on the data object
+            data.Load();
 
             Debug.Log("Game Loaded");
         }
@@ -36,7 +36,6 @@ public class SaveManager : Singleton<SaveManager>
         {
             Debug.LogWarning("Save file not found");
 
-            // Instantiate 'data' if the file doesn't exist, to prevent null reference issues later
             data = new SaveData();
         }
     }

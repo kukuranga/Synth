@@ -19,8 +19,6 @@ public enum ItemType
 
 public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    //flag if the item is the Golden Button 
-    //public bool _GoldenItem = false; //Change code to enum for ItemType
     public ItemType _ItemType = ItemType.NormalItem;
     public Sprite _PurpleItemSprite;
     public Sprite _GoldenItemSprite;
@@ -226,8 +224,6 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
     {
         _ItemType = ItemType.TreasureItem;
         SetSprite(RewardsManager.Instance._TreasureSprite);
-        //_Image.color = Color.blue;
-        //_GoldenImage.SetActive(true);
     }
 
     private void SetPurpleItem()
@@ -235,8 +231,6 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
         _ItemType = ItemType.MotionItem;
         _Image.sprite = _PurpleItemSprite;
         GameManager.Instance._purpleItemsSpawned++;
-
-        //_Image.color = Color.blue;
     }
 
     private void SetYellowItem()
@@ -260,7 +254,6 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
     }
 
     private Vector2 startTouchPosition;
-    //private bool isSwiping = false;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -391,8 +384,8 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
     IEnumerator MoveToCont()
     {
         ButtonManager.Instance._MovingItems++;
-        Vector2 startPosition = _rect.anchoredPosition; //a.transform.position;
-        Vector2 targetPosition = _Container.GetRectTransform().anchoredPosition; //target;
+        Vector2 startPosition = _rect.anchoredPosition;
+        Vector2 targetPosition = _Container.GetRectTransform().anchoredPosition;
 
         // Calculate the distance to move
         float distance = Vector2.Distance(startPosition, targetPosition);

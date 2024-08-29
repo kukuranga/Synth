@@ -4,7 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GoldenItemTurnIncrease", menuName = "Rewards/GoldenItemTurnIncrease", order = 51)]
 public class GoldenItemTurnIncrease : Reward
 {
-
     [SerializeField] int _IncreaseTurns = 0;
 
     public override void Activate()

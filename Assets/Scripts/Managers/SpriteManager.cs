@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpriteManager : Singleton<SpriteManager>
 {
     private string _MageSpritePath = "GameSprites/Texture/Mage";
-    private string _ColorlessPatrh = "GameSprites/Texture/Color";
+    //private string _ColorlessPatrh = "GameSprites/Texture/Color";
 
     public Sprite[] _MageloadedSprites;
 
@@ -17,10 +17,7 @@ public class SpriteManager : Singleton<SpriteManager>
     void LoadSprites()
     {
         // Load all sprites from the specified folder path
-        //if(GameManager.Instance._SetColors)
-            //_MageloadedSprites = Resources.LoadAll<Sprite>(_ColorlessPatrh);
-        //else
-            _MageloadedSprites = Resources.LoadAll<Sprite>(_MageSpritePath);
+        _MageloadedSprites = Resources.LoadAll<Sprite>(_MageSpritePath);
 
         if (_MageloadedSprites.Length > 0)
         {

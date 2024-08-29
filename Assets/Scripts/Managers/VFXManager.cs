@@ -20,11 +20,6 @@ public class VFXManager : Singleton<VFXManager>
     public Color _GoldBackgroundColor;
     public Color _RedBackgroundColor;
 
-
-
-    //TODO: Have different presets of items to spawn with a unique background
-
-
     private void Start()
     {
         _VFXDust.SetActive(false);
