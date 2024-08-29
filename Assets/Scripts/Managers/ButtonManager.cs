@@ -35,8 +35,6 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private List<GameObject> _InstatiatedButtons = new();
 
-
-
     private void Awake()
     {
         CreateButtons();
