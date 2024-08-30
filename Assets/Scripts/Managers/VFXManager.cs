@@ -14,6 +14,8 @@ public class VFXManager : Singleton<VFXManager>
     public GameObject _VFXDust;
     public GameObject _VFXParticles;
     public GameObject _VFXSynthBackground;
+
+    //Todo: Remove this and replace itwith different visuals
     public Color _BaseBackgroundColor;
     public Color _DustBackgroundColor;
     public Color _RainBackgroundColor;
