@@ -94,7 +94,6 @@ public class GameManager : Singleton<GameManager>
     private float _RedItemPreset = 0f;
     private float _YellowItemPreset = 0f;
     private float _FrozenItemPreset = 0f;
-    private float _TreasureItemPreset = 0f;
 
 
     private void Start()
