@@ -19,16 +19,36 @@ public class GameManager : Singleton<GameManager>
     //Todo: Use this to add to the level preset and add on differnt values to roll for when spawning the planets
     // eg: rain planet will have a 0% chance to spawn lava but a 60% to spawn frozen planets
     public LevelPreSet _levelPreSet;
-   
+
     //possible presets: Rain level(more ice planets), lava level(more red planets), gold levels(more golden planets)
-    
+
 
     //add here: Preset values for all planets, a save method to save the planets original values on normal levels,
 
     //add here values for each of the different planet presets depending on the _levelpreset selected
 
     //Figure out the different how the level presets would be required.
-    
+
+    /*
+    -figure out how to add visuals to moving planets
+    -Fix Color spawning when color variation is selected
+    -remake the color background to be an even circle
+    -Add background particle systems to each spawn location for buttons
+    -Use those PS to create a graphic when set correct is triggered,
+    That will draw lines or cubes to the synth position
+    -Add a boarder around the game that can change colorand be used
+    to change color depending on the state of the game
+
+    Special levels
+    -100 (Special type)
+
+
+    Problems
+    -Hard stuck at rain level
+
+    -fix visuals for color spinning
+    */
+
 
     public bool _SetColors;
     public List<Color> colors;
@@ -267,7 +287,7 @@ public class GameManager : Singleton<GameManager>
                 _FrozenItemChance = 0f;
                 break;
         }
-}
+    }
 
     public void ResetValuesAfterLevelPreset()
     {
@@ -421,7 +441,7 @@ public class GameManager : Singleton<GameManager>
 
         return _MovesLeft + _MovesToGive;
     }
-    
+
     public void GameOver()
     {
         if (!_GameOver)

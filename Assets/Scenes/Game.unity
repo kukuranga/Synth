@@ -15694,7 +15694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7929190450944083118, guid: 5252f6fccd9f2904287d923b8b675f8f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5252f6fccd9f2904287d923b8b675f8f, type: 3}
@@ -15980,6 +15980,10 @@ PrefabInstance:
     - target: {fileID: 5753035718889222830, guid: 24a59ddadcba8e841ac88d0ddc455578, type: 3}
       propertyPath: m_Name
       value: Dust
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753035718889222830, guid: 24a59ddadcba8e841ac88d0ddc455578, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24a59ddadcba8e841ac88d0ddc455578, type: 3}
@@ -20771,7 +20775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &9011448392385291014
 ParticleSystemRenderer:
   serializedVersion: 6
