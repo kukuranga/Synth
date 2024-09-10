@@ -184,6 +184,10 @@ public class GameManager : Singleton<GameManager>
             case 2:
                 _MovesToGive = 5;
                 _RowsToGive = 1;
+                _levelPreSet = LevelPreSet.Rain; //TEST 
+                break;
+            case 3:
+                _levelPreSet = LevelPreSet.Normal;
                 break;
             case 5:
                 _MovesToGive += 1;
@@ -239,18 +243,27 @@ public class GameManager : Singleton<GameManager>
                 //_MovesToGive--;
                 break;
         }
+        CheckLevelPreset();
     }
+
+    bool _PresetSaved = false;
 
     public void CheckLevelPreset()
     {
         //Set the preset amounts
-        if (_levelPreSet != LevelPreSet.Normal)
+         if (_levelPreSet != LevelPreSet.Normal && !_PresetSaved)
         {
             _GoldItemPreset = _GoldenItemChance;
             _PurpleItemPreset = _PurpleItemChance;
             _RedItemPreset = _RedItemChance;
             _YellowItemPreset = _YellowItemChance;
             _FrozenItemPreset = _FrozenItemChance;
+            _PresetSaved = true;
+        }
+        else if(_PresetSaved)
+        {
+            ResetValuesAfterLevelPreset();
+            _PresetSaved = false;
         }
 
         switch(_levelPreSet)
@@ -291,6 +304,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetValuesAfterLevelPreset()
     {
+        //Porblem: Not correctly assigning the new chance values
         _GoldenItemChance = _GoldItemPreset;
         _PurpleItemChance = _PurpleItemPreset;
         _RedItemChance = _RedItemPreset;

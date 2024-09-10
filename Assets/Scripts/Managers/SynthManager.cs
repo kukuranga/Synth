@@ -20,7 +20,7 @@ using UnityEngine;
         public bool _Dance = true;
         public bool _Pulse = true;
 
-        public float _ChaosMaxRange = 0.2f;
+        public float _ChaosMaxRange = 0.2f; //TODO: Remove this unused
 
         //Add ref for each element in the synth
         public DreamStarAnimator _Animator;
@@ -124,7 +124,7 @@ using UnityEngine;
         //_PreviousChangeA = _Mixer.a;
         if (_Mixer.Radius < 10) //&& GameManager.Instance._Level > 5)
         {
-            _Mixer.Radius += 0.1f;
+            _Mixer.Radius += 0.15f;
         }
     }
 

@@ -100,7 +100,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
             SetGoldenItem();
         else if (GameManager.Instance.SpawnRedItem())
             SetRedItem();
-        else if (GameManager.Instance.SpawnFrozenItem() && GameManager.Instance._FrozenItemsSpawned < GameManager.Instance._FrozenItemLimit)
+        else if (GameManager.Instance.SpawnFrozenItem() && GameManager.Instance._FrozenItemsSpawned < GameManager.Instance._FrozenItemLimit && GameManager.Instance._RowsToGive == 3)
             SetFrozenItem();
 
         if (GameManager.Instance._SetColors && _ItemType == ItemType.NormalItem)
