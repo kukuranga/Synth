@@ -113,6 +113,8 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
         
         if(_CorrectPosition == _Container._Index)
         {
+            AudioManager.Instance.PlaySound("Star1");
+
             _Container.SetCorrect();
             if (!AlreadyChecked)
             {
@@ -127,6 +129,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
                         break;
                     case ItemType.TreasureItem:
                         ButtonManager.Instance._GameRewardsScreen.SetActive(true);
+                        AudioManager.Instance.PlaySound("Coin");
                         break;
                     case ItemType.MotionItem:
                         //_Image.sprite = _PurpleItemSprite;

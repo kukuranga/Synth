@@ -108,6 +108,11 @@ public class GameManager : Singleton<GameManager>
     public bool _FrozenItemUnlocked = false;
     public bool _TreasureItemUnlocked = false;
 
+    //UI Unlocks
+    public bool GoalsUnlocked = false;
+    public bool StatsUnlocked = false;
+    public bool SynthUnlocked = false;
+
     //Reset Values post unlocks
     private float _GoldItemPreset = 0f;
     private float _PurpleItemPreset = 0f;
@@ -116,11 +121,16 @@ public class GameManager : Singleton<GameManager>
     private float _FrozenItemPreset = 0f;
 
 
+    private void Awake()
+    {
+        SaveManager.Instance.LoadGame();
+    }
+
     private void Start()
     {
-        AudioManager.Instance.PlayMusic("Music");
+        //AudioManager.Instance.PlayMusic("Music");
+        AudioManager.Instance.CrossfadeMusic("MusicOld", 1f);
         OnStartSetRunValues();
-        SaveManager.Instance.LoadGame();
         CheckLevelPreset();//Test here 
     }
 
@@ -131,6 +141,19 @@ public class GameManager : Singleton<GameManager>
             _RowsToGive = 3;
             _MovesToGive = 9001;
         }
+    }
+
+    //Playes when the main game starts
+    public void GameStart()
+    {
+        AudioManager.Instance.CrossfadeMusic("Music", 1f);
+    }
+
+    //Happenes when the game ends and the player goes back to the home screen
+    public void GameEnd()
+    {
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic("MusicOld");
     }
 
     //Base Values used to reset
@@ -402,7 +425,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool SpawnYellowItem()
     {
-        if (_YellowItemUnlocked)
+        if (_YellowItemUnlocked && _RowsToGive >= 3)
         {
             float c = Random.Range(0f, 1f);
             if (c <= _YellowItemChance)

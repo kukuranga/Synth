@@ -35,6 +35,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private List<GameObject> _InstatiatedButtons = new();
 
+    private bool _AlreadyExploded = false;
+
     private void Awake()
     {
         CreateButtons();
@@ -61,6 +63,11 @@ public class ButtonManager : Singleton<ButtonManager>
         _WinText.text = GameManager.Instance._Level.ToString();
         if(_MovesLeft <= 0)
         {
+            if (!_AlreadyExploded)
+            {
+                AudioManager.Instance.PlaySound("Lose");
+                _AlreadyExploded = true;
+            }
             _GameOverScreen.SetActive(true);
         }
     }
@@ -110,6 +117,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
         if (_CanMove)
         {
+            AudioManager.Instance.PlaySound("Move");
             _FirstClicked = btn;
             _FirstClicked.SetUnSelected();
             _FirstClicked.Zoom(1f);
@@ -935,6 +943,7 @@ public class ButtonManager : Singleton<ButtonManager>
         {
             _GameWon = true;
             _GameWonScreen.SetActive(true);
+            AudioManager.Instance.PlaySound("Win 1");
             SynthManager.Instance.RandomUpgrade();
 
             GameManager.Instance.StoreMoves(_MovesLeft);

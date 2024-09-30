@@ -13,16 +13,25 @@ public class AudioManager : Singleton<AudioManager>
     public void PlaySound(string clipName)
     {
         AudioClip clip = audioClips.Find(c => c.name == clipName);
+
         if (clip != null)
         {
-            audioSource.PlayOneShot(clip);
+            // Check if the audio source is already playing this specific clip
+            if (!audioSource.isPlaying || audioSource.clip != clip)
+            {
+                audioSource.clip = clip; // Set the clip (optional, depending on your setup)
+                audioSource.PlayOneShot(clip); // Play the sound
+            }
+            else
+            {
+                Debug.Log("Clip is already playing: " + clipName);
+            }
         }
         else
         {
             Debug.LogWarning("Audio clip not found: " + clipName);
         }
     }
-
 
     public void PlayMusic(string musicName)
     {

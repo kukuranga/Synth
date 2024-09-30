@@ -12,7 +12,7 @@ public class HomeScreenManager : MonoBehaviour
 
     private void Start()
     {
-        AchievementManager.Instance.CheckAchievements();
+        AchievementManager.Instance.CheckAchievements(); 
         _ShinyAchievementText.gameObject.SetActive(false);
     }
 

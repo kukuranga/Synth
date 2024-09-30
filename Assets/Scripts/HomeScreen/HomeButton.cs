@@ -10,6 +10,7 @@ public class HomeButton : MonoBehaviour
         if (GameManager.Instance._GameOver)
             GameManager.Instance.ResetGame();
         SceneLoader.Instance.UnloadScene(GameManager.Instance._LevelToLoad);        
-        SceneLoader.Instance.LoadScene(GameManager.Instance._Homepage);        
+        SceneLoader.Instance.LoadScene(GameManager.Instance._Homepage);
+        AudioManager.Instance.CrossfadeMusic("MusicOld", 1f);
     }
 }

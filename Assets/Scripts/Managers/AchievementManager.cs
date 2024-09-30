@@ -30,6 +30,7 @@ public class AchievementManager : Singleton<AchievementManager>
             if (_Ach.Achieve())
                 _PendingAchievements.Add(_Ach);
         }
+        CheckPendingAchievements();
         CheckUpgrades();
     }
 

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d60677754f22440bfb522aa835d643, type: 3}
+  m_Name: 5000
+  m_EditorClassIdentifier: 
+  _Sprite: {fileID: 21300000, guid: 4dc75a220dfadec47be9a6b70272c152, type: 3}
+  _Name: Another Synth Point
+  _Description: Get 5000 Points
+  _Difficulty: 2
+  _Unlock: {fileID: 11400000, guid: afd79506232d8ac47966a3d4ccd24109, type: 2}
+  _Unlocked: 0
+  _PointsRequirement: 5000

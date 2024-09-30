@@ -88,6 +88,11 @@ using UnityEngine;
         _AvailableUpgradePoints = _TotalUpgradePoints - _UsedUpgradePoints;
     }
 
+    public void AddTotalUpgradePoint()
+    {
+        _TotalUpgradePoints++;
+    }
+
     public void UpdateSynthValues()
     {
         SetCircle(_Circle1, _Ci1P);
