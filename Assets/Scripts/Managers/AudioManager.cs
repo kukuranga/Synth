@@ -58,9 +58,24 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.volume = Mathf.Clamp(volume, 0f, 1f);
     }
 
-    public float GetVolume()
+    public float GetFXVolume()
     {
         return audioSource.volume;
+    }
+
+    public void SetFXVolume(float volume)
+    {
+        audioSource.volume = Mathf.Clamp01(volume);
+    }
+
+    public float GetMusicVolume()
+    {
+        return musicSource.volume;  
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        musicSource.volume = Mathf.Clamp01(volume);
     }
 
     public void Mute()

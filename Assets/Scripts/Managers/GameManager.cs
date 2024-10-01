@@ -207,10 +207,6 @@ public class GameManager : Singleton<GameManager>
             case 2:
                 _MovesToGive = 5;
                 _RowsToGive = 1;
-                _levelPreSet = LevelPreSet.Rain; //TEST 
-                break;
-            case 3:
-                _levelPreSet = LevelPreSet.Normal;
                 break;
             case 5:
                 _MovesToGive += 1;
@@ -295,32 +291,44 @@ public class GameManager : Singleton<GameManager>
                 //nothing changes
                 break;
             case LevelPreSet.Dust:
-                _GoldenItemChance = 0f;
-                _PurpleItemChance = 0f;
-                _RedItemChance = 0f;
-                _YellowItemChance = 0.6f;
-                _FrozenItemChance = 0f;
+                if (_YellowItemUnlocked)
+                {
+                    _GoldenItemChance = 0f;
+                    _PurpleItemChance = 0f;
+                    _RedItemChance = 0f;
+                    _YellowItemChance = 0.6f;
+                    _FrozenItemChance = 0f;
+                }
                 break;
             case LevelPreSet.Rain:
-                _GoldenItemChance = 0f;
-                _PurpleItemChance = 0f;
-                _RedItemChance = 0f;
-                _YellowItemChance = 0.2f;
-                _FrozenItemChance = 0.85f;
+                if (_FrozenItemUnlocked)
+                {
+                    _GoldenItemChance = 0f;
+                    _PurpleItemChance = 0f;
+                    _RedItemChance = 0f;
+                    _YellowItemChance = 0.2f;
+                    _FrozenItemChance = 0.85f;
+                }
                 break;
             case LevelPreSet.lava:
-                _GoldenItemChance = 0f;
-                _PurpleItemChance = 0f;
-                _RedItemChance = 0.6f;
-                _YellowItemChance = 0f;
-                _FrozenItemChance = 0f;
+                if (_RedItemUnlocked)
+                {
+                    _GoldenItemChance = 0f;
+                    _PurpleItemChance = 0f;
+                    _RedItemChance = 0.6f;
+                    _YellowItemChance = 0f;
+                    _FrozenItemChance = 0f;
+                }
                 break;
             case LevelPreSet.gold:
-                _GoldenItemChance = 0.6f;
-                _PurpleItemChance = 0f;
-                _RedItemChance = 0f;
-                _YellowItemChance = 0f;
-                _FrozenItemChance = 0f;
+                if (_GoldItemUnclocked)
+                {
+                    _GoldenItemChance = 0.6f;
+                    _PurpleItemChance = 0f;
+                    _RedItemChance = 0f;
+                    _YellowItemChance = 0f;
+                    _FrozenItemChance = 0f;
+                }
                 break;
         }
     }
@@ -477,6 +485,11 @@ public class GameManager : Singleton<GameManager>
     {
 
         return _MovesLeft + _MovesToGive;
+    }
+
+    public void SetSwipeSensitivity(int n)
+    {
+        _SwipeSensitivity = n;
     }
 
     public void GameOver()
