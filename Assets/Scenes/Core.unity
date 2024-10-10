@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &30406897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 30406898}
+  - component: {fileID: 30406899}
+  m_Layer: 0
+  m_Name: 'TutorialManager '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &30406898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30406897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1060.0831, y: 1164.6809, z: -17.922441}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &30406899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30406897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a64a792949e9f54b87c70d03abb57f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _StartButtonTutorial: 1
 --- !u!1 &126394563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,7 +1866,7 @@ MonoBehaviour:
   - {r: 0, g: 0.73333335, b: 0.9803922, a: 1}
   - {r: 0.024886142, g: 0.05660379, b: 0, a: 1}
   _Debugger: 0
-  _SwipeSensitivity: 2
+  _SwipeSensitivity: 4
   _Level: 1
   _Homepage:
     sceneAsset: {fileID: 102900000, guid: f7466f6c44f70b04d9a566e6033cc523, type: 3}
@@ -1853,15 +1898,15 @@ MonoBehaviour:
   _RedItemChance: 0
   _YellowItemChance: 0
   _FrozenItemChance: 0
-  _StartingMoves: 8
+  _StartingMoves: 12
   _RedItemColorChange: {r: 0.6603774, g: 0.021804927, b: 0.021804927, a: 0}
   _PurpleItemColorChange: {r: 0.6364209, g: 0.03524386, b: 0.6792453, a: 0}
-  _GoldItemUnclocked: 1
-  _PurpleItemUnlocked: 1
-  _RedItemUnlocked: 1
-  _YellowItemUnlocked: 1
-  _FrozenItemUnlocked: 1
-  _TreasureItemUnlocked: 1
+  _GoldItemUnclocked: 0
+  _PurpleItemUnlocked: 0
+  _RedItemUnlocked: 0
+  _YellowItemUnlocked: 0
+  _FrozenItemUnlocked: 0
+  _TreasureItemUnlocked: 0
   GoalsUnlocked: 0
   StatsUnlocked: 0
   SynthUnlocked: 0

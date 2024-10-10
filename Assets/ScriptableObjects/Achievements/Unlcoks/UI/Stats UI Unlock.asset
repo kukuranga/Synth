@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d0483cc686d5a4aa88bb1ca353750c, type: 3}
   m_Name: Stats UI Unlock
   m_EditorClassIdentifier: 
-  _Description: 
+  _Description: Unlocks Stats!

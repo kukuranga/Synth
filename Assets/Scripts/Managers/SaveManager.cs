@@ -5,6 +5,8 @@ using System.IO;
 
 public class SaveManager : Singleton<SaveManager>
 {
+
+    //C:\Users\Richard\AppData\LocalLow\DefaultCompany\Match4
     public SaveData data;
 
     public void SaveGame()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class HomeScreenManager : MonoBehaviour
 {
     public TextMeshProUGUI _ShinyAchievementText;
+    public GameObject _HowToPlayGO;
 
     // Speed of the color cycle
     public float cycleSpeed = 1f;
@@ -14,6 +15,12 @@ public class HomeScreenManager : MonoBehaviour
     {
         AchievementManager.Instance.CheckAchievements(); 
         _ShinyAchievementText.gameObject.SetActive(false);
+
+        if (TutorialManager.Instance._StartButtonTutorial)
+        {
+            _HowToPlayGO.SetActive(true);
+            TutorialManager.Instance._StartButtonTutorial = false;
+        }
     }
 
     private void Update()

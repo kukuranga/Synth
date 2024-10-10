@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384372aee22e91c4e8427aaa73bcf397, type: 3}
   m_Name: PurpleItemTurnDecrease
   m_EditorClassIdentifier: 
-  _Image: {fileID: 21300000, guid: efb124023345fe147824adf564a828c9, type: 3}
+  _Image: {fileID: 21300000, guid: f9bb6b30fc0e60f4ca660c11bbb894ac, type: 3}
   _Description: Decrease the purple item spawn rate
   _Rarity: 1
   _Cost: 3

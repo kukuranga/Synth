@@ -285,7 +285,7 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
 
             float absX = Mathf.Abs(swipeDirection.x);
             float absY = Mathf.Abs(swipeDirection.y);
-            float _SwipeSensitivity = GameManager.Instance._SwipeSensitivity;
+            float _SwipeSensitivity =  6 - GameManager.Instance._SwipeSensitivity;
 
             if ((swipeDirection.x > _SwipeSensitivity || swipeDirection.y > _SwipeSensitivity) ||(swipeDirection.x < -_SwipeSensitivity || swipeDirection.y < -_SwipeSensitivity))
             {

@@ -120,7 +120,6 @@ public class GameManager : Singleton<GameManager>
     private float _YellowItemPreset = 0f;
     private float _FrozenItemPreset = 0f;
 
-
     private void Awake()
     {
         SaveManager.Instance.LoadGame();

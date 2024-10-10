@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eab52d310646994b8af779890f24c19, type: 3}
   m_Name: Synth UI Unlock
   m_EditorClassIdentifier: 
-  _Description: 
+  _Description: Unlocks Synth

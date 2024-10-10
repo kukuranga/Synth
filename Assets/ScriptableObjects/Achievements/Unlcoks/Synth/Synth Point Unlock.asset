@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b749cf3357b243f47ada03198e7f1709, type: 3}
   m_Name: Synth Point Unlock
   m_EditorClassIdentifier: 
-  _Description: Adds a Synth Point to Your Total Points
+  _Description: Adds a Synth Point

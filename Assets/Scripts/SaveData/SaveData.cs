@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class SaveData
@@ -8,12 +9,16 @@ public class SaveData
     {
         UpdateGameStats();
         UpdateSynthStats();
+        UpdateOptions();
+        UpdateTutorialData();
     }
     
     public void Save()
     {
         SaveGameStats();
         SaveSynthStats();
+        SaveUpdateOptions();
+        SaveTutorialData();
     }
 
     #region Game Stats
@@ -82,4 +87,42 @@ public class SaveData
     }
 
     #endregion
+
+    #region Options
+
+    public float _MusicVolume;
+    public float _fXVolume;
+    public float _Sensitivity;
+
+    public void SaveUpdateOptions()
+    {
+        _MusicVolume = AudioManager.Instance.GetMusicVolume();
+        _fXVolume = AudioManager.Instance.GetFXVolume();
+        _Sensitivity = GameManager.Instance._SwipeSensitivity;
+    }
+
+    public void UpdateOptions()
+    {
+        AudioManager.Instance.SetMusicVolume(_MusicVolume);
+        AudioManager.Instance.SetFXVolume(_fXVolume);
+        GameManager.Instance._SwipeSensitivity = _Sensitivity;
+    }
+
+    #endregion
+
+    #region Tutorials
+
+    public bool _StartButtonTutorial;
+
+    public void SaveTutorialData()
+    {
+        _StartButtonTutorial = TutorialManager.Instance._StartButtonTutorial;
+    }
+
+    public void UpdateTutorialData()
+    {
+        TutorialManager.Instance._StartButtonTutorial = _StartButtonTutorial;
+    }
+
+    #endregion 
 }
