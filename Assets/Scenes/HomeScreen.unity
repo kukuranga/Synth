@@ -14337,6 +14337,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TotalNumberOfSlides: 5
   _Page: {fileID: 1877978944}
+  _Pages:
+  - {fileID: 209630444}
+  - {fileID: 664876257}
+  - {fileID: 1639258893}
+  - {fileID: 1368379087}
+  - {fileID: 1194698791}
   moveDuration: 0.5
 --- !u!1 &1269817805
 GameObject:
@@ -21032,7 +21038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1798232109
 Transform:
   m_ObjectHideFlags: 0

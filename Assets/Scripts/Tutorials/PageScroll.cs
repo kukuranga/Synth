@@ -9,6 +9,7 @@ public class PageScroll : MonoBehaviour
     public int _TotalNumberOfSlides = 0;      // Total number of pages/slides
     public GameObject _Page;                  // The page GameObject (UI element or normal GameObject)
     private int _CurrentPage = 0;             // Current page index
+    public List<GameObject> _Pages;           // Move Pages to the correct position using this
 
     private float _screenWidth;
     private bool isMoving = false;            // To prevent multiple movements at the same time
@@ -18,6 +19,12 @@ public class PageScroll : MonoBehaviour
     {
         // Get the width of the screen (useful for the sliding effect)
         _screenWidth = Screen.width;
+        int i = 0;
+        foreach (var page in _Pages)
+        {
+            page.transform.position = _Pages[0].transform.position + new Vector3((_screenWidth * i) * 1.454f, 0);
+            i++;
+        }
     }
 
     // Move one screen width to the right
