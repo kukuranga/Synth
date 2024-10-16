@@ -22,7 +22,7 @@ public class PageScroll : MonoBehaviour
         int i = 0;
         foreach (var page in _Pages)
         {
-            page.transform.position = _Pages[0].transform.position + new Vector3((_screenWidth * i) * 1.454f, 0);
+            page.transform.position = _Pages[0].transform.position + new Vector3((_screenWidth * i), 0); //* 1.454f, 0);
             i++;
         }
     }

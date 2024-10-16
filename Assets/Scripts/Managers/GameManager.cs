@@ -65,7 +65,7 @@ public class GameManager : Singleton<GameManager>
     public bool _GameOver = false;
 
     private int _MovesLeft = 0;
-    private int _MovesToGive = 8;
+    private int _MovesToGive = 14;
 
     public int _TotalPurpleItemsToSpawn = 0;
     public int _purpleItemsSpawned = 0;

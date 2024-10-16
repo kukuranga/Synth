@@ -139,7 +139,6 @@ public class ButtonManager : Singleton<ButtonManager>
             }
             else if (_FirstClicked._ItemType == ItemType.FrozenItem || _SecondClicked._ItemType == ItemType.FrozenItem)
             {
-                //Todo: add a tell (ANIMATION OR SFX) to show its not interactable
                 //ToDo: add audio clip for frozen item not being able to move
                 _MovesLeft++;
             }
