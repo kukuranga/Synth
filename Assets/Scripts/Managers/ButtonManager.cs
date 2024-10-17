@@ -16,6 +16,13 @@ public class ButtonManager : Singleton<ButtonManager>
     public int _MovingItems = 0;
     public TextMeshProUGUI _WinText;
     public TextMeshProUGUI _MoveText;
+
+    //WinScreen Objects
+    public TextMeshProUGUI _WinTextWinScreen;
+    public TextMeshProUGUI _UsedMovesWinScreen;//todo calculate the number of moves used in this encounter
+    public TextMeshProUGUI _MovesLeftWinScreen;//todo show the number of moves left
+    public TextMeshProUGUI _MovesGainedWinScreen;//todo show how many moves the player will gain
+    
     public GameObject _GameOverScreen;
     public GameObject _GameWonScreen;
     public GameObject _GameRewardsScreen;
@@ -61,6 +68,7 @@ public class ButtonManager : Singleton<ButtonManager>
         _MoveText.text = _MovesLeft.ToString();
 
         _WinText.text = GameManager.Instance._Level.ToString();
+        _WinTextWinScreen.text = GameManager.Instance._Level.ToString();
         if(_MovesLeft <= 0)
         {
             if (!_AlreadyExploded)
