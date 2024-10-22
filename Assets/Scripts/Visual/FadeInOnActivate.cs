@@ -7,6 +7,7 @@ public class FadeInOnActivate : MonoBehaviour
 {
     public Image image;
     public float fadeDuration = 1.0f;
+    public float Delay = 0f;
 
     private void OnEnable()
     {
@@ -22,6 +23,16 @@ public class FadeInOnActivate : MonoBehaviour
         color.a = 0f;
         image.color = color;
 
+        // Delay before starting the fade
+        while (elapsedTime < Delay)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+
+        // Fade in over fadeDuration
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;

@@ -129,7 +129,7 @@ using UnityEngine;
         //_PreviousChangeA = _Mixer.a;
         if (_Mixer.Radius < 10) //&& GameManager.Instance._Level > 5)
         {
-            _Mixer.Radius += 0.15f;
+            _Mixer.Radius += 1f;
         }
     }
 

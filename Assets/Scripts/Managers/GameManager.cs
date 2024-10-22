@@ -210,10 +210,12 @@ public class GameManager : Singleton<GameManager>
             case 5:
                 _MovesToGive += 1;
                 _RowsToGive = 2;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 10:
                 _MovesToGive += 3;
                 _levelPreSet = LevelPreSet.gold;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 11:
                 _levelPreSet = LevelPreSet.Normal;
@@ -221,6 +223,7 @@ public class GameManager : Singleton<GameManager>
             case 15:
                 _MovesToGive += 2;
                 _RowsToGive = 3;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 25:
                 _TotalPurpleItemsToSpawn++;
@@ -229,6 +232,7 @@ public class GameManager : Singleton<GameManager>
                 IncreaseYellowItemChance(0.1f);
                 _RowsToGive = 3;
                 _levelPreSet = LevelPreSet.lava;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 26:
                 _levelPreSet = LevelPreSet.Normal;
@@ -238,12 +242,14 @@ public class GameManager : Singleton<GameManager>
                 _MovesToGive += 3;
                 _RowsToGive = 3;
                 _levelPreSet = LevelPreSet.Dust;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 31:
                 _levelPreSet = LevelPreSet.Normal;
                 break;
             case 40:
                 _levelPreSet = LevelPreSet.Rain;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 41:
                 _levelPreSet = LevelPreSet.Normal;
@@ -253,6 +259,7 @@ public class GameManager : Singleton<GameManager>
                 _MovesToGive -= 5;
                 _RowsToGive = 3;
                 _levelPreSet = LevelPreSet.Dust;
+                SynthManager.Instance.GrowSynth();
                 break;
             case 51:
                 _levelPreSet = LevelPreSet.Normal;
@@ -513,7 +520,7 @@ public class GameManager : Singleton<GameManager>
         StatsManager.Instance.AddToLevelsCompleted(1);
         StatsManager.Instance.CheckHighestLevelCompleted(_Level);
         _Level++;
-        SynthManager.Instance.GrowSynth();
+        //SynthManager.Instance.GrowSynth();
         SaveManager.Instance.SaveGame();
         CheckLevel();
     }

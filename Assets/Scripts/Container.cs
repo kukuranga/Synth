@@ -27,16 +27,6 @@ public class Container : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        SetWave(false);
-    }
-
-    public void SetWave(bool value)
-    {
-        _Material.SetFloat("_Wave", value ? 1.0f : 0.0f);
-    }
-
     public void SetCorrect()
     {
         _CorrectGO.SetActive(true);

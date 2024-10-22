@@ -1898,7 +1898,7 @@ MonoBehaviour:
   _RedItemChance: 0
   _YellowItemChance: 0
   _FrozenItemChance: 0
-  _StartingMoves: 12
+  _StartingMoves: 15
   _RedItemColorChange: {r: 0.6603774, g: 0.021804927, b: 0.021804927, a: 0}
   _PurpleItemColorChange: {r: 0.6364209, g: 0.03524386, b: 0.6792453, a: 0}
   _GoldItemUnclocked: 0

@@ -19,9 +19,13 @@ public class ButtonManager : Singleton<ButtonManager>
 
     //WinScreen Objects
     public TextMeshProUGUI _WinTextWinScreen;
-    public TextMeshProUGUI _UsedMovesWinScreen;//todo calculate the number of moves used in this encounter
-    public TextMeshProUGUI _MovesLeftWinScreen;//todo show the number of moves left
-    public TextMeshProUGUI _MovesGainedWinScreen;//todo show how many moves the player will gain
+    public TextMeshProUGUI _UsedMovesWinScreen;
+    public TextMeshProUGUI _MovesLeftWinScreen;
+    public TextMeshProUGUI _MovesGainedWinScreen;
+
+    //lossScreen Objects
+    public TextMeshProUGUI _HighestLevelLossScreen;
+    public TextMeshProUGUI _LevelReachedLossScreen;
     
     public GameObject _GameOverScreen;
     public GameObject _GameWonScreen;
@@ -43,6 +47,7 @@ public class ButtonManager : Singleton<ButtonManager>
     private List<GameObject> _InstatiatedButtons = new();
 
     private bool _AlreadyExploded = false;
+    private int _StartingMoves; //Number of moves the round starts with
 
     private void Awake()
     {
@@ -53,6 +58,7 @@ public class ButtonManager : Singleton<ButtonManager>
     {
         _MovesLeft = GameManager.Instance.SetMoves();
         RandomizeAndSetCorrectPositions();
+        _StartingMoves = GameManager.Instance.SetMoves();
     }
 
     private void Update()
@@ -66,10 +72,18 @@ public class ButtonManager : Singleton<ButtonManager>
         }
 
         _MoveText.text = _MovesLeft.ToString();
+        _MovesLeftWinScreen.text = _MovesLeft.ToString();
 
         _WinText.text = GameManager.Instance._Level.ToString();
         _WinTextWinScreen.text = GameManager.Instance._Level.ToString();
-        if(_MovesLeft <= 0)
+
+        _MovesGainedWinScreen.text = GameManager.Instance.GetMovesToGive().ToString();
+        _UsedMovesWinScreen.text = (_StartingMoves - _MovesLeft).ToString();
+
+        _HighestLevelLossScreen.text = StatsManager.Instance._HighestLevelAchieved.ToString();
+        _LevelReachedLossScreen.text = GameManager.Instance._Level.ToString();
+
+        if (_MovesLeft <= 0)
         {
             if (!_AlreadyExploded)
             {
@@ -948,15 +962,16 @@ public class ButtonManager : Singleton<ButtonManager>
 
         if(_CorrectAnswers == _ButtonsRow.Count && !_GameWon)
         {
-            _GameWon = true;
-            _GameWonScreen.SetActive(true);
-            AudioManager.Instance.PlaySound("Win 1");
-            SynthManager.Instance.RandomUpgrade();
+            StartCoroutine(GameWinTransition());
+            //FadeUi();
+            //_GameWon = true;
+            //_GameWonScreen.SetActive(true);
+            //AudioManager.Instance.PlaySound("Win 1");
+            //SynthManager.Instance.RandomUpgrade();
 
-            GameManager.Instance.StoreMoves(_MovesLeft);
-            _Containers[0].SetWave(true);
+            //GameManager.Instance.StoreMoves(_MovesLeft); ///--------------------------------------------------------HERE------------------------!!!!!!!!!!!!!!---------
 
-            GameManager.Instance.GameWon();
+            //GameManager.Instance.GameWon();
         }
 
         //FREEZE ITEM CODE
@@ -1200,4 +1215,44 @@ public class ButtonManager : Singleton<ButtonManager>
 
         return surroundingObjects;
     }
+
+    #region Fade UI
+
+    public UIController _UiController;
+
+    public void FadeUi()
+    {
+        _MovingItems++;
+        _GameWon = true;
+        _UiController.StartFade(false);
+    }
+
+    public void OpenWinScreen()
+    {
+        _GameWonScreen.SetActive(true);
+        GameManager.Instance.GameWon();
+    }
+
+    public bool GetGameWon()
+    {
+        return _GameWon;
+    }
+
+    IEnumerator GameWinTransition()
+    {
+        FadeUi();
+        //Move the synth to the middle of screen
+        //_GameWon = true;
+        //
+        //AudioManager.Instance.PlaySound("Win 1");
+        //SynthManager.Instance.RandomUpgrade();
+
+        //GameManager.Instance.StoreMoves(_MovesLeft); ///--------------------------------------------------------HERE------------------------!!!!!!!!!!!!!!---------
+
+        //GameManager.Instance.GameWon();
+
+        yield return null;
+    }
+
+    #endregion
 }
