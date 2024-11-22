@@ -18,4 +18,4 @@ MonoBehaviour:
   _Difficulty: 1
   _Unlock: {fileID: 11400000, guid: 15f02bc9ccb6585438111f19a12a0949, type: 2}
   _Unlocked: 0
-  _LevelRequirement: 35
+  _LevelRequirement: 0

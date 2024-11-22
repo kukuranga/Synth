@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 public enum LevelPreSet
 {
     Normal,
@@ -20,35 +22,6 @@ public class GameManager : Singleton<GameManager>
     // eg: rain planet will have a 0% chance to spawn lava but a 60% to spawn frozen planets
     public LevelPreSet _levelPreSet;
 
-    //possible presets: Rain level(more ice planets), lava level(more red planets), gold levels(more golden planets)
-
-
-    //add here: Preset values for all planets, a save method to save the planets original values on normal levels,
-
-    //add here values for each of the different planet presets depending on the _levelpreset selected
-
-    //Figure out the different how the level presets would be required.
-
-    /*
-    -figure out how to add visuals to moving planets
-    -Fix Color spawning when color variation is selected
-    -remake the color background to be an even circle
-    -Add background particle systems to each spawn location for buttons
-    -Use those PS to create a graphic when set correct is triggered,
-    That will draw lines or cubes to the synth position
-    -Add a boarder around the game that can change colorand be used
-    to change color depending on the state of the game
-
-    Special levels
-    -100 (Special type)
-
-
-    Problems
-    -Hard stuck at rain level
-
-    -fix visuals for color spinning
-    */
-
 
     public bool _SetColors;
     public List<Color> colors;
@@ -63,9 +36,11 @@ public class GameManager : Singleton<GameManager>
     public SceneReference _LevelToLoad;
     public int _RowsToGive = 1;
     public bool _GameOver = false;
+    public int _MovesAddedPerRound;
+    public int _MoveUpperLimit;
 
     private int _MovesLeft = 0;
-    private int _MovesToGive = 14;
+    private int _MovesToGive = 3;
 
     public int _TotalPurpleItemsToSpawn = 0;
     public int _purpleItemsSpawned = 0;
@@ -95,9 +70,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private float _YellowItemChance = 0f;
 
     [SerializeField] private float _FrozenItemChance = 0f;
-    [SerializeField] private int _StartingMoves = 8;
+    [SerializeField] private int _StartingMoves = 8; //-------------------------------------------------------------------------------
 
-    public Color _RedItemColorChange;
+    public Color _RedItemColorChange;  
     public Color _PurpleItemColorChange;
 
     //Item Unlock Bools
@@ -130,11 +105,17 @@ public class GameManager : Singleton<GameManager>
         //AudioManager.Instance.PlayMusic("Music");
         AudioManager.Instance.CrossfadeMusic("MusicOld", 1f);
         OnStartSetRunValues();
-        CheckLevelPreset();//Test here 
+        //CheckLevelPreset(); //To set test level as level 1 when needed
     }
 
     private void Update()
     {
+        //Upper limit
+        if(_MovesLeft > _MoveUpperLimit)
+        {
+            _MovesLeft = _MoveUpperLimit;
+        }
+
         if(_Debugger)
         {
             _RowsToGive = 3;
@@ -146,6 +127,7 @@ public class GameManager : Singleton<GameManager>
     public void GameStart()
     {
         AudioManager.Instance.CrossfadeMusic("Music", 1f);
+        _MovesLeft = _StartingMoves + _MovesLeft; //Note: The starting moves will have the original moves to give amount added ontop
     }
 
     //Happenes when the game ends and the player goes back to the home screen
@@ -170,7 +152,8 @@ public class GameManager : Singleton<GameManager>
     {
         _TotalPurpleItemsToSpawn = 1;
         _RowsToGive = 1;
-        _MovesToGive = _StartingMoves;
+        _MovesToGive = _MovesAddedPerRound;
+        _MovesLeft = _StartingMoves;
         _GoldenItemChance = _BaseGoldenItemChance;
         _GoldenItemBonus = _BaseGoldenItemBonus;
         _PurpleItemChance = _BasePurpleItemChance;
@@ -184,6 +167,7 @@ public class GameManager : Singleton<GameManager>
     private void OnStartSetRunValues()
     {
         //Set the default values to be reset on game load
+        _MovesToGive = _MovesAddedPerRound;
         _BaseGoldenItemChance = _GoldenItemChance;
         _BaseGoldenItemBonus = _GoldenItemBonus;
         _BasePurpleItemChance = _PurpleItemChance;
@@ -202,19 +186,21 @@ public class GameManager : Singleton<GameManager>
             case 1:
                 ResetRunValues();
                 AddBonusesToGame();
+                _MovesLeft = _StartingMoves;
                 break;
             case 2:
-                _MovesToGive = 5;
+                _MovesToGive += 1;
                 _RowsToGive = 1;
                 break;
             case 5:
                 _MovesToGive += 1;
                 _RowsToGive = 2;
                 SynthManager.Instance.GrowSynth();
-                break;
+                break; 
             case 10:
                 _MovesToGive += 3;
-                _levelPreSet = LevelPreSet.gold;
+                RandomLevelPreset();
+                //_levelPreSet = LevelPreSet.gold;
                 SynthManager.Instance.GrowSynth();
                 break;
             case 11:
@@ -225,30 +211,35 @@ public class GameManager : Singleton<GameManager>
                 _RowsToGive = 3;
                 SynthManager.Instance.GrowSynth();
                 break;
+            case 20:
+                RandomLevelPreset();
+                break;
+            case 21:
+                _levelPreSet = LevelPreSet.Normal;
+                break;
             case 25:
                 _TotalPurpleItemsToSpawn++;
                 _MovesToGive += 1;
                 IncreaseFrozenItemChance(0.2f);
                 IncreaseYellowItemChance(0.1f);
                 _RowsToGive = 3;
-                _levelPreSet = LevelPreSet.lava;
+                //_levelPreSet = LevelPreSet.lava;
                 SynthManager.Instance.GrowSynth();
-                break;
-            case 26:
-                _levelPreSet = LevelPreSet.Normal;
                 break;
             case 30:
                 IncreaseFrozenItemChance(0.1f);
-                _MovesToGive += 3;
+                _MovesToGive += 1;
                 _RowsToGive = 3;
-                _levelPreSet = LevelPreSet.Dust;
+                RandomLevelPreset();
+                //_levelPreSet = LevelPreSet.Dust;
                 SynthManager.Instance.GrowSynth();
                 break;
             case 31:
                 _levelPreSet = LevelPreSet.Normal;
                 break;
             case 40:
-                _levelPreSet = LevelPreSet.Rain;
+                //_levelPreSet = LevelPreSet.Rain;
+                RandomLevelPreset();
                 SynthManager.Instance.GrowSynth();
                 break;
             case 41:
@@ -256,9 +247,10 @@ public class GameManager : Singleton<GameManager>
                 break;
             case 50:
                 IncreaseYellowItemChance(0.1f);
-                _MovesToGive -= 5;
+                //_MovesToGive -= 1;
                 _RowsToGive = 3;
-                _levelPreSet = LevelPreSet.Dust;
+                //_levelPreSet = LevelPreSet.Dust;
+                RandomLevelPreset();
                 SynthManager.Instance.GrowSynth();
                 break;
             case 51:
@@ -272,6 +264,16 @@ public class GameManager : Singleton<GameManager>
     }
 
     bool _PresetSaved = false;
+
+    //TODO: Problem: this will sometimes give you the same upgrade several times;
+    public void RandomLevelPreset()
+    {
+        // Get all values of the LevelPreset enum
+        System.Array levelPresets = System.Enum.GetValues(typeof(LevelPreSet));
+
+        // Pick a random value from the enum using UnityEngine.Random
+        _levelPreSet = (LevelPreSet)levelPresets.GetValue(Random.Range(0, levelPresets.Length -1)) + 1;
+    }
 
     public void CheckLevelPreset()
     {
@@ -294,7 +296,7 @@ public class GameManager : Singleton<GameManager>
         switch(_levelPreSet)
         {
             case LevelPreSet.Normal:
-                //nothing changes
+                ResetValuesAfterLevelPreset();
                 break;
             case LevelPreSet.Dust:
                 if (_YellowItemUnlocked)
@@ -509,14 +511,24 @@ public class GameManager : Singleton<GameManager>
 
     public void GameWon()
     {
-        SetMoves();
+        
+        _MovesLeft = SetMoves();
         IncreasePurpleItemChance(0.001f);
         IncreaseRedItemChance(0.002f);
+        IncreaseFrozenItemChance(0.002f);
+        IncreaseYellowItemChance(0.002f);
+        _GoldItemPreset = _GoldenItemChance;
+        _PurpleItemPreset = _PurpleItemChance;
+        _RedItemPreset = _RedItemChance;
+        _YellowItemPreset = _YellowItemChance;
+        _FrozenItemPreset = _FrozenItemChance;
+        _PresetSaved = true;
         _purpleItemsSpawned = 0;
         _YellowItemsSpawned = 0;
         _FrozenItemsSpawned = 0;
         _SpawnDecay = 1;
         CheckLevelPreset();
+        StoreMoves(_MovesLeft);
         StatsManager.Instance.AddToLevelsCompleted(1);
         StatsManager.Instance.CheckHighestLevelCompleted(_Level);
         _Level++;
@@ -528,6 +540,11 @@ public class GameManager : Singleton<GameManager>
     public void ResetGame()
     {
         StatsManager.Instance.AddToTotalNumberOfRuns(1);
+        _PurpleItemChance = 0;
+        _RedItemChance = 0;
+        _FrozenItemChance = 0;
+        _YellowItemChance = 0;
+        _GoldenItemChance = 0;
         _Level = 1;
         _MovesLeft = 0;
         _SpawnDecay = 1;

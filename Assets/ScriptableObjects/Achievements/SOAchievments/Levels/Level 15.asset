@@ -17,5 +17,5 @@ MonoBehaviour:
   _Description: Get to Level 15
   _Difficulty: 1
   _Unlock: {fileID: 11400000, guid: 4635a724c45d9ef46ac331d0f4b5ce59, type: 2}
-  _Unlocked: 0
-  _LevelRequirement: 15
+  _Unlocked: 1
+  _LevelRequirement: 0

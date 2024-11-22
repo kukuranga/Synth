@@ -107,13 +107,18 @@ public class Buttons : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, I
             _ColorSprite.color =  GameManager.Instance.colors[_CorrectPosition];
     }
 
+    //public void PlayMoveSound()
+    //{
+    //    AudioManager.Instance.PlaySound("Star1");
+    //}
+
     private bool _CheckedAlready = false;
     public void CheckCorrect()
     {
         
         if(_CorrectPosition == _Container._Index)
         {
-            AudioManager.Instance.PlaySound("Star1");
+            //AudioManager.Instance.PlaySound("Star1");
 
             _Container.SetCorrect();
             if (!AlreadyChecked)

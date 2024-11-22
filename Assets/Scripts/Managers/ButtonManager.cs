@@ -26,7 +26,7 @@ public class ButtonManager : Singleton<ButtonManager>
     //lossScreen Objects
     public TextMeshProUGUI _HighestLevelLossScreen;
     public TextMeshProUGUI _LevelReachedLossScreen;
-    
+
     public GameObject _GameOverScreen;
     public GameObject _GameWonScreen;
     public GameObject _GameRewardsScreen;
@@ -63,7 +63,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void Update()
     {
-        if(_IsFirstActiveFrame)
+        if (_IsFirstActiveFrame)
         {
             SetCorrectNumbers();
             CheckIFAllCoorect();
@@ -97,7 +97,7 @@ public class ButtonManager : Singleton<ButtonManager>
     //TODO: FIX LOGIC TO RESET THE GAME WITHOUT THE NEED FOR RELOADING THE SCENE -------------------------------------------------------------------------------------
     public void ResetGame()
     {
-        foreach(GameObject g in _InstatiatedButtons)
+        foreach (GameObject g in _InstatiatedButtons)
         {
             g.SetActive(false);
         }
@@ -106,14 +106,14 @@ public class ButtonManager : Singleton<ButtonManager>
         _MovesLeft = GameManager.Instance.SetMoves();
         RandomizeAndSetCorrectPositions();
     }
-    
+
     //resets moves when a gold item triggers
     public void ResetMoves()
     {
         _MovesLeft += GameManager.Instance.GetGoldenBonus();
     }
-    
-    public void SelectButtons(Buttons btn , int Direction) //called on buttons drag
+
+    public void SelectButtons(Buttons btn, int Direction) //called on buttons drag
     {
         _FirstClicked = btn;
         bool _CanMove = false;
@@ -121,7 +121,7 @@ public class ButtonManager : Singleton<ButtonManager>
         int index = GetButtonInOrderedList(btn);
 
         // 1:Up 2:Down 3:Right 4:Left
-        switch(Direction)
+        switch (Direction)
         {
             case 1:
                 _CanMove = CheckUp(index);
@@ -143,8 +143,8 @@ public class ButtonManager : Singleton<ButtonManager>
             _FirstClicked = btn;
             _FirstClicked.SetUnSelected();
             _FirstClicked.Zoom(1f);
-            
-            if(_FirstClicked._ItemType == ItemType.MotionItem && _SecondClicked._ItemType == ItemType.MotionItem)
+
+            if (_FirstClicked._ItemType == ItemType.MotionItem && _SecondClicked._ItemType == ItemType.MotionItem)
             {
                 PurpleItemClash();
                 PointsManager.Instance.AddPoint(5);
@@ -194,7 +194,7 @@ public class ButtonManager : Singleton<ButtonManager>
     private bool CheckUp(int indx)
     {
         int val = indx - 3;
-        if(val < 0)
+        if (val < 0)
         {
             return false;
         }
@@ -290,8 +290,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     //Checks the number of moves left the player has
     private void CheckMoves()
-    {      
-        if(_MovesLeft <= 0)
+    {
+        if (_MovesLeft <= 0)
         {
             GameManager.Instance.GameOver();
             _GameOverScreen.SetActive(true);
@@ -323,7 +323,20 @@ public class ButtonManager : Singleton<ButtonManager>
 
         StartCoroutine(MoveToPosition(a, aV));
         StartCoroutine(MoveToPosition(b, bV));
-        
+        PlayButtonSounds(a, b);//Might move this after the coroutines are over
+
+    }
+
+    private void PlayButtonSounds(Buttons a, Buttons b)
+    {
+        if (a.IsCorrect() || b.IsCorrect())
+        {
+            AudioManager.Instance.PlaySound("Star1");
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound("Move");
+        }
     }
 
     IEnumerator MoveToPosition(Buttons a , Vector2 target)
@@ -1125,7 +1138,7 @@ public class ButtonManager : Singleton<ButtonManager>
         }
         if(RewardsManager.Instance.RollForRewards()) 
         {
-            if (GameManager.Instance._TreasureItemUnlocked)
+            if (GameManager.Instance._TreasureItemUnlocked && GameManager.Instance._Level > 9)
             {
                 RewardsManager.Instance.SetRewards(_RewardButton1, _RewardButton2, _RewardButton3);
                 int a = GetNormalItem();

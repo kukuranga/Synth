@@ -23,7 +23,7 @@ public class HomeScreenTutorial : MonoBehaviour
             TutorialManager.Instance._StartButtonTutorial = false;
         }
 
-        _OriginalPosition = _StartButtonTut.transform.position;
+        //_OriginalPosition = _StartButtonTut.transform.position;
 
         if(TutorialManager.Instance._StartButtonTutorial)
         {
@@ -33,19 +33,19 @@ public class HomeScreenTutorial : MonoBehaviour
 
     public void Next()
     {
-        TutorialSO tut = _Tutorials[_Index++];
-        if(tut._EndingTut)
-        {
-            _StartButtonTut.SetActive(false);
-            TutorialManager.Instance._StartButtonTutorial = false;
-        }
-        else
-        {
-            _Text.text = tut._Text;
+        //TutorialSO tut = _Tutorials[_Index++];
+        //if(tut._EndingTut)
+        //{
+        //    _StartButtonTut.SetActive(false);
+        //    TutorialManager.Instance._StartButtonTutorial = false;
+        //}
+        //else
+        //{
+        //    _Text.text = tut._Text;
             
-            if(tut._Move)
-                _StartButtonTut.transform.position = tut._Position;
-        }
+        //    if(tut._Move)
+        //        _StartButtonTut.transform.position = tut._Position;
+        //}
 
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
     public class SynthManager : Singleton<SynthManager>
@@ -90,7 +91,16 @@ using UnityEngine;
 
     public void AddTotalUpgradePoint()
     {
+        //Change this info to not cause bug
+
+        //Psudo: - Make sure the value is reset on game reset:
         _TotalUpgradePoints++;
+    }
+
+    public void ResetSynthValues()
+    {
+        _TotalUpgradePoints = 0;
+        _AvailableUpgradePoints = 0;
     }
 
     public void UpdateSynthValues()
@@ -129,7 +139,7 @@ using UnityEngine;
         //_PreviousChangeA = _Mixer.a;
         if (_Mixer.Radius < 10) //&& GameManager.Instance._Level > 5)
         {
-            _Mixer.Radius += 1f;
+            _Mixer.Radius += 0.1f;
         }
     }
 
@@ -137,6 +147,9 @@ using UnityEngine;
     {
         //_Mixer.a = 100;
         //_PreviousChangeA = 100;
+        _TotalUpgradePoints = 0;
+        _AvailableUpgradePoints = 0;
+        _UsedUpgradePoints = 0;
         _Mixer.Radius = 0.5f;
     }
 

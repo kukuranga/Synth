@@ -783,6 +783,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 78ad99fd0a0a5144280b07bbdba84815, type: 3}
   - {fileID: 8300000, guid: c3a1761c4656f9944a3e552064bb010d, type: 3}
   - {fileID: 8300000, guid: 5a7d8bb0c1b702a49aaf754dff9c6d64, type: 3}
+  - {fileID: 8300000, guid: 25c1a480e92d39e43b5e54aae7743db8, type: 3}
   musicSource: {fileID: 579803639}
 --- !u!4 &579803641
 Transform:
@@ -1882,6 +1883,8 @@ MonoBehaviour:
     sceneName: Game
   _RowsToGive: 1
   _GameOver: 0
+  _MovesAddedPerRound: 1
+  _MoveUpperLimit: 50
   _TotalPurpleItemsToSpawn: 1
   _purpleItemsSpawned: 0
   _YellowItemsSpawned: 0
@@ -1893,12 +1896,12 @@ MonoBehaviour:
   _TreasureItemChanceMultiplier: 0.01
   _LuckBonusMultiplier: 0.02
   _GoldenItemChance: 0.05
-  _GoldenItemBonus: 6
-  _PurpleItemChance: 0
-  _RedItemChance: 0
-  _YellowItemChance: 0
-  _FrozenItemChance: 0
-  _StartingMoves: 15
+  _GoldenItemBonus: 4
+  _PurpleItemChance: 0.01
+  _RedItemChance: 0.02
+  _YellowItemChance: 0.01
+  _FrozenItemChance: 0.02
+  _StartingMoves: 5
   _RedItemColorChange: {r: 0.6603774, g: 0.021804927, b: 0.021804927, a: 0}
   _PurpleItemColorChange: {r: 0.6364209, g: 0.03524386, b: 0.6792453, a: 0}
   _GoldItemUnclocked: 0
@@ -2579,7 +2582,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0f74d85def060743b352da773064f2f, type: 2}
   - {fileID: 11400000, guid: 451cb3c7014d133448179c394f73dc3d, type: 2}
   - {fileID: 11400000, guid: 1f1ce1c9b45483c4d887534f05e40ec8, type: 2}
-  _RewardsChance: 0.3
+  _RewardsChance: 0.1
   _Luck: 0
 --- !u!4 &2093436374
 Transform:

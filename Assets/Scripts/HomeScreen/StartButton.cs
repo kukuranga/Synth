@@ -12,6 +12,7 @@ public class StartButton : MonoBehaviour
         SceneLoader.Instance.UnloadScene(GameManager.Instance._Homepage);
         SceneLoader.Instance.UnloadScene(GameManager.Instance._GameOverScene);
         SceneLoader.Instance.LoadScene(GameManager.Instance._LevelToLoad);
+        SynthManager.Instance.ResetSynthValues();
         GameManager.Instance.GameStart();
     }
 }

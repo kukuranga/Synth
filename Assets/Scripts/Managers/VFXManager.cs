@@ -67,9 +67,9 @@ public class VFXManager : Singleton<VFXManager>
                 break;
             case LevelPreSet.lava:
                 _VFXDust.SetActive(false);
-                _VFXParticles.SetActive(true);
+                _VFXParticles.SetActive(false);
                 _VFXRain.SetActive(false);
-                _VFXSynthBackground.SetActive(false);
+                _VFXSynthBackground.SetActive(true);
                 _IceBackground.SetActive(false);
                 _GoldBackground.SetActive(false);
 
