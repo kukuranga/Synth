@@ -1,0 +1,15 @@
+-have a way to get to this point from the main menu
+-Finish shop logic and visuals
+- add retry button to the lose and win screen
+- make the other units
+	-make the abilities for each of the units
+		-this can be doneby making an ability type scriptable object and adding those to each unit
+		-then calling the units ability after the check in the game2manager
+
+
+-making the abilities
+	-make a scriptable oobject called DBAbility
+	-create a bool if it is passable
+	-check that bool at the end as done before
+	-Otherwise add a button to each DB that will check if it has an activatable ability
+	-the button will onclick and use the ability
