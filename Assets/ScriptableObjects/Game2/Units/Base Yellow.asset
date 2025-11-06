@@ -17,7 +17,7 @@ MonoBehaviour:
   _YellowResourceGain: 1
   _GreenResourceGain: 0
   _Star: 0
-  _Danger: 1
+  _Danger: 0
   _ActivatedAbility: 0
   _PostGameAbility: 0
   _sprite: {fileID: 21300000, guid: 9df942fda2d8a154eb4f9461c53771b1, type: 3}

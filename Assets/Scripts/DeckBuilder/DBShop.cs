@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DBShop : MonoBehaviour
 {
-    
-    public void OnClickClose()
-    {
+    public DBUnitList _ShopUnits;
 
-    }
+    //display each of them in a list of units
+
+
+
+
 }
