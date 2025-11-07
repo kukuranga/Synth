@@ -1,5 +1,4 @@
 -have a way to get to this point from the main menu
--Finish shop logic and visuals
 - add retry button to the lose and win screen
 - make the other units
 	-make the abilities for each of the units
@@ -13,3 +12,14 @@
 	-check that bool at the end as done before
 	-Otherwise add a button to each DB that will check if it has an activatable ability
 	-the button will onclick and use the ability
+
+-Change the way negatives work to use a negative bool and that changes the look of the number
+
+Bugs:
+
+-Increase the total containers to allow up to 28 slots
+-add a way to look at your active deck
+-shouldnt go to lose screen when you hit too much danger
+-bug with negative money gains
+-bug with the _active list not ending correctly and letting the user add more units from the deck when 
+ containers full

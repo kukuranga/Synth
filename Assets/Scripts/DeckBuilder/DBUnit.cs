@@ -15,6 +15,10 @@ public class DBUnit : ScriptableObject
     public bool _ActivatedAbility;
     public bool _PostGameAbility;
     public Sprite _sprite;
+    public int _ShopCost;
+    public int _NumberOfBuys;
+    public DBAbility _Ability;
+    public bool _FlagDangerReduction;
 
     public void OnConditionsChecked()
     {

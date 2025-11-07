@@ -19,6 +19,7 @@ public class DBContainerManager : MonoBehaviour
     public void FirstSetUp()
     {
         ClearContainers();
+        ClearNumberOfUnitsPulled();
         SetActiveContainerNumber(_StartingContainers);
     }
 
@@ -28,6 +29,11 @@ public class DBContainerManager : MonoBehaviour
         {
             _cont.ClearContainer();
         }
+    }
+
+    public void IncreaseStartingContainers()
+    {
+        _StartingContainers++;
     }
 
     public void SetActiveContainerNumber(int _activeNumber)
@@ -58,7 +64,10 @@ public class DBContainerManager : MonoBehaviour
             {
                 if (_cont._unit._Danger)
                     i++;
-            }    
+
+                if (_cont._unit._FlagDangerReduction)
+                    i--;
+            }
         }
         return i;
     }

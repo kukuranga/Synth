@@ -46,6 +46,9 @@ public class Deck : MonoBehaviour
 
     public DBUnit PullUnit()
     {
+        if (_CurrentDeck.Count == 0)
+            Game2Manager.Instance.UpdateGameState(GameState.CheckConditions);
+
         if (_CurrentDeck == null || _CurrentDeck.Count == 0)
         {
             Debug.LogWarning("No cards left in the deck!");

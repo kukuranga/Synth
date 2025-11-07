@@ -21,3 +21,5 @@ MonoBehaviour:
   _ActivatedAbility: 0
   _PostGameAbility: 0
   _sprite: {fileID: 21300000, guid: 4ef4365c9bf34a543bc695b3a2c85e89, type: 3}
+  _ShopCost: 3
+  _NumberOfBuys: 3

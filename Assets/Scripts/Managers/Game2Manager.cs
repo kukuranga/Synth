@@ -20,15 +20,20 @@ public class Game2Manager : Singleton<Game2Manager>
     public int _GreenResource;
     public int _TotalTurnCount;
     public int _CurrentTurnCount;
+    public int _ActiveContainers;
+    public int _DangerLevelAllowed;
+    public int _StarCountToWin;
+    public GameObject _Containers;
     public GameObject _ShopScene;
     public GameObject _GameUI;
     public GameObject _GameWon;
     public GameObject _GameLost;
+    public GameObject _MessageScreen;
+    public DBMessageScreen _DBMessageScreen;
     public GameState _gameState;
     public Deck _deck;
     public DBContainerManager _ContainerManager;
-    public int _ActiveContainers;
-    public int _DangerLevelAllowed;
+    public DBShop _shop;
 
     private void Update()
     {
@@ -47,16 +52,20 @@ public class Game2Manager : Singleton<Game2Manager>
             case GameState.pregame:
                 DisableUI();
                 _GameUI.SetActive(true);
+                _Containers.SetActive(true);
                 _deck.SetActiveDeck();
                 _ContainerManager.FirstSetUp();
                 _deck.StartRound();
                 _CurrentTurnCount = _TotalTurnCount;
+                _shop.Init();
                 UpdateGameState(GameState.GamePlay);
                 break;
             case GameState.RoundStart:
                 DisableUI();
+                _ContainerManager.FirstSetUp();
+                _deck.StartRound();
                 _GameUI.SetActive(true);
-                _deck.ShuffleCurrentDeck();
+                _Containers.SetActive(true); 
                 UpdateGameState(GameState.GamePlay);
                 break;
             case GameState.GamePlay:
@@ -99,6 +108,11 @@ public class Game2Manager : Singleton<Game2Manager>
         }
     }
 
+    public void AddUnitToDeck(DBUnit _Unit)
+    {
+        _deck.AddUnit(_Unit);
+    }
+
     public void SetContainerManager(DBContainerManager _DBContMan)
     {
         _ContainerManager = _DBContMan;
@@ -118,28 +132,49 @@ public class Game2Manager : Singleton<Game2Manager>
         return true;
     }
 
+    public void IncreaseSlots()
+    {
+        _ContainerManager.IncreaseStartingContainers();
+    }
+
     #region OnButtonClick
 
     //Called on click of the grab button
     public void SetUnit()
     {
-        DBUnit _u = _deck.PullUnit();
-        _ContainerManager.AddUnitToLastContainer(_u);
+        if (_ContainerManager._NumberOfUnitsPulled < _ContainerManager._StartingContainers)
+        {
+            DBUnit _u = _deck.PullUnit();
+            _ContainerManager.AddUnitToLastContainer(_u);
 
-        //check the number of units and check if the danger level is too high after that
-        if (CheckDanger())
-            UpdateGameState(GameState.GameLost);
-        else if (_ContainerManager._NumberOfUnitsPulled == _ActiveContainers)
+            //check the number of units and check if the danger level is too high after that
+            if (CheckDanger())
+            {
+                DisableUI();
+                _DBMessageScreen.UpdateMessage("Danger too high");
+                _MessageScreen.SetActive(true);
+                //UpdateGameState(GameState.Shop);
+            }
+            else if (_ContainerManager._NumberOfUnitsPulled == _ActiveContainers)
+                UpdateGameState(GameState.CheckConditions);
+        }
+        else
             UpdateGameState(GameState.CheckConditions);
     }
 
     //Called onclick of the end button
     public void EndSelection()
     {
-        UpdateGameState(GameState.CheckConditions);
+        if(_gameState != GameState.CheckConditions)
+            UpdateGameState(GameState.CheckConditions);
     }
 
     #endregion
+
+    public void SetShop(DBShop _DBShop)
+    {
+        _shop = _DBShop;
+    }
 
     public void SetDeck(Deck _d)
     {
@@ -151,35 +186,65 @@ public class Game2Manager : Singleton<Game2Manager>
         _deck = null;
     }
 
+    public void AddYellowResource(int i)
+    {
+        _YellowResource += i;
+    }
+
     private void DisableUI()
     {
         _GameUI.SetActive(false);
         _ShopScene.SetActive(false);
         _GameWon.SetActive(false);
         _GameLost.SetActive(false);
+        _Containers.SetActive(false);
+        _MessageScreen.SetActive(false);
     }
 
     private IEnumerator CheckConditions()
     {
+        int _NumberOfStars = 0;
+
         foreach(DBContainer _cont in _ContainerManager._ActiveContainers)
         {
             if(_cont._unit != null)
             {
                 _YellowResource += _cont._unit._YellowResourceGain;
-                _GreenResource += _cont._unit._GreenResourceGain;
+                _GreenResource += _cont._unit._GreenResourceGain;                
 
-                if(_GreenResource <= -1)
-                {
-                    //_GreenResource = 0;
-                    //_YellowResource -= 5;
-                    Debug.Log("5 yellow taken away");
-                }
+                if (_cont._unit._Star)
+                    _NumberOfStars++;
 
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(1);
             }
         }
 
-        UpdateGameState(GameState.Shop);
+        foreach(DBContainer _cont in _ContainerManager._ActiveContainers)
+        {
+            if(_cont._unit != null)
+            {
+                if(_cont._unit._Ability != null && !_cont._unit._Ability.Activated)
+                {
+                    _cont._unit._Ability.UseAbility();
+                }
+            }
+        }
+
+        _CurrentTurnCount--;
+
+        if (_GreenResource <= -1)
+        {
+            _GreenResource = 0;
+            _YellowResource -= 5;
+            Debug.Log("5 yellow taken away");
+        }
+
+        if (_CurrentTurnCount <= 0)
+            UpdateGameState(GameState.GameLost);
+        else if (_NumberOfStars >= _StarCountToWin)
+            UpdateGameState(GameState.Gamewon);
+        else
+            UpdateGameState(GameState.Shop);
 
         yield return null;
     }

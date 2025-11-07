@@ -13,9 +13,11 @@ public class DBContainer : MonoBehaviour
     public GameObject _GreenresourceGO;
     public GameObject _Star;
     public GameObject _Danger;
+    public SpriteRenderer _Ability;
     public TextMeshPro _YellowText;
     public TextMeshPro _GreenText;
     public SpriteRenderer _spriteRender;
+    public Sprite _FlagSprite;
 
     private void Start()
     {
@@ -75,6 +77,13 @@ public class DBContainer : MonoBehaviour
             _Danger.SetActive(true);
         if (_unit._Star)
             _Star.SetActive(true);
+
+        if (_unit._FlagDangerReduction)
+            _Ability.sprite = _FlagSprite;
+        else if(_unit._Ability != null)
+        {
+            _Ability.sprite = _unit._Ability._sprite;
+        }
     }
 
     public void DisableAllVisuals()
@@ -84,6 +93,7 @@ public class DBContainer : MonoBehaviour
         _yellowresourceGO.SetActive(false);
         _GreenresourceGO.SetActive(false);
         _spriteRender.sprite = null;
+        _Ability.sprite = null;
     }
 
     public void ClearContainer()
