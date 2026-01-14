@@ -7,12 +7,20 @@ public class DBButtonLogic : MonoBehaviour
     //Handles the buttons for the DBButtons
     public void AddUnitOnClick()
     {
-        Game2Manager.Instance.SetUnit();
+        if (Game2Manager.Instance._gameState == GameState.GamePlay)
+        {
+            DBMessageManager.Instance.ClearMessage();
+            Game2Manager.Instance.SetUnit();
+        }
     }
 
     public void EndOnClick()
     {
-        Game2Manager.Instance.EndSelection();
+        if (Game2Manager.Instance._gameState == GameState.GamePlay)
+        {
+            DBMessageManager.Instance.ClearMessage();
+            Game2Manager.Instance.EndSelection();
+        }
     }
 
 }

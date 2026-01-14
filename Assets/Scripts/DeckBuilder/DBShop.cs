@@ -7,7 +7,7 @@ public class DBShop : MonoBehaviour
     public DBUnitList _ShopUnits;
     //display each of them in a list of units
     //public GameObject _DBShopContainerPrefab;
-    public GameObject _ContainerParent; //Not Used
+    public GameObject _ContainerParent;
     public List<DBShopContainer> _ShopContainers;
 
     private void Awake()          

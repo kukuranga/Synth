@@ -25,4 +25,10 @@ public class DBUnit : ScriptableObject
 
     }
 
+    public void Init()
+    {
+        if(_Ability != null)
+            _Ability._OwnerUnit = this;
+    }
+
 }

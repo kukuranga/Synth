@@ -29,11 +29,13 @@ public class GameManager : Singleton<GameManager>
     public bool _Debugger;
     public float _SwipeSensitivity;
     public int _Level = 1;
+    public SceneReference _GameSelect;
     public SceneReference _Homepage;
     public SceneReference _GameOverScene;
 
     //Set scene to load when the game starts
     public SceneReference _LevelToLoad;
+    public SceneReference _DBLevelToLoad;
     public int _RowsToGive = 1;
     public bool _GameOver = false;
     public int _MovesAddedPerRound;

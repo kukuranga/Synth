@@ -34,6 +34,8 @@ public class DBContainerManager : MonoBehaviour
     public void IncreaseStartingContainers()
     {
         _StartingContainers++;
+        Game2Manager.Instance._ActiveContainers = _StartingContainers;
+
     }
 
     public void SetActiveContainerNumber(int _activeNumber)
@@ -83,5 +85,20 @@ public class DBContainerManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public int CheckIfActivatedabilities()
+    {
+        int i = 0;
+
+        foreach(DBContainer _cont in _AllContainers)
+        {
+            if(_cont._unit != null)
+                if (_cont._Activated && _cont._unit._Ability != null)
+                    if(_cont._unit._Ability.Activated)
+                        i++;
+        }
+
+        return i;
     }
 }

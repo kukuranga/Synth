@@ -12,12 +12,20 @@ public class DBAbility : ScriptableObject
     public bool Activated; //If it is not activated, the ability will just be run passivly during the check game state
     public Sprite _sprite; //This is the sprite associated with the ability, to be displayed on the character portrate
     public string Description; //Describes the ability and its uses
+    public string Prompt; //Used to detail what the ability does at the bottom of the screen
+    public bool _Used; //This is used to tell if an ability is already used
+    public DBUnit _OwnerUnit;
 
 
 
     public virtual void UseAbility()
     {
 
+    }
+
+    public virtual void ActivateAbility()
+    {
+        
     }
 
 }

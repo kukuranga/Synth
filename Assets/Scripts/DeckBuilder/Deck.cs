@@ -56,6 +56,7 @@ public class Deck : MonoBehaviour
         }
 
         DBUnit _unit = _CurrentDeck[0];
+        _unit.Init();
         _CurrentDeck.RemoveAt(0);
         return _unit;
     }

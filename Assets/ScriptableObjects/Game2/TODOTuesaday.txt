@@ -15,6 +15,10 @@
 
 -Change the way negatives work to use a negative bool and that changes the look of the number
 
+-add the methods to use the active abilities (On click)
+	-use the current shop pointer method to help
+-make more units and abilities
+
 Bugs:
 
 -Increase the total containers to allow up to 28 slots

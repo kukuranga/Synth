@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DBContainer : MonoBehaviour
+public class DBContainer : MonoBehaviour , IPointerClickHandler
 {
+    public bool _Shop;
     public bool _Unlocked;
     public DBUnit _unit;
     public GameObject _BackGround;
@@ -18,10 +20,14 @@ public class DBContainer : MonoBehaviour
     public TextMeshPro _GreenText;
     public SpriteRenderer _spriteRender;
     public Sprite _FlagSprite;
+    public bool _Activated;
+
+    private Quaternion originalRotation;
 
     private void Start()
     {
         DisableAllVisuals();
+        originalRotation = transform.rotation;
     }
 
     private void Update()
@@ -54,6 +60,12 @@ public class DBContainer : MonoBehaviour
             _BackGround.SetActive(false);
     }
 
+    void LateUpdate()
+    {
+        // Reset rotation after parent rotates
+        transform.rotation = originalRotation;
+    }
+
     public void SetUnit(DBUnit _u)
     {
         _unit = _u;
@@ -82,7 +94,12 @@ public class DBContainer : MonoBehaviour
             _Ability.sprite = _FlagSprite;
         else if(_unit._Ability != null)
         {
+            _Ability.gameObject.SetActive(true);
             _Ability.sprite = _unit._Ability._sprite;
+        }
+        else
+        {
+            _Ability.gameObject.SetActive(false);
         }
     }
 
@@ -101,5 +118,45 @@ public class DBContainer : MonoBehaviour
         DisableAllVisuals();
         _unit = null;
         _Unlocked = false;
+        _Activated = true;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        //onlick will display the information on the ability and set the game state to selecting an option
+        //the options will change how this onclick works if the gamestate is set to select a unit
+        //a method to change the state back should also be made
+
+        switch(Game2Manager.Instance._gameState)
+        {
+            case GameState.GamePlay:
+                    if (_unit == null)
+                        return;
+
+                    //Show Definintion of red values here
+                    if (_unit._Danger)
+                        DBMessageManager.Instance.UpdateMessage("Unit Contains Danger");
+
+                    if (_unit._Ability == null)
+                        return;
+
+
+                    if (_Activated && !_Shop)
+                    {
+                        //the effects of the activated ability will trigger here.
+                        _Activated = false;
+                        _unit._Ability.ActivateAbility();
+                    }
+                break;
+
+            case GameState.SelectUnit:
+                if (Game2Manager.Instance._TempUnit != this._unit)
+                    Game2Manager.Instance.UnitClicked(this);
+                else
+                    DBMessageManager.Instance.UpdateMessage("Cant Select the same unit");
+                break;
+        }
+
+        
     }
 }

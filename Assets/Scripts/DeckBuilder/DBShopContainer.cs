@@ -12,6 +12,7 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
     //make a variable to hold the number of units you can buy
     public int _CurrentAvailableBuys;
     public TextMeshPro _BuysTMP;
+    public TextMeshPro _CostTmp;
 
     private void Update()
     {
@@ -22,6 +23,7 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
     {
         //set the unit here
         _CurrentAvailableBuys = _DBCont._unit._NumberOfBuys;
+        _CostTmp.text = _DBCont._unit._ShopCost.ToString();
     }
 
     public void SetUnit(DBUnit _U)
