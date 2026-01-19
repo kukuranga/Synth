@@ -11,7 +11,8 @@ public enum GameState
     Shop,
     Gamewon,
     GameLost,
-    SelectUnit
+    SelectUnit,
+    Animation
 }
 
 public enum DBAbilityTypes
@@ -123,6 +124,9 @@ public class Game2Manager : Singleton<Game2Manager>
                 break;
             case GameState.SelectUnit:
                 //Used to select a unit in reference to an ability
+                break;
+            case GameState.Animation:
+                //used during animations in the game are happenening
                 break;
         }
     }

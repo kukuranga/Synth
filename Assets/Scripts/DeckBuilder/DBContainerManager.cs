@@ -34,6 +34,10 @@ public class DBContainerManager : MonoBehaviour
     public void IncreaseStartingContainers()
     {
         _StartingContainers++;
+        //Expand circle
+        if (_StartingContainers > 6)
+            CircleManager.Instance.ExpandCircleOne();
+
         Game2Manager.Instance._ActiveContainers = _StartingContainers;
 
     }
