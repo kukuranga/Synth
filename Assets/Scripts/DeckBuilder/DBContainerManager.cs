@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DBContainerManager : MonoBehaviour
+public class DBContainerManager : Singleton<DBContainerManager>
 {
 
     //In charge of the containers and all its functions
@@ -10,6 +10,7 @@ public class DBContainerManager : MonoBehaviour
     public List<DBContainer> _AllContainers;
     public List<DBContainer> _ActiveContainers;
     public int _NumberOfUnitsPulled;
+    public GameObject _SpawnPoint;
 
     private void Start()
     {
@@ -84,6 +85,7 @@ public class DBContainerManager : MonoBehaviour
         {
             if (_cont._unit == null)
             {
+                //set the unit off screen and add the animation here ------------------------------------------------------------------------
                 _NumberOfUnitsPulled++;
                 _cont.SetUnit(_u);
                 return;

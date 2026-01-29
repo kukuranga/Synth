@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class DBContainer : MonoBehaviour , IPointerClickHandler
 {
@@ -71,6 +72,26 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         _unit = _u;
         _spriteRender.sprite = _u._sprite;
 
+        StartCoroutine(SetUnit());
+
+        
+    }
+
+    IEnumerator SetUnit()
+    {
+
+        Game2Manager.Instance.UpdateGameState(GameState.Animation);
+
+        _spriteRender.gameObject.transform.position = DBContainerManager.Instance._SpawnPoint.transform.position;
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(_spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.OutExpo))
+            .Join(_spriteRender.gameObject.transform.DOScale(new Vector3(2, 2, 2), 1));
+
+        yield return new WaitForSeconds(1);
+        _spriteRender.gameObject.transform.position = this.transform.position;
+
         if (_unit._YellowResourceGain == 0)
             _yellowresourceGO.SetActive(false);
         else
@@ -92,7 +113,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         if (_unit._FlagDangerReduction)
             _Ability.sprite = _FlagSprite;
-        else if(_unit._Ability != null)
+        else if (_unit._Ability != null)
         {
             _Ability.gameObject.SetActive(true);
             _Ability.sprite = _unit._Ability._sprite;
@@ -101,6 +122,11 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         {
             _Ability.gameObject.SetActive(false);
         }
+
+
+        Game2Manager.Instance.UpdateGameState(GameState.GamePlay);
+
+        yield return null;
     }
 
     public void DisableAllVisuals()
