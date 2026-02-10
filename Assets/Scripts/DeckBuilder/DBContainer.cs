@@ -72,9 +72,9 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         _unit = _u;
         _spriteRender.sprite = _u._sprite;
 
+
         StartCoroutine(SetUnit());
 
-        
     }
 
     IEnumerator SetUnit()
@@ -84,13 +84,39 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         _spriteRender.gameObject.transform.position = DBContainerManager.Instance._SpawnPoint.transform.position;
 
-        Sequence seq = DOTween.Sequence();
+        //Sequence seq = DOTween.Sequence();
 
-        seq.Append(_spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.OutExpo))
-            .Join(_spriteRender.gameObject.transform.DOScale(new Vector3(2, 2, 2), 1));
+        int a = Random.Range(0, 4);
+        switch(a)
+        {
+            case 0:
+                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.OutElastic);
+                break;
 
-        yield return new WaitForSeconds(1);
+            case 1:
+                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.InOutBounce);
+                break;
+
+            case 2:
+                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.InOutCubic);
+                break;
+
+            case 3:
+                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.InQuint);
+                break;
+
+            case 4:
+                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.OutCirc);
+                break;
+        }
+
+        SFXManager.Instance.PlaySound("ta daah");
+
+
+        yield return new WaitForSeconds(1.5f);
         _spriteRender.gameObject.transform.position = this.transform.position;
+        SFXManager.Instance.PlaySound("brah");
+
 
         if (_unit._YellowResourceGain == 0)
             _yellowresourceGO.SetActive(false);

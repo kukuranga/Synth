@@ -521,7 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5769682126650811771}
-  - component: {fileID: 5769682126650811770}
+  - component: {fileID: 7062190054963260532}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -544,7 +544,7 @@ Transform:
   m_Father: {fileID: 5769682127570597952}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5769682126650811770
+--- !u!212 &7062190054963260532
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -590,7 +590,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -743,7 +743,7 @@ MonoBehaviour:
   _Ability: {fileID: 5769682127102393564}
   _YellowText: {fileID: 5769682125984067604}
   _GreenText: {fileID: 5769682126377818798}
-  _spriteRender: {fileID: 5769682126650811770}
+  _spriteRender: {fileID: 7062190054963260532}
   _FlagSprite: {fileID: 21300000, guid: 8f6d58fd471ba8a45a4b681953e29c26, type: 3}
   _Activated: 0
 --- !u!61 &2866873252391127422
