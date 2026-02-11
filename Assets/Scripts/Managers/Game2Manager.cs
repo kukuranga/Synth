@@ -48,6 +48,8 @@ public class Game2Manager : Singleton<Game2Manager>
     public DBAbilityTypes _CurrentAbility;
     public DBUnit _TempUnit;
 
+    public List<DBRotateAroundCentre> _RotationComponents;
+
     private void Update()
     {
         if(DebuggerMode)
@@ -319,5 +321,21 @@ public class Game2Manager : Singleton<Game2Manager>
             UpdateGameState(GameState.Shop);
 
         yield return null;
+    }
+
+    public void StopRingsRotating()
+    {
+        foreach(DBRotateAroundCentre _items in _RotationComponents)
+        {
+            _items.Rotate = false;
+        }
+    }
+
+    public void StartRingsRotating()
+    {
+        foreach (DBRotateAroundCentre _items in _RotationComponents)
+        {
+            _items.Rotate = true;
+        }
     }
 }

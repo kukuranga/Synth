@@ -22,6 +22,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
     public SpriteRenderer _spriteRender;
     public Sprite _FlagSprite;
     public bool _Activated;
+    public GameObject _Coin;
 
     private Quaternion originalRotation;
 
@@ -87,6 +88,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         //Sequence seq = DOTween.Sequence();
 
         int a = Random.Range(0, 4);
+        Game2Manager.Instance.StopRingsRotating();
         switch(a)
         {
             case 0:
@@ -115,7 +117,9 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         yield return new WaitForSeconds(1.5f);
         _spriteRender.gameObject.transform.position = this.transform.position;
+        Game2Manager.Instance.StartRingsRotating();
         SFXManager.Instance.PlaySound("brah");
+        FullRotateCoin();
 
 
         if (_unit._YellowResourceGain == 0)
@@ -211,4 +215,35 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         
     }
+
+    public void FullRotateCoin()
+    {
+        StartCoroutine(RotateCoin());
+    }
+
+    IEnumerator RotateCoin()
+    {
+        if (_Coin == null) yield break;
+
+        float rotationSpeed = 360f; // degrees per second
+        float rotatedAmount = 0f;
+
+        while (rotatedAmount < 360f)
+        {
+            float step = rotationSpeed * Time.deltaTime;
+
+            _Coin.transform.Rotate(0f, 0f, step);
+
+            rotatedAmount += step;
+
+            yield return null;
+        }
+
+        // Snap exactly to full rotation (prevents tiny float errors)
+        Vector3 rot = _Coin.transform.eulerAngles;
+        rot.z = Mathf.Round(rot.z / 360f) * 360f;
+        _Coin.transform.eulerAngles = rot;
+    }
+
+
 }

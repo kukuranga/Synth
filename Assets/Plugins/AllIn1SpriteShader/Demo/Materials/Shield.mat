@@ -16,7 +16,6 @@ Material:
   - GLOWTEX_ON
   - GLOW_ON
   - PIXELATE_ON
-  - TEXTURESCROLL_ON
   - WAVEUV_ON
   m_InvalidKeywords:
   - ETC1_EXTERNAL_ALPHA
@@ -61,7 +60,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 2f5c9cbfde2d0384bb53189b0d0f06d8, type: 3}
-        m_Scale: {x: 1.5, y: 1.5}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineDistortTex:
         m_Texture: {fileID: 2800000, guid: 7aad8c583ef292e48b06af0d1f2fab97, type: 3}

@@ -10,9 +10,18 @@ Material:
   m_Name: Fire
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
   m_ValidKeywords:
+  - BLUR_ON
+  - DISTORT_ON
   - FADE_ON
+  - GHOST_ON
   - GLOWTEX_ON
   - GLOW_ON
+  - GRADIENT_ON
+  - OUTTEX_ON
+  - OVERLAYMULT_ON
+  - OVERLAY_ON
+  - PINCH_ON
+  - WAVEUV_ON
   m_InvalidKeywords:
   - ETC1_EXTERNAL_ALPHA
   - _GLOWTEXUSED_ON
@@ -55,7 +64,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: be304275dbf36014ca9828884588ac47, type: 3}
-        m_Scale: {x: 0.6, y: 0.6}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineDistortTex:
         m_Texture: {fileID: 2800000, guid: 7aad8c583ef292e48b06af0d1f2fab97, type: 3}
@@ -77,14 +86,14 @@ Material:
     m_Floats:
     - _Alpha: 0.488
     - _AlphaCutoffValue: 0.25
-    - _AlphaOutlineBlend: 1
-    - _AlphaOutlineGlow: 5
+    - _AlphaOutlineBlend: 0.891
+    - _AlphaOutlineGlow: 1
     - _AlphaOutlineMinAlpha: 0
-    - _AlphaOutlinePower: 1
+    - _AlphaOutlinePower: 0.45
     - _AlphaRoundThreshold: 0.5
     - _BillboardY: 0
     - _BlurHD: 0
-    - _BlurIntensity: 10
+    - _BlurIntensity: 28
     - _Brightness: 0
     - _ChromAberrAlpha: 0.4
     - _ChromAberrAmount: 1
@@ -163,8 +172,8 @@ Material:
     - _MaxYUV: 1
     - _MinXUV: 0
     - _MinYUV: 0
-    - _MotionBlurAngle: 0.1
-    - _MotionBlurDist: 1.25
+    - _MotionBlurAngle: -0.76
+    - _MotionBlurDist: 0.15
     - _MyDstMode: 10
     - _MySrcMode: 5
     - _NegativeAmount: 1
@@ -173,14 +182,14 @@ Material:
     - _OnlyInnerOutline: 0
     - _OnlyOutline: 0
     - _Outline8Directions: 0
-    - _OutlineAlpha: 1
+    - _OutlineAlpha: 0.75
     - _OutlineDistortAmount: 0.5
     - _OutlineDistortTexXSpeed: 5
     - _OutlineDistortTexYSpeed: 5
     - _OutlineDistortToggle: 0
-    - _OutlineGlow: 1.5
+    - _OutlineGlow: 6.5
     - _OutlineIsPixel: 0
-    - _OutlinePixelWidth: 1
+    - _OutlinePixelWidth: 0.1
     - _OutlineTexGrey: 0
     - _OutlineTexToggle: 0
     - _OutlineTexXSpeed: 10
@@ -190,7 +199,7 @@ Material:
     - _OverlayGlow: 1
     - _OverlayTextureScrollXSpeed: 0.25
     - _OverlayTextureScrollYSpeed: 0.25
-    - _PinchUvAmount: 0.35
+    - _PinchUvAmount: 0.025
     - _PixelateSize: 32
     - _PosterizeGamma: 0.75
     - _PosterizeNumColors: 8
@@ -200,7 +209,7 @@ Material:
     - _RadialStartAngle: 90
     - _RandomSeed: 0
     - _RectSize: 1
-    - _RotateUvAmount: 0
+    - _RotateUvAmount: 0.03
     - _RoundWaveSpeed: 2
     - _RoundWaveStrength: 0.7
     - _ShadowAlpha: 0.5
@@ -209,29 +218,29 @@ Material:
     - _ShakeUvSpeed: 2.5
     - _ShakeUvX: 1.5
     - _ShakeUvY: 1
-    - _ShineGlow: 1
-    - _ShineLocation: 0.5
-    - _ShineRotate: 0
-    - _ShineWidth: 0.1
+    - _ShineGlow: 1.5
+    - _ShineLocation: 0.284
+    - _ShineRotate: 0.99
+    - _ShineWidth: 0.162
     - _TextureScrollXSpeed: 0.1
     - _TextureScrollYSpeed: 0.1
-    - _TwistUvAmount: 1
-    - _TwistUvPosX: 0.5
-    - _TwistUvPosY: 0.5
+    - _TwistUvAmount: 2.07
+    - _TwistUvPosX: 1
+    - _TwistUvPosY: 1
     - _TwistUvRadius: 0.75
     - _WarpScale: 0.5
     - _WarpSpeed: 8
     - _WarpStrength: 0.025
     - _WaveAmount: 7
-    - _WaveSpeed: 10
-    - _WaveStrength: 7.5
+    - _WaveSpeed: 12.2
+    - _WaveStrength: 9.4
     - _WaveX: 0
     - _WaveY: 0.5
     - _ZTestMode: 4
     - _ZWrite: 0
     - _ZoomUvAmount: 0.5
     m_Colors:
-    - _AlphaOutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AlphaOutlineColor: {r: 0.764151, g: 0.17661981, b: 0.17661981, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorChangeNewCol: {r: 1, g: 1, b: 0, a: 1}
     - _ColorChangeNewCol2: {r: 1, g: 1, b: 0, a: 1}
@@ -252,10 +261,10 @@ Material:
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
     - _HologramStripeColor: {r: 0, g: 1, b: 1, a: 1}
     - _InnerOutlineColor: {r: 1, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.6603774, g: 0.37308618, b: 0.21493416, a: 1}
     - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShineColor: {r: 0.9150943, g: 0.6603753, b: 0.15970986, a: 1}
   m_BuildTextureStacks: []
 --- !u!28 &1224435869679222136
 Texture2D:

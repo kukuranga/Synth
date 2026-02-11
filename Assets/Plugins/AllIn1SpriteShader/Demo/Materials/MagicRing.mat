@@ -16,10 +16,8 @@ Material:
   - OUTBASE8DIR_ON
   - OUTBASEPIXELPERF_ON
   - OUTBASE_ON
-  - PINCH_ON
   - RADIALGRADIENT_ON
-  - ROTATEUV_ON
-  - TWISTUV_ON
+  - WARP_ON
   - WAVEUV_ON
   m_InvalidKeywords:
   - ETC1_EXTERNAL_ALPHA
@@ -94,7 +92,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.9
+    - _Alpha: 0.56
     - _AlphaCutoffValue: 0.25
     - _AlphaOutlineBlend: 1
     - _AlphaOutlineGlow: 5
@@ -142,7 +140,7 @@ Material:
     - _GlitchAmount: 20
     - _GlitchSize: 4.51
     - _GlitchSpeed: 20
-    - _Glow: 33.6
+    - _Glow: 16.3
     - _GlowAffectLight: 1
     - _GlowGlobal: 1
     - _GlowTexUsed: 0
@@ -190,14 +188,14 @@ Material:
     - _OnlyInnerOutline: 0
     - _OnlyOutline: 0
     - _Outline8Directions: 1
-    - _OutlineAlpha: 0.306
+    - _OutlineAlpha: 0.1
     - _OutlineDistortAmount: 0.5
     - _OutlineDistortTexXSpeed: 5
     - _OutlineDistortTexYSpeed: 5
     - _OutlineDistortToggle: 0
     - _OutlineGlow: 1
     - _OutlineIsPixel: 1
-    - _OutlinePixelWidth: 1
+    - _OutlinePixelWidth: 0.49
     - _OutlineTexGrey: 0
     - _OutlineTexToggle: 0
     - _OutlineTexXSpeed: 10
@@ -239,7 +237,7 @@ Material:
     - _WarpScale: 0.5
     - _WarpSpeed: 8
     - _WarpStrength: 0.025
-    - _WaveAmount: 7
+    - _WaveAmount: 4.6
     - _WaveSpeed: 10
     - _WaveStrength: 7.5
     - _WaveX: 0
@@ -249,7 +247,7 @@ Material:
     - _ZoomUvAmount: 1.95
     m_Colors:
     - _AlphaOutlineColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 0.9044944, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.9044944, b: 0, a: 0.2784314}
     - _ColorChangeNewCol: {r: 1, g: 1, b: 0, a: 1}
     - _ColorChangeNewCol2: {r: 1, g: 1, b: 0, a: 1}
     - _ColorChangeNewCol3: {r: 1, g: 1, b: 0, a: 1}
