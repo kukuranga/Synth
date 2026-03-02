@@ -43,13 +43,17 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
             if (_unit._YellowResourceGain == 0)
                 _yellowresourceGO.SetActive(false);
             else
+            {
+                _yellowresourceGO.SetActive(true);
                 _YellowText.text = _unit._YellowResourceGain.ToString();
-
+            }
             if (_unit._GreenResourceGain == 0)
                 _GreenresourceGO.SetActive(false);
             else
+            {
+                _GreenresourceGO.SetActive(true);
                 _GreenText.text = _unit._GreenResourceGain.ToString();
-
+            }
             if (_unit._Danger)
                 _Danger.SetActive(true);
             if (_unit._Star)
@@ -68,6 +72,12 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         transform.rotation = originalRotation;
     }
 
+    public void UpdateSpriteVisuals()
+    {
+        _spriteRender.sprite = _unit._sprite;
+        _Unlocked = true;
+    }
+
     public void SetUnit(DBUnit _u)
     {
         _unit = _u;
@@ -78,6 +88,43 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
     }
 
+    public void SetUnitNoAnimation(DBUnit _u)
+    {
+        _unit = _u;
+        _spriteRender.sprite = _u._sprite;
+        _Coin.SetActive(true);
+        if (_unit._YellowResourceGain == 0)
+            _yellowresourceGO.SetActive(false);
+        else
+        {
+            _yellowresourceGO.SetActive(true);
+            _YellowText.text = _unit._YellowResourceGain.ToString();
+        }
+        if (_unit._GreenResourceGain == 0)
+            _GreenresourceGO.SetActive(false);
+        else
+        {
+            _GreenresourceGO.SetActive(true);
+            _GreenText.text = _unit._GreenResourceGain.ToString();
+        }
+        if (_unit._Danger)
+            _Danger.SetActive(true);
+        if (_unit._Star)
+            _Star.SetActive(true);
+
+        if (_unit._FlagDangerReduction)
+            _Ability.sprite = _FlagSprite;
+        else if (_unit._Ability != null)
+        {
+            _Ability.gameObject.SetActive(true);
+            _Ability.sprite = _unit._Ability._sprite;
+        }
+        else
+        {
+            _Ability.gameObject.SetActive(false);
+        }
+    }
+
     IEnumerator SetUnit()
     {
 
@@ -86,6 +133,8 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         _spriteRender.gameObject.transform.position = DBContainerManager.Instance._SpawnPoint.transform.position;
 
         //Sequence seq = DOTween.Sequence();
+
+        _Coin.SetActive(true);
 
         int a = Random.Range(0, 4);
         Game2Manager.Instance.StopRingsRotating();
@@ -156,6 +205,12 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         Game2Manager.Instance.UpdateGameState(GameState.GamePlay);
 
+        if(_unit._Ability != null)
+            if(_unit._Ability.OnPull)
+            {
+                _unit._Ability.OnPullAbility();
+            }
+
         yield return null;
     }
 
@@ -167,6 +222,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         _GreenresourceGO.SetActive(false);
         _spriteRender.sprite = null;
         _Ability.sprite = null;
+        _Coin.SetActive(false);
     }
 
     public void ClearContainer()

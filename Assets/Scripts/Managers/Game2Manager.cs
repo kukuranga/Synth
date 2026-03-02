@@ -12,7 +12,8 @@ public enum GameState
     Gamewon,
     GameLost,
     SelectUnit,
-    Animation
+    Animation,
+    FetchUnit
 }
 
 public enum DBAbilityTypes
@@ -39,6 +40,9 @@ public class Game2Manager : Singleton<Game2Manager>
     public GameObject _GameLost;
     public GameObject _CheckBanner;
     public GameObject _MessageScreen;
+    public GameObject _SelectUnitUI;
+    public GameObject _NextUnitUI;
+    public SelectUnitUI _SelectUnitUiComponent;
     public DBMessageScreen _DBMessageScreen;
     public GameState _gameState;
     public Deck _deck;
@@ -49,6 +53,10 @@ public class Game2Manager : Singleton<Game2Manager>
     public DBUnit _TempUnit;
 
     public List<DBRotateAroundCentre> _RotationComponents;
+
+    private int _RoundStartYellow;
+    private int _RoundStartGreen;
+    private bool _DontCheckConditions;
 
     private void Update()
     {
@@ -78,6 +86,8 @@ public class Game2Manager : Singleton<Game2Manager>
                 break;
             case GameState.RoundStart:
                 DisableUI();
+                _RoundStartYellow = _YellowResource;
+                _RoundStartGreen = _GreenResource;
                 _ContainerManager.FirstSetUp();
                 _deck.StartRound();
                 _GameUI.SetActive(true);
@@ -110,9 +120,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 //after the conditions are checked the shop will be opened
                 //players can buy units to add to their deck or increase the size of the galaxy
                 //reset a suspended unit if applicible
-                DisableUI();
-                _ShopScene.SetActive(true);
-                _ContainerManager.ClearActiveContainers();//clears the current active containers
+                VFX2Manager.Instance.OpenShopVFX();
                 break;
             case GameState.Gamewon:
                 DisableUI();
@@ -129,6 +137,10 @@ public class Game2Manager : Singleton<Game2Manager>
                 break;
             case GameState.Animation:
                 //used during animations in the game are happenening
+                break;
+            case GameState.FetchUnit:
+                //open ui here
+                _SelectUnitUI.SetActive(true);
                 break;
         }
     }
@@ -183,18 +195,48 @@ public class Game2Manager : Singleton<Game2Manager>
     //Called on click of the grab button
     public void SetUnit()
     {
+        StartCoroutine(SetUnitCoroutine());
+    }
+
+    IEnumerator SetUnitCoroutine()
+    {
         if (_ContainerManager._NumberOfUnitsPulled <= _ContainerManager._StartingContainers)
         {
+            _NextUnitUI.SetActive(false);
             DBUnit _u = _deck.PullUnit();
             _ContainerManager.AddUnitToLastContainer(_u);
 
             //check the number of units and check if the danger level is too high after that
             if (CheckDanger())
             {
-                DisableUI();
-                _DBMessageScreen.UpdateMessage("Danger too high");
-                _MessageScreen.SetActive(true);
-                //UpdateGameState(GameState.Shop);
+                DangerTooHigh();
+            }
+            else if (_ContainerManager._NumberOfUnitsPulled == _ActiveContainers && !_DontCheckConditions)
+            {
+                yield return new WaitForSeconds(2);
+                UpdateGameState(GameState.CheckConditions);
+            }
+
+            _DontCheckConditions = false;
+        }
+        else
+        {
+            yield return new WaitForSeconds(2);
+            UpdateGameState(GameState.CheckConditions);
+        }
+        yield return null;
+    }
+
+    public void SetSpecificUnit(DBUnit _Unit)
+    {
+        if (_ContainerManager._NumberOfUnitsPulled <= _ContainerManager._StartingContainers)
+        {
+            _ContainerManager.AddUnitToLastContainer(_Unit);
+
+            //check the number of units and check if the danger level is too high after that
+            if (CheckDanger())
+            {
+                DangerTooHigh();
             }
             else if (_ContainerManager._NumberOfUnitsPulled == _ActiveContainers)
                 UpdateGameState(GameState.CheckConditions);
@@ -203,10 +245,21 @@ public class Game2Manager : Singleton<Game2Manager>
             UpdateGameState(GameState.CheckConditions);
     }
 
+    public void DangerTooHigh()
+    {
+        DisableUI();
+        _DBMessageScreen.UpdateMessage("Danger too high");
+        _MessageScreen.SetActive(true);
+        _YellowResource = _RoundStartYellow;
+        _GreenResource = _RoundStartGreen;
+        _DontCheckConditions = true;
+        //UpdateGameState(GameState.Shop);
+    }
+
     //Called onclick of the end button
     public void EndSelection()
     {
-        if(_gameState != GameState.CheckConditions)
+        if(_gameState != GameState.CheckConditions && !_DontCheckConditions)
             UpdateGameState(GameState.CheckConditions);
     }
 
@@ -232,7 +285,7 @@ public class Game2Manager : Singleton<Game2Manager>
         _YellowResource += i;
     }
 
-    private void DisableUI()
+    public void DisableUI()
     {
         _GameUI.SetActive(false);
         _ShopScene.SetActive(false);
@@ -240,6 +293,13 @@ public class Game2Manager : Singleton<Game2Manager>
         _GameLost.SetActive(false);
         _Containers.SetActive(false);
         _MessageScreen.SetActive(false);
+        _SelectUnitUI.SetActive(false);
+        _NextUnitUI.SetActive(false);
+    }
+
+    public void CloseSelectUnitUI()
+    {
+        _SelectUnitUI.SetActive(false);
     }
 
     #region Abilities
@@ -272,54 +332,81 @@ public class Game2Manager : Singleton<Game2Manager>
         }
     }
 
+    //Shows the next unit in the nextUnitUI
+    public void SetNextUnitShow()
+    {
+        DBContainer _cont = _NextUnitUI.GetComponent<NextUnitUi>()._Container;
+        _cont.SetUnitNoAnimation(_deck._CurrentDeck[0]);
+        _cont._Unlocked = true;
+        _cont._Coin.SetActive(true);
+        _NextUnitUI.SetActive(true);
+    }
+
+    //Brings another unit and checks if there is space for another unit
+    public void BringAnotherUnit()
+    {
+        //this brings another unit with it
+        //if there are no more open containers the place overfills and the game ends
+        if(_ContainerManager.NumberOfEmptyContainers() < 1)
+        {
+
+            _YellowResource = _RoundStartYellow;
+            _GreenResource = _RoundStartGreen;
+            DangerTooHigh();
+        }
+        else
+            SetUnit();
+
+    }
+
     #endregion
 
     private IEnumerator CheckConditions()
     {
-        int _NumberOfStars = 0;
+            int _NumberOfStars = 0;
 
-        foreach(DBContainer _cont in _ContainerManager._ActiveContainers)
-        {
-            if(_cont._unit != null)
+            foreach (DBContainer _cont in _ContainerManager._ActiveContainers)
             {
-                _YellowResource += _cont._unit._YellowResourceGain;
-                _GreenResource += _cont._unit._GreenResourceGain;                
-
-                if (_cont._unit._Star)
-                    _NumberOfStars++;
-
-                yield return new WaitForSeconds(1);
-            }
-        }
-
-        foreach(DBContainer _cont in _ContainerManager._ActiveContainers)
-        {
-            if(_cont._unit != null)
-            {
-                if(_cont._unit._Ability != null && !_cont._Activated)
+                if (_cont._unit != null)
                 {
-                    _cont._unit._Ability.UseAbility();
+                    _YellowResource += _cont._unit._YellowResourceGain;
+                    _GreenResource += _cont._unit._GreenResourceGain;
+
+                    if (_cont._unit._Star)
+                        _NumberOfStars++;
+
                     yield return new WaitForSeconds(1);
                 }
             }
-        }
 
-        _CurrentTurnCount--;
+            foreach (DBContainer _cont in _ContainerManager._ActiveContainers)
+            {
+                if (_cont._unit != null)
+                {
+                    if (_cont._unit._Ability != null && !_cont._Activated)
+                    {
+                        _cont._unit._Ability.UseAbility();
+                        yield return new WaitForSeconds(1);
+                    }
+                }
+            }
 
-        if (_GreenResource <= -1)
-        {
-            _GreenResource = 0;
-            _YellowResource -= 5;
-            Debug.Log("5 yellow taken away");
-        }
+            _CurrentTurnCount--;
 
-        if (_CurrentTurnCount <= 0)
-            UpdateGameState(GameState.GameLost);
-        else if (_NumberOfStars >= _StarCountToWin)
-            UpdateGameState(GameState.Gamewon);
-        else
-            UpdateGameState(GameState.Shop);
+            if (_GreenResource <= -1)
+            {
+                _GreenResource = 0;
+                _YellowResource -= 5;
+                Debug.Log("5 yellow taken away");
+            }
 
+            if (_CurrentTurnCount <= 0)
+                UpdateGameState(GameState.GameLost);
+            else if (_NumberOfStars >= _StarCountToWin)
+                UpdateGameState(GameState.Gamewon);
+            else
+                UpdateGameState(GameState.Shop);
+        
         yield return null;
     }
 

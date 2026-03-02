@@ -28,7 +28,9 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
 
     public void SetUnit(DBUnit _U)
     {
+        _DBCont._Coin.SetActive(true);
         _DBCont.SetUnit(_U);
+        _DBCont._Unlocked = true;
         Init();
     }
 

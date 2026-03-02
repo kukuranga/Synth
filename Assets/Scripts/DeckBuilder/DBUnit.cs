@@ -6,6 +6,7 @@ using UnityEngine;
 public class DBUnit : ScriptableObject
 {
     //The base deck builder unit 
+    public int _ID; //Given to each unit to identify what type of unit it is
     public string _Name;
     public string _Description;
     public int _YellowResourceGain;

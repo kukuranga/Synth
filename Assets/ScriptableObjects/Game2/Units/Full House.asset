@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
   m_Name: Full House
   m_EditorClassIdentifier: 
+  _ID: 4
   _Name: Full House
   _Description: If Full house 4 yellow
   _YellowResourceGain: 0
-  _GreenResourceGain: 0
+  _GreenResourceGain: -1
   _Star: 0
   _Danger: 0
   _ActivatedAbility: 0

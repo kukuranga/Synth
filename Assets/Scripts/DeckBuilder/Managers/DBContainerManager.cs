@@ -32,6 +32,17 @@ public class DBContainerManager : Singleton<DBContainerManager>
         }
     }
 
+    public int NumberOfEmptyContainers()
+    {
+        int i = 0;
+        foreach(DBContainer _con in _ActiveContainers)
+        {
+            if (_con._unit == null)
+                i++;
+        }
+        return i;
+    }
+
     public void IncreaseStartingContainers()
     {
         _StartingContainers++;
