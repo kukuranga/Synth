@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
   m_Name: Caterer
   m_EditorClassIdentifier: 
-  _ID: 12
+  _ID: 5
   _Name: Caterer
   _Description: Just a dood
   _YellowResourceGain: 4

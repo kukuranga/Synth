@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
   m_Name: Ticketer
   m_EditorClassIdentifier: 
-  _ID: 10
+  _ID: 15
   _Name: Ficketer
   _Description: 
   _YellowResourceGain: -1

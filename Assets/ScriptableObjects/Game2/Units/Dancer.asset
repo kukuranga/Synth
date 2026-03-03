@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
-  m_Name: Base Danger
+  m_Name: Dancer
   m_EditorClassIdentifier: 
-  _ID: 1
-  _Name: Wild Card
-  _Description: Meteor
-  _YellowResourceGain: 2
+  _ID: 6
+  _Name: Dancer
+  _Description: stacks based on how many are present
+  _YellowResourceGain: 0
   _GreenResourceGain: 0
   _Star: 0
-  _Danger: 1
+  _Danger: 0
   _ActivatedAbility: 0
-  _PostGameAbility: 0
-  _sprite: {fileID: 21300000, guid: 4ef4365c9bf34a543bc695b3a2c85e89, type: 3}
-  _ShopCost: 3
-  _NumberOfBuys: 3
-  _Ability: {fileID: 0}
+  _PostGameAbility: 1
+  _sprite: {fileID: 21300000, guid: 2a814f9364d206648bbf0c04b2e657fa, type: 3}
+  _ShopCost: 7
+  _NumberOfBuys: 4
+  _Ability: {fileID: 11400000, guid: 19832d15475f44941ac7848c9b2e6c3d, type: 2}
   _FlagDangerReduction: 0

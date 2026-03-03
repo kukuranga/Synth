@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
   m_Name: Base Flag
   m_EditorClassIdentifier: 
-  _ID: 1
+  _ID: 2
   _Name: Flagger
   _Description: Reduces the Danger by 1
   _YellowResourceGain: 1

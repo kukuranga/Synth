@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
   m_Name: Rockstar
   m_EditorClassIdentifier: 
-  _ID: 6
+  _ID: 13
   _Name: RocketStar
   _Description: cool but dangerous
   _YellowResourceGain: 3

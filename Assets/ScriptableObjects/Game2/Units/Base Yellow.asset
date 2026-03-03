@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cee1e48df2fab438b933724ef05653, type: 3}
   m_Name: Base Yellow
   m_EditorClassIdentifier: 
-  _ID: 3
+  _ID: 4
   _Name: Earth
   _Description: Home sweet home
   _YellowResourceGain: 1

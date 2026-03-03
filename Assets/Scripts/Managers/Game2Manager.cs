@@ -86,6 +86,8 @@ public class Game2Manager : Singleton<Game2Manager>
                 break;
             case GameState.RoundStart:
                 DisableUI();
+                _NumberOfStacks = 0;
+                _StackChecked = false;
                 _RoundStartYellow = _YellowResource;
                 _RoundStartGreen = _GreenResource;
                 _ContainerManager.FirstSetUp();
@@ -205,17 +207,6 @@ public class Game2Manager : Singleton<Game2Manager>
             _NextUnitUI.SetActive(false);
             DBUnit _u = _deck.PullUnit();
             _ContainerManager.AddUnitToLastContainer(_u);
-
-            //check the number of units and check if the danger level is too high after that
-            if (CheckDanger())
-            {
-                DangerTooHigh();
-            }
-            else if (_ContainerManager._NumberOfUnitsPulled == _ActiveContainers && !_DontCheckConditions)
-            {
-                yield return new WaitForSeconds(2);
-                UpdateGameState(GameState.CheckConditions);
-            }
 
             _DontCheckConditions = false;
         }
@@ -359,6 +350,45 @@ public class Game2Manager : Singleton<Game2Manager>
 
     }
 
+    bool _StackChecked = false;
+    int _NumberOfStacks = 0;
+    //adds yellow based on each stack
+    public void AddStackingYellow()
+    {
+        if (!_StackChecked)
+        {
+            foreach (DBContainer _cont in _ContainerManager._ActiveContainers)
+            {
+                if (_cont._unit._Ability is  DBStackingAbility)
+                {
+                    _NumberOfStacks++;
+                }
+            }
+            _StackChecked = true;
+        }
+
+        switch(_NumberOfStacks)
+        {
+            case 0:
+                break;
+            case 1:
+                _YellowResource += 1;
+                break;
+            case 2:
+                _YellowResource += 2;
+                break;
+            case 3:
+                _YellowResource += 9;
+                break;
+            case 4:
+                _YellowResource += 16;
+                break;
+            default:
+                _YellowResource += 16;
+                break;
+        }
+    }
+
     #endregion
 
     private IEnumerator CheckConditions()
@@ -375,19 +405,12 @@ public class Game2Manager : Singleton<Game2Manager>
                     if (_cont._unit._Star)
                         _NumberOfStars++;
 
-                    yield return new WaitForSeconds(1);
-                }
-            }
-
-            foreach (DBContainer _cont in _ContainerManager._ActiveContainers)
-            {
-                if (_cont._unit != null)
+                if (_cont._unit._Ability != null && _cont._unit._PostGameAbility)
                 {
-                    if (_cont._unit._Ability != null && !_cont._Activated)
-                    {
-                        _cont._unit._Ability.UseAbility();
-                        yield return new WaitForSeconds(1);
-                    }
+                    _cont._unit._Ability.UseAbility();
+                }
+
+                yield return new WaitForSeconds(1);
                 }
             }
 

@@ -211,6 +211,17 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
                 _unit._Ability.OnPullAbility();
             }
 
+        //check the number of units and check if the danger level is too high after that
+        if (Game2Manager.Instance.CheckDanger())
+        {
+            Game2Manager.Instance.DangerTooHigh();
+        }
+        else if (Game2Manager.Instance._ContainerManager._NumberOfUnitsPulled == Game2Manager.Instance._ActiveContainers)
+        {
+            yield return new WaitForSeconds(2);
+            Game2Manager.Instance.UpdateGameState(GameState.CheckConditions);
+        }
+
         yield return null;
     }
 
