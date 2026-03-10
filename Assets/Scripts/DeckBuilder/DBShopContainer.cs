@@ -13,6 +13,8 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
     public int _CurrentAvailableBuys;
     public TextMeshPro _BuysTMP;
     public TextMeshPro _CostTmp;
+    public TextMeshPro _DescTMP;
+    public TextMeshPro _AbilityDescTMP;
 
     private void Update()
     {
@@ -24,6 +26,10 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
         //set the unit here
         _CurrentAvailableBuys = _DBCont._unit._NumberOfBuys;
         _CostTmp.text = _DBCont._unit._ShopCost.ToString();
+        _DescTMP.text = _DBCont._unit._Description;
+        
+        if(_DBCont._unit._Ability != null)
+            _AbilityDescTMP.text = _DBCont._unit._Ability.Description;
     }
 
     public void SetUnit(DBUnit _U)

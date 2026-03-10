@@ -27,6 +27,11 @@ public class VFX2Manager : Singleton<VFX2Manager>
         StartCoroutine(OpenShop());
     }
 
+    public void CloseShopVFX()
+    {
+        StartCoroutine(CloseShop());
+    }
+
 
     IEnumerator changeEvery1sec(Renderer matRenderer, Material changeMat)
     {
@@ -63,7 +68,33 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
         }
 
+        yield return null;
+    }
 
+    IEnumerator CloseShop()
+    {
+        float t = _2DLight.pointLightOuterRadius;
+
+        Game2Manager.Instance.DisableUI();
+
+        while (_2DLight.pointLightOuterRadius > 0)
+        {
+            _2DLight.pointLightOuterRadius -= 1;
+            yield return new WaitForSeconds(_FadeRate);
+        }
+
+        //Game2Manager.Instance.DisableUI();
+        //Game2Manager.Instance._ShopScene.SetActive(false);
+        Game2Manager.Instance._ContainerManager.ClearActiveContainers();//clears the current active containers
+
+        while (_2DLight.pointLightOuterRadius < t)
+        {
+            _2DLight.pointLightOuterRadius += 1;
+            yield return new WaitForSeconds(_FadeRate);
+
+        }
+        
+        Game2Manager.Instance.UpdateGameState(GameState.RoundStart);
 
         yield return null;
     }

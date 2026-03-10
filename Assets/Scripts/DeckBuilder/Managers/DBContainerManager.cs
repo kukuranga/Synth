@@ -90,6 +90,21 @@ public class DBContainerManager : Singleton<DBContainerManager>
         return i;
     }
 
+    public int GetNumberOfStarsActive()
+    {
+        int i = 0;
+
+        foreach (DBContainer _cont in _ActiveContainers)
+        {
+            if (_cont._unit != null)
+            {
+                if (_cont._unit._Star)
+                    i++;
+            }
+        }
+        return i;
+    }
+
     public void AddUnitToLastContainer(DBUnit _u)
     {
         foreach (DBContainer _cont in _ActiveContainers)
