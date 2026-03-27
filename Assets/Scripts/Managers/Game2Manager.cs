@@ -33,6 +33,7 @@ public class Game2Manager : Singleton<Game2Manager>
     public int _ActiveContainers;
     public int _DangerLevelAllowed;
     public int _StarCountToWin;
+    public int _NumberOfShopContainersToOpen;
     public GameObject _Containers;
     public GameObject _ShopScene;
     public GameObject _GameUI;
@@ -48,6 +49,7 @@ public class Game2Manager : Singleton<Game2Manager>
     public Deck _deck;
     public DBContainerManager _ContainerManager;
     public DBShop _shop;
+    public Camera _CameraMain;
 
     public DBAbilityTypes _CurrentAbility;
     public DBUnit _TempUnit;
@@ -123,6 +125,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 //players can buy units to add to their deck or increase the size of the galaxy
                 //reset a suspended unit if applicible
                 VFX2Manager.Instance.OpenShopVFX();
+                _shop.SetUpShop(_NumberOfShopContainersToOpen);
                 break;
             case GameState.Gamewon:
                 DisableUI();
@@ -394,6 +397,18 @@ public class Game2Manager : Singleton<Game2Manager>
     private IEnumerator CheckConditions()
     {
             int _NumberOfStars = 0;
+
+            //Check for negatives
+            if(_YellowResource < 0 && _GreenResource < 0)
+            {
+                _YellowResource = 0;
+                _GreenResource = 0;
+            }
+
+            if (_YellowResource < 0)
+                _GreenResource -= 3;
+            if (_GreenResource < 0)
+                _YellowResource -= 3;
 
             foreach (DBContainer _cont in _ContainerManager._ActiveContainers)
             {

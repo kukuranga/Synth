@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Activated: 0
   OnPull: 1
-  _sprite: {fileID: 21300000, guid: 2efdb2fad02cf5247aefa90b10320874, type: 3}
+  _sprite: {fileID: 21300000, guid: 28cb3f06afd86e341aeec87297f0eca2, type: 3}
   Description: 'Gravity: On draw, draw another'
   Prompt: Pulls Another Unit
   _Used: 0

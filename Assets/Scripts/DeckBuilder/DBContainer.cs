@@ -136,6 +136,9 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         _Coin.SetActive(true);
 
+        VFX2Manager.Instance.CameraFollow(_spriteRender.gameObject, 2f);
+
+
         int a = Random.Range(0, 4);
         Game2Manager.Instance.StopRingsRotating();
         switch(a)
@@ -161,13 +164,13 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
                 break;
         }
 
-        SFXManager.Instance.PlaySound("ta daah");
 
+        //SFXManager.Instance.PlaySound("ta daah");
 
         yield return new WaitForSeconds(1.5f);
         _spriteRender.gameObject.transform.position = this.transform.position;
         Game2Manager.Instance.StartRingsRotating();
-        SFXManager.Instance.PlaySound("brah");
+        //SFXManager.Instance.PlaySound("brah");
         FullRotateCoin();
 
 

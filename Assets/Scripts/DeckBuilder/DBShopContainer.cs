@@ -27,9 +27,11 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
         _CurrentAvailableBuys = _DBCont._unit._NumberOfBuys;
         _CostTmp.text = _DBCont._unit._ShopCost.ToString();
         _DescTMP.text = _DBCont._unit._Description;
-        
-        if(_DBCont._unit._Ability != null)
+
+        if (_DBCont._unit._Ability != null)
             _AbilityDescTMP.text = _DBCont._unit._Ability.Description;
+        else
+            _AbilityDescTMP.text = "";
     }
 
     public void SetUnit(DBUnit _U)

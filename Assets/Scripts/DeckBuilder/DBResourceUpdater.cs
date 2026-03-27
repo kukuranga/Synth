@@ -18,8 +18,8 @@ public class DBResourceUpdater : MonoBehaviour
         _GreenText.text = Game2Manager.Instance._GreenResource.ToString();
         if (Game2Manager.Instance._gameState == GameState.GamePlay)
         {
-            _DangerText.text = Game2Manager.Instance._ContainerManager.GetNumberOfDangerActive().ToString();
-            _StarText.text = Game2Manager.Instance._ContainerManager.GetNumberOfStarsActive().ToString();
+            _DangerText.text = Game2Manager.Instance._ContainerManager.GetNumberOfDangerActive().ToString() + "/" + Game2Manager.Instance._DangerLevelAllowed.ToString();
+            _StarText.text = Game2Manager.Instance._ContainerManager.GetNumberOfStarsActive().ToString() + "/" + Game2Manager.Instance._StarCountToWin.ToString();
         }
     }
 }

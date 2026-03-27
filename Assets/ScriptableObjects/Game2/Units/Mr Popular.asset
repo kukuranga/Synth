@@ -21,7 +21,7 @@ MonoBehaviour:
   _Danger: 0
   _ActivatedAbility: 0
   _PostGameAbility: 0
-  _sprite: {fileID: 21300000, guid: 46ac406919dd0624da60e8a6ec46a7c6, type: 3}
+  _sprite: {fileID: 21300000, guid: f9bb6b30fc0e60f4ca660c11bbb894ac, type: 3}
   _ShopCost: 5
   _NumberOfBuys: 4
   _Ability: {fileID: 11400000, guid: 01a7065d9b7b3034b8f28a1c8a9dfa25, type: 2}

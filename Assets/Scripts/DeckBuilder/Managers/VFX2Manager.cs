@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -12,26 +12,17 @@ public class VFX2Manager : Singleton<VFX2Manager>
     //public List<Material> _EffectMats;
 
     public Material _FireMat;
+    private Camera _CameraMain;
 
     private void Start()
     {
 
         _DefaultMat = _Containers[0]._spriteRender.GetComponent<Renderer>().material;
+        _CameraMain = Game2Manager.Instance._CameraMain;
         //StartCoroutine(changeEvery1sec(_Containers[0]._Coin._spriteRender.GetComponent<Renderer>(), _FireMat));
         //_Containers[0]._Coin.GetComponent<Renderer>().material = _FireMat;
         
     }
-
-    public void OpenShopVFX()
-    {
-        StartCoroutine(OpenShop());
-    }
-
-    public void CloseShopVFX()
-    {
-        StartCoroutine(CloseShop());
-    }
-
 
     IEnumerator changeEvery1sec(Renderer matRenderer, Material changeMat)
     {
@@ -44,6 +35,122 @@ public class VFX2Manager : Singleton<VFX2Manager>
             matRenderer.material = _DefaultMat;
 
         }
+    }
+
+    #region Camera
+
+    public void CameraFollow(GameObject _target, float _Time)
+    {
+        StartCoroutine(CameraFollowCo(_target, _Time));
+    }
+
+    IEnumerator CameraFollowCo(GameObject _target, float _Time)
+    {
+        float originalZoom = _CameraMain.orthographicSize;
+
+        yield return StartCoroutine(CameraZoomIn(10f, 0.1f));
+
+        float elapsed = 0f;
+        Vector3 startPos = _CameraMain.transform.position;
+
+        while (elapsed < _Time)
+        {
+             Vector3 targetPos = new Vector3(_target.transform.position.x, _target.transform.position.y, startPos.z);
+             _CameraMain.transform.position = Vector3.Lerp(startPos, targetPos, elapsed / _Time*2);
+
+            elapsed += Time.deltaTime;
+            yield return null;         
+        }
+
+        yield return StartCoroutine(CameraZoomOut(originalZoom, 0.5f));
+    }
+
+    IEnumerator CameraZoomIn(float targetZoom, float duration)
+    {
+        if (duration <= 0f)
+        {
+            _CameraMain.orthographicSize = targetZoom;
+            yield break;
+        }
+
+        float startZoom = _CameraMain.orthographicSize;
+
+        // Zoom in → target should be smaller than current
+        if (targetZoom >= startZoom)
+        {
+            _CameraMain.orthographicSize = targetZoom; // safety fallback
+            yield break;
+        }
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            // Optional: ease in/out (uncomment one if you want nicer feel)
+            // t = Mathf.SmoothStep(0f, 1f, t);                // smooth start & end
+            // t = t * t * (3f - 2f * t);                      // smootherstep
+             t = Mathf.Pow(t, 2f);                           // ease-in (accelerates)
+
+            _CameraMain.orthographicSize = Mathf.Lerp(startZoom, targetZoom, t);
+
+            yield return null;
+        }
+
+        // Ensure we exactly hit the target (avoids float precision issues)
+        _CameraMain.orthographicSize = targetZoom;
+    }
+
+    IEnumerator CameraZoomOut(float targetZoom, float duration)
+    {
+        if (duration <= 0f)
+        {
+            _CameraMain.orthographicSize = targetZoom;
+            yield break;
+        }
+
+        float startZoom = _CameraMain.orthographicSize;
+
+        // Zoom out → target should be larger than current
+        if (targetZoom <= startZoom)
+        {
+            _CameraMain.orthographicSize = targetZoom; // safety fallback
+            yield break;
+        }
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            // Optional: add easing (uncomment one if desired)
+            // t = Mathf.SmoothStep(0f, 1f, t);
+            // t = t * t * (3f - 2f * t);
+             t = 1f - Mathf.Pow(1f - t, 2f);                 // ease-out (decelerates at end)
+
+            _CameraMain.orthographicSize = Mathf.Lerp(startZoom, targetZoom, t);
+
+            yield return null;
+        }
+
+        _CameraMain.orthographicSize = targetZoom;
+    }
+
+    #endregion
+
+    #region Shop
+    public void OpenShopVFX()
+    {
+        StartCoroutine(OpenShop());
+    }
+
+    public void CloseShopVFX()
+    {
+        StartCoroutine(CloseShop());
     }
 
     IEnumerator OpenShop()
@@ -98,4 +205,5 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
         yield return null;
     }
+    #endregion
 }

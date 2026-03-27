@@ -17,12 +17,13 @@ public class DBShop : MonoBehaviour
     {
         Game2Manager.Instance.SetShop(this);//Sets the shop object in the game manager
         // Get all DBShopContainer components inside _ContainerParent
+        _ShopPool._UnitList.Clear();
         _ShopContainers.Clear();
         _ShopContainers = new List<DBShopContainer>(_ContainerParent.GetComponentsInChildren<DBShopContainer>());
 
     }
 
-    public void Init()
+    public void Init() //Called once during pregame
     {
         //for (int i = 0; i < _ShopContainers.Count; i++)
         //{
@@ -35,6 +36,34 @@ public class DBShop : MonoBehaviour
         //        _ShopContainers[i].gameObject.SetActive(false);
         //    }
         //}
+        AddUnitListToPool(_BasePack);
     }
 
+    public void SetUpShop(int NumberOfOptions)
+    {
+        foreach(DBShopContainer _u in _ShopContainers)
+        {
+            int i = 0;
+            if (i < NumberOfOptions)
+            {
+                _u.SetUnit(PullForShop());
+                //ToDo: add conditions to check for rarity etc
+            }
+            else
+                _u.gameObject.SetActive(false);
+        }
+    }
+
+    public DBUnit PullForShop()
+    {
+        return _ShopPool._UnitList[Random.Range(0, _ShopPool._UnitList.Count)];
+    }
+
+    public void AddUnitListToPool(DBUnitList _list)
+    {
+        foreach (DBUnit _u in _list._UnitList)
+        {
+            _ShopPool._UnitList.Add(_u);
+        }
+    }
 }
