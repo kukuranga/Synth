@@ -140,11 +140,13 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
 
         int a = Random.Range(0, 4);
+        a = 0; //Test
         Game2Manager.Instance.StopRingsRotating();
         switch(a)
         {
             case 0:
-                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.OutElastic);
+                //_spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.OutElastic);
+                _spriteRender.gameObject.transform.DOMove(this.gameObject.transform.position, 1.5f).SetEase(Ease.InExpo);
                 break;
 
             case 1:
@@ -205,8 +207,8 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
             _Ability.gameObject.SetActive(false);
         }
 
-
-        Game2Manager.Instance.UpdateGameState(GameState.GamePlay);
+        //Done in the animation
+        //Game2Manager.Instance.UpdateGameState(GameState.GamePlay);
 
         if(_unit._Ability != null)
             if(_unit._Ability.OnPull)

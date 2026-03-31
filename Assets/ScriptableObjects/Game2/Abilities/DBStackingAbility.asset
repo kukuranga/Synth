@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Activated: 0
   OnPull: 0
-  _sprite: {fileID: 21300000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
+  _sprite: {fileID: 21300000, guid: e61d67c76699ec6489f589137d7a2759, type: 3}
   Description: adds yellow for each 1=1 2=4 3=9 4 =16
   Prompt: hello
   _Used: 0

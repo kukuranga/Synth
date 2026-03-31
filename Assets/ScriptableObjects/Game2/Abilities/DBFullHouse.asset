@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: DBFullHouse
   m_EditorClassIdentifier: 
   Activated: 0
-  _sprite: {fileID: 21300000, guid: 1fe19ffae1abab0479d7d9716bcbbb9c, type: 3}
+  OnPull: 0
+  _sprite: {fileID: 21300000, guid: 214afce2a8d6e954a889b596bc4d8a18, type: 3}
   Description: +4 Yellow if Full House
+  Prompt: 
+  _Used: 0
+  _OwnerUnit: {fileID: 11400000, guid: 3a36ce4345e421e4a816ec9e5a5cf157, type: 2}
   _AmountToAdd: 4

@@ -46,23 +46,55 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
     IEnumerator CameraFollowCo(GameObject _target, float _Time)
     {
+        Game2Manager.Instance.UpdateGameState(GameState.Animation);
+
         float originalZoom = _CameraMain.orthographicSize;
 
         yield return StartCoroutine(CameraZoomIn(10f, 0.1f));
 
-        float elapsed = 0f;
         Vector3 startPos = _CameraMain.transform.position;
+
+        yield return StartCoroutine(CameraLerpTo(startPos, _target, _Time));
+
+        StartCoroutine(CameraLerpTo(_CameraMain.transform.position, startPos, _Time/4));
+
+        yield return StartCoroutine(CameraZoomOut(originalZoom, 0.5f));
+
+        yield return new WaitForSeconds(0.5f);
+
+        Game2Manager.Instance.UpdateGameState(GameState.GamePlay);
+    }
+
+    IEnumerator CameraLerpTo(Vector3 startPos, GameObject _target, float _Time)
+    {
+        float elapsed = 0;
 
         while (elapsed < _Time)
         {
-             Vector3 targetPos = new Vector3(_target.transform.position.x, _target.transform.position.y, startPos.z);
-             _CameraMain.transform.position = Vector3.Lerp(startPos, targetPos, elapsed / _Time*2);
+            Vector3 targetPos = new Vector3(_target.transform.position.x, _target.transform.position.y, startPos.z);
+            _CameraMain.transform.position = Vector3.Lerp(startPos, targetPos, elapsed / _Time*2);
 
             elapsed += Time.deltaTime;
-            yield return null;         
+            yield return null;
         }
 
-        yield return StartCoroutine(CameraZoomOut(originalZoom, 0.5f));
+
+        yield return null;
+    }IEnumerator CameraLerpTo(Vector3 startPos, Vector3 _target, float _Time)
+    {
+        float elapsed = 0;
+
+        while (elapsed < _Time)
+        {
+            Vector3 targetPos = new Vector3(_target.x, _target.y, startPos.z);
+            _CameraMain.transform.position = Vector3.Lerp(startPos, targetPos, elapsed / _Time*2);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+
+        yield return null;
     }
 
     IEnumerator CameraZoomIn(float targetZoom, float duration)
