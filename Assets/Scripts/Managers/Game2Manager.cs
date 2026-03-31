@@ -59,6 +59,7 @@ public class Game2Manager : Singleton<Game2Manager>
     private int _RoundStartYellow;
     private int _RoundStartGreen;
     private bool _DontCheckConditions;
+    private Vector3 _CameraOriginalPosition;
 
     private void Update()
     {
@@ -67,9 +68,15 @@ public class Game2Manager : Singleton<Game2Manager>
             Debug.Log("Game state = " + _gameState);
         }
     }
+    private void Start()
+    {
+        _CameraOriginalPosition = _CameraMain.transform.position;
+    }
 
     public void UpdateGameState(GameState newState)
     {
+        ResetCamera();
+
         _gameState = newState;
 
         switch(newState)
@@ -163,8 +170,7 @@ public class Game2Manager : Singleton<Game2Manager>
             return true;
         }
 
-        //TODO: figure out how to check the gamestate and bring it back to check conditions after an ability is used
-        Debug.Log("log");
+        //TODO: figure out how to check the gamestate and bring it back to check conditions after an ability is used        
         return false;
     }
 
@@ -399,16 +405,27 @@ public class Game2Manager : Singleton<Game2Manager>
             int _NumberOfStars = 0;
 
             //Check for negatives
-            if(_YellowResource < 0 && _GreenResource < 0)
+            while (_YellowResource < 0 && _GreenResource < 0)
             {
-                _YellowResource = 0;
-                _GreenResource = 0;
-            }
 
-            if (_YellowResource < 0)
-                _GreenResource -= 3;
-            if (_GreenResource < 0)
-                _YellowResource -= 3;
+                if (_YellowResource < 0)
+                {
+                    _GreenResource -= 3;
+                    _YellowResource++;
+                }
+
+                if (_GreenResource < 0)
+                {
+                    _YellowResource -= 3;
+                    _GreenResource++;
+                }
+
+                if (_YellowResource < 0 && _GreenResource < 0)
+                {
+                    _YellowResource = 0;
+                    _GreenResource = 0;
+                }
+            }
 
             foreach (DBContainer _cont in _ContainerManager._ActiveContainers)
             {
@@ -462,5 +479,10 @@ public class Game2Manager : Singleton<Game2Manager>
         {
             _items.Rotate = true;
         }
+    }
+
+    public void ResetCamera()
+    {
+        _CameraMain.transform.position = _CameraOriginalPosition;
     }
 }
