@@ -54,7 +54,7 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
         Vector3 startPos = _CameraMain.transform.position;
 
-        yield return StartCoroutine(CameraLerpTo(startPos, _target, _Time));
+        yield return StartCoroutine(CameraLerpTo(startPos, _target, _Time/2));
 
         StartCoroutine(CameraLerpTo(_CameraMain.transform.position, startPos, _Time/4));
 

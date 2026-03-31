@@ -136,7 +136,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
         _Coin.SetActive(true);
 
-        VFX2Manager.Instance.CameraFollow(_spriteRender.gameObject, 2f);
+        VFX2Manager.Instance.CameraFollow(_spriteRender.gameObject, 1.5f);
 
 
         int a = Random.Range(0, 4);

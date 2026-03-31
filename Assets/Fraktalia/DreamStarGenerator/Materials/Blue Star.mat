@@ -59,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Reflection:
-        m_Texture: {fileID: 8900000, guid: 66bd52941144803499c5453208a19277, type: 3}
+        m_Texture: {fileID: 8900000, guid: 46d09d86438906947904e2646b984c61, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ScrollTex:
@@ -79,17 +79,17 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ReflectionMulti: 1
-    - _RotationSpeed: 1
-    - _ScrollDirection_X: 5
-    - _ScrollDirection_Y: 10
+    - _RotationSpeed: 2.05
+    - _ScrollDirection_X: 50
+    - _ScrollDirection_Y: 100
     - _ScrollSpeed: 11.69
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.05882354, g: 0.25346208, b: 0.65882355, a: 1}
+    - _Color: {r: 0.9716981, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ReflectionColor: {r: 0, g: 0.8117647, b: 0.31550896, a: 1}
-    - _ScrollColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
+    - _ReflectionColor: {r: 0.94275093, g: 1, b: 0, a: 1}
+    - _ScrollColor: {r: 0.6981132, g: 0.41213292, b: 0.009878943, a: 1}
     - _TintColor: {r: 0.4705882, g: 0.4705882, b: 0.4705882, a: 0.484}
   m_BuildTextureStacks: []
