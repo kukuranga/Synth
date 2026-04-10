@@ -24,8 +24,10 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
     public bool _Activated;
     public GameObject _Coin;
     public DBContAbility _AbilityCont;
+    public bool _UnitSet;
 
     private Quaternion originalRotation;
+
 
     private void Start()
     {
@@ -61,7 +63,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
                 _Star.SetActive(true);
         }
 
-        if (_Unlocked)
+        if (_Unlocked && !_UnitSet)
             _BackGround.SetActive(true);
         else
             _BackGround.SetActive(false);
@@ -130,6 +132,8 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
     {
 
         Game2Manager.Instance.UpdateGameState(GameState.Animation);
+
+        _UnitSet = true;
 
         _spriteRender.gameObject.transform.position = DBContainerManager.Instance._SpawnPoint.transform.position;
 

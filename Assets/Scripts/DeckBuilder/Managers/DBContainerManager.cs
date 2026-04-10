@@ -59,6 +59,7 @@ public class DBContainerManager : Singleton<DBContainerManager>
         for (int i = 0; i < _activeNumber; i++)
         {
             _AllContainers[i]._Unlocked = true;
+            //_ActiveContainers[1]._UnitSet = false;
             _ActiveContainers.Add(_AllContainers[i]);
         }
     }

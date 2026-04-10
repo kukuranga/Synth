@@ -20292,6 +20292,7 @@ MonoBehaviour:
   _Activated: 0
   _Coin: {fileID: 669368105977486262}
   _AbilityCont: {fileID: 0}
+  _UnitSet: 0
 --- !u!1 &6283690627385648130
 GameObject:
   m_ObjectHideFlags: 0
