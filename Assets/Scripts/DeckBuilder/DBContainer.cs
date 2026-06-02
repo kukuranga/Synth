@@ -37,6 +37,14 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
 
     private void Update()
     {
+
+
+        if (_Unlocked && !_UnitSet)
+            _BackGround.SetActive(true);
+        else
+            _BackGround.SetActive(false);
+
+
         if (_unit == null || !_Unlocked)
         {
             DisableAllVisuals();
@@ -63,10 +71,6 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
                 _Star.SetActive(true);
         }
 
-        if (_Unlocked && !_UnitSet)
-            _BackGround.SetActive(true);
-        else
-            _BackGround.SetActive(false);
     }
 
     void LateUpdate()
@@ -249,6 +253,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
     public void ClearContainer()
     {
         DisableAllVisuals();
+        _UnitSet = false;
         _unit = null;
         _Unlocked = false;
         _Activated = true;

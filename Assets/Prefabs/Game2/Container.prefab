@@ -707,6 +707,7 @@ MonoBehaviour:
   _Activated: 0
   _Coin: {fileID: 1039261382777048998}
   _AbilityCont: {fileID: 8639829199444790554}
+  _UnitSet: 0
 --- !u!61 &2866873252391127422
 BoxCollider2D:
   m_ObjectHideFlags: 0

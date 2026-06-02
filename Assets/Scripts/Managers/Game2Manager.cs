@@ -44,6 +44,7 @@ public class Game2Manager : Singleton<Game2Manager>
     public GameObject _SelectUnitUI;
     public GameObject _NextUnitUI;
     public SelectUnitUI _SelectUnitUiComponent;
+    public GameObject _ShopBuyUI;
     public DBMessageScreen _DBMessageScreen;
     public GameState _gameState;
     public Deck _deck;
@@ -295,6 +296,7 @@ public class Game2Manager : Singleton<Game2Manager>
         _MessageScreen.SetActive(false);
         _SelectUnitUI.SetActive(false);
         _NextUnitUI.SetActive(false);
+        _ShopBuyUI.SetActive(false);
     }
 
     public void CloseSelectUnitUI()
@@ -484,5 +486,21 @@ public class Game2Manager : Singleton<Game2Manager>
     public void ResetCamera()
     {
         _CameraMain.transform.position = _CameraOriginalPosition;
+    }
+
+    public void OpenShopBuyScreen(DBUnit _Unit , DBShopContainer _ShopCont)
+    {
+        _ShopBuyUI.SetActive(true);
+        _ShopBuyUI.GetComponent<ShopBuyScreen>().SetUnit(_Unit, _ShopCont);
+
+        // Set Shop UI Unit here
+        //update the info
+        //
+
+    }
+
+    public void CloseShopBuyScreen()
+    {
+        _ShopBuyUI.SetActive(false);
     }
 }
