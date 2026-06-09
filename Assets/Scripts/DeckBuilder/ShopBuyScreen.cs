@@ -12,8 +12,8 @@ public class ShopBuyScreen : MonoBehaviour
     public TextMeshProUGUI _Yellow;
     public TextMeshProUGUI _Green;
     public SpriteRenderer _SpriteRend;
-    public SpriteRenderer _AbilityRender; //TODO
-    public TextMeshProUGUI _AbilityDesc; //TODO
+    public SpriteRenderer _AbilityRender;
+    public TextMeshProUGUI _AbilityDesc; 
     public DBShopContainer _ShopCont;
 
 
@@ -34,6 +34,19 @@ public class ShopBuyScreen : MonoBehaviour
             _Green.text = _Unit._GreenResourceGain.ToString();
         else
             _Green.text = "";
+
+        if(_U._Ability != null)
+        {
+            _AbilityRender.gameObject.SetActive(true);
+            _AbilityDesc.gameObject.SetActive(true);
+            _AbilityDesc.text = _U._Ability.Description;
+            _AbilityRender.sprite = _U._Ability._sprite;
+        }
+        else
+        {
+            _AbilityRender.gameObject.SetActive(false);
+            _AbilityDesc.gameObject.SetActive(false);
+        }
 
     }
 
