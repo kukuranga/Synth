@@ -56,7 +56,16 @@ public class DBShop : MonoBehaviour
 
     public DBUnit PullForShop()
     {
-        return _ShopPool._UnitList[Random.Range(0, _ShopPool._UnitList.Count)];
+
+        DBUnit _U = _ShopPool._UnitList[Random.Range(0, _ShopPool._UnitList.Count)];
+
+        foreach(DBShopContainer _cont in _ShopContainers)
+        {
+            if (_cont._unit == _U)
+                _U = PullForShop();
+        }
+
+        return _U;
     }
 
     public void AddUnitListToPool(DBUnitList _list)
