@@ -25,17 +25,7 @@ public class DBShop : MonoBehaviour
 
     public void Init() //Called once during pregame
     {
-        //for (int i = 0; i < _ShopContainers.Count; i++)
-        //{
-        //    if (i < _ShopUnits._UnitList.Count && _ShopUnits._UnitList[i] != null)
-        //    {
-        //        _ShopContainers[i].SetUnit(_ShopUnits._UnitList[i]);
-        //    }
-        //    else
-        //    {
-        //        _ShopContainers[i].gameObject.SetActive(false);
-        //    }
-        //}
+        
         AddUnitListToPool(_BasePack);
     }
 
@@ -46,6 +36,7 @@ public class DBShop : MonoBehaviour
             int i = 0;
             if (i < NumberOfOptions)
             {
+                _u.ActivateVisuals();
                 _u.SetUnit(PullForShop());
                 //ToDo: add conditions to check for rarity etc
             }

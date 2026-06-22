@@ -11,7 +11,13 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
     //public DBContainer _DBCont;
     //make a variable to hold the number of units you can buy
     public int _CurrentAvailableBuys;
-    public TextMeshPro _BuysTMP;
+    //public TextMeshPro _BuysTMP;
+    public GameObject _Container;
+    public TextMeshPro _YellowTMP;
+    public TextMeshPro _GreenTMP;
+    public SpriteRenderer _AbilityRend;
+    public GameObject _DangerGO;
+    public GameObject _StarGO;
     //public TextMeshPro _CostTmp;
     //public TextMeshPro _DescTMP;
 
@@ -39,7 +45,14 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
         //    _AbilityDescTMP.text = "";
 
         _Sprite.sprite = _unit._sprite;
-        _BuysTMP.text = _unit._NumberOfBuys.ToString();
+        //_BuysTMP.text = _unit._NumberOfBuys.ToString();
+        if (_unit._YellowResourceGain > 0) _YellowTMP.text = _unit._YellowResourceGain.ToString(); else _YellowTMP.text = "0";
+        if (_unit._GreenResourceGain >0) _GreenTMP.text = _unit._GreenResourceGain.ToString(); else _GreenTMP.text = "0";
+        
+        if (_unit._Ability != null) { _AbilityRend.gameObject.SetActive(true); _AbilityRend.sprite = _unit._Ability._sprite; } else _AbilityRend.gameObject.SetActive(false);
+        
+        if (_unit._Danger) _DangerGO.SetActive(true); else _DangerGO.SetActive(false);
+        if (_unit._Star) _StarGO.SetActive(true); else _StarGO.SetActive(false);
     }
 
     public void SetUnit(DBUnit _U)
@@ -63,8 +76,13 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
         //}
         //else
         //    Debug.Log("Cant Buy Anymore");
-
+        _Container.SetActive(false);
         Game2Manager.Instance.OpenShopBuyScreen(_unit, this);
+    }
+
+    public void ActivateVisuals()
+    {
+        _Container.SetActive(true);
     }
 
 }
