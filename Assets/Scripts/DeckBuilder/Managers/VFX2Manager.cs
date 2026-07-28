@@ -9,6 +9,9 @@ public class VFX2Manager : Singleton<VFX2Manager>
     public Material _DefaultMat;
     public Light2D _2DLight;
     public float _FadeRate;
+    public GameObject _yellowPrefab;
+    public GameObject _greenPrefab;
+
     //public List<Material> _EffectMats;
 
     public Material _FireMat;
@@ -237,5 +240,19 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
         yield return null;
     }
+    #endregion
+
+    #region CheckConditions
+
+    public void SpawnItems()
+    {
+        //spawns the appropriate prefab of an object = to the number of needed yellow or green coins
+        
+
+        //the objects will move towards the appropriate container and then be destroyed on contact with the container
+
+        //after it is destroyed we add +1 to the appropriate resource
+    }
+
     #endregion
 }

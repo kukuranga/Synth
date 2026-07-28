@@ -67,4 +67,9 @@ public class ShopBuyScreen : MonoBehaviour
 
 
     }
+
+    public void ShopBack()
+    {
+        Game2Manager.Instance.ShopBuyBack();
+    }
 }

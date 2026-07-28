@@ -308,7 +308,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
     {
         if (_Coin == null) yield break;
 
-        float rotationSpeed = 360f; // degrees per second
+        float rotationSpeed = 720f; // degrees per second
         float rotatedAmount = 0f;
 
         while (rotatedAmount < 360f)
@@ -328,5 +328,9 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
         _Coin.transform.eulerAngles = rot;
     }
 
+    public void ConditionsAnim()
+    {
+        FullRotateCoin();
+    }
 
 }

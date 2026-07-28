@@ -433,6 +433,7 @@ public class Game2Manager : Singleton<Game2Manager>
             {
                 if (_cont._unit != null)
                 {
+                    _cont.ConditionsAnim();
                     _YellowResource += _cont._unit._YellowResourceGain;
                     _GreenResource += _cont._unit._GreenResourceGain;
 
@@ -492,6 +493,7 @@ public class Game2Manager : Singleton<Game2Manager>
     {
         _ShopBuyUI.SetActive(true);
         _ShopBuyUI.GetComponent<ShopBuyScreen>().SetUnit(_Unit, _ShopCont);
+        _shop.gameObject.SetActive(false);
 
         // Set Shop UI Unit here
         //update the info
@@ -502,5 +504,11 @@ public class Game2Manager : Singleton<Game2Manager>
     public void CloseShopBuyScreen()
     {
         _ShopBuyUI.SetActive(false);
+    }
+
+    public void ShopBuyBack()
+    {
+        _ShopBuyUI.SetActive(false);
+        _shop.gameObject.SetActive(true);
     }
 }
