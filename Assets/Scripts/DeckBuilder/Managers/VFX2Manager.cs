@@ -11,11 +11,17 @@ public class VFX2Manager : Singleton<VFX2Manager>
     public float _FadeRate;
     public GameObject _yellowPrefab;
     public GameObject _greenPrefab;
+    public Transform _yelowWaypoint;
+    public Transform _GreenWaypoint;
+    public DBRotateAroundCentre _InnerCircleRotate;
+    public DBRotateAroundCentre _OuterCircleRotate;
 
     //public List<Material> _EffectMats;
 
     public Material _FireMat;
     private Camera _CameraMain;
+    private float InnerOrbitalSpeed;
+    private float OuterOrbitalSpeed;
 
     private void Start()
     {
@@ -25,6 +31,21 @@ public class VFX2Manager : Singleton<VFX2Manager>
         //StartCoroutine(changeEvery1sec(_Containers[0]._Coin._spriteRender.GetComponent<Renderer>(), _FireMat));
         //_Containers[0]._Coin.GetComponent<Renderer>().material = _FireMat;
         
+    }
+
+    public void StopOrbitals()
+    {
+        InnerOrbitalSpeed = _InnerCircleRotate.orbitSpeed;
+        OuterOrbitalSpeed = _OuterCircleRotate.orbitSpeed;
+
+        _InnerCircleRotate.orbitSpeed = 0;
+        _OuterCircleRotate.orbitSpeed = 0;
+    }
+
+    public void StartOrbitals()
+    {
+        _InnerCircleRotate.orbitSpeed = InnerOrbitalSpeed;
+        _OuterCircleRotate.orbitSpeed = OuterOrbitalSpeed;
     }
 
     IEnumerator changeEvery1sec(Renderer matRenderer, Material changeMat)
@@ -244,14 +265,49 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
     #region CheckConditions
 
-    public void SpawnItems()
+    public void CheckConditions(DBUnit _unit, Transform _SpawnPoint)
     {
         //spawns the appropriate prefab of an object = to the number of needed yellow or green coins
-        
+
 
         //the objects will move towards the appropriate container and then be destroyed on contact with the container
 
         //after it is destroyed we add +1 to the appropriate resource
+        StopOrbitals();
+
+        if(_unit._GreenResourceGain > 0)
+        {
+            StartCoroutine(SpawnResource(true, _unit._GreenResourceGain, _SpawnPoint));
+        }
+        if(_unit._YellowResourceGain > 0)
+        {
+            StartCoroutine(SpawnResource(false, _unit._YellowResourceGain, _SpawnPoint));
+        }
+    }
+
+    IEnumerator SpawnResource(bool _isGreen , int _numbertoSpawn, Transform _SpawnPoint)
+    {
+        for (int i = 0; i < _numbertoSpawn; i++)
+        {
+            
+
+            if(_isGreen)
+            {
+                //spawn prefab, send it to the correct resource destination
+                Instantiate(_greenPrefab, this.transform);
+            }
+            else
+            {
+                //spawn prefab, send it to the correct resource destination
+                Instantiate(_yellowPrefab, this.transform);
+
+            }
+
+            yield return new WaitForSeconds(0.1f);
+
+        }
+
+        yield return null;
     }
 
     #endregion

@@ -331,6 +331,7 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
     public void ConditionsAnim()
     {
         FullRotateCoin();
+        VFX2Manager.Instance.CheckConditions(_unit, this.transform);
     }
 
 }
