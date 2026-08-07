@@ -285,29 +285,20 @@ public class VFX2Manager : Singleton<VFX2Manager>
         }
     }
 
-    IEnumerator SpawnResource(bool _isGreen , int _numbertoSpawn, Transform _SpawnPoint)
+    IEnumerator SpawnResource(bool _isGreen, int _numbertoSpawn, Transform _SpawnPoint)
     {
         for (int i = 0; i < _numbertoSpawn; i++)
         {
-            
+            GameObject prefab = _isGreen ? _greenPrefab : _yellowPrefab;
 
-            if(_isGreen)
-            {
-                //spawn prefab, send it to the correct resource destination
-                Instantiate(_greenPrefab, this.transform);
-            }
-            else
-            {
-                //spawn prefab, send it to the correct resource destination
-                Instantiate(_yellowPrefab, this.transform);
+            // Instantiate at the spawn point's world position, no parent needed
+            GameObject go = Instantiate(prefab, _SpawnPoint.position, Quaternion.identity);
 
-            }
+            DBCheckConditionsItem item = go.GetComponent<DBCheckConditionsItem>();
+            item._IsYellow = !_isGreen;
 
             yield return new WaitForSeconds(0.1f);
-
         }
-
-        yield return null;
     }
 
     #endregion

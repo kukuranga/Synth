@@ -105,6 +105,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 _GameUI.SetActive(true);
                 _Containers.SetActive(true);
                 _CheckBanner.SetActive(false);
+                VFX2Manager.Instance.StartOrbitals();
                 UpdateGameState(GameState.GamePlay);
                 break;
             case GameState.GamePlay:
@@ -285,6 +286,19 @@ public class Game2Manager : Singleton<Game2Manager>
     {
         _YellowResource += i;
     }
+    public void AddGreenResource(int i)
+    {
+        _GreenResource += i;
+    }
+    public void SubtractYellowResource(int i)
+    {
+        _YellowResource -= i;
+    }
+    public void SubtractGreenResource(int i)
+    {
+        _GreenResource -= i;
+    }
+
 
     public void DisableUI()
     {
@@ -412,14 +426,14 @@ public class Game2Manager : Singleton<Game2Manager>
 
                 if (_YellowResource < 0)
                 {
-                    _GreenResource -= 3;
-                    _YellowResource++;
+                    SubtractGreenResource(3);
+                    AddYellowResource(1);
                 }
 
                 if (_GreenResource < 0)
                 {
-                    _YellowResource -= 3;
-                    _GreenResource++;
+                    SubtractYellowResource(3);
+                    AddGreenResource(1);
                 }
 
                 if (_YellowResource < 0 && _GreenResource < 0)
@@ -434,8 +448,8 @@ public class Game2Manager : Singleton<Game2Manager>
                 if (_cont._unit != null)
                 {
                     _cont.ConditionsAnim();
-                    _YellowResource += _cont._unit._YellowResourceGain;
-                    _GreenResource += _cont._unit._GreenResourceGain;
+                    //_YellowResource += _cont._unit._YellowResourceGain;
+                    //_GreenResource += _cont._unit._GreenResourceGain;
 
                     if (_cont._unit._Star)
                         _NumberOfStars++;
