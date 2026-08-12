@@ -11,17 +11,12 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
     //public DBContainer _DBCont;
     //make a variable to hold the number of units you can buy
     public int _CurrentAvailableBuys;
-    //public TextMeshPro _BuysTMP;
     public GameObject _Container;
     public TextMeshPro _YellowTMP;
     public TextMeshPro _GreenTMP;
     public SpriteRenderer _AbilityRend;
     public GameObject _DangerGO;
     public GameObject _StarGO;
-    //public TextMeshPro _CostTmp;
-    //public TextMeshPro _DescTMP;
-
-    //public TextMeshPro _AbilityDescTMP;
 
     //todo: add elements for visual components here
     //: also make the grab not bring repeats
@@ -29,7 +24,6 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
 
     private void Update()
     {
-        //_BuysTMP.text = _CurrentAvailableBuys.ToString();
     }
 
     public void Init()
@@ -85,4 +79,8 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
         _Container.SetActive(true);
     }
 
+    private void OnEnable()
+    {
+        _Container.SetActive(true);
+    }
 }
