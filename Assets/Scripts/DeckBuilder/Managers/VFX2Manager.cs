@@ -265,12 +265,6 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
     public void CheckConditions(DBUnit _unit, Transform _SpawnPoint)
     {
-        //spawns the appropriate prefab of an object = to the number of needed yellow or green coins
-
-
-        //the objects will move towards the appropriate container and then be destroyed on contact with the container
-
-        //after it is destroyed we add +1 to the appropriate resource
         StopOrbitals();
 
         if(_unit._GreenResourceGain > 0)
@@ -281,6 +275,19 @@ public class VFX2Manager : Singleton<VFX2Manager>
         {
             StartCoroutine(SpawnResource(false, _unit._YellowResourceGain, _SpawnPoint));
         }
+        if(_unit._YellowResourceGain < 0)
+        {
+            Game2Manager.Instance.SubtractYellowResource(_unit._YellowResourceGain);
+        }
+        if(_unit._GreenResourceGain < 0)
+        {
+            Game2Manager.Instance.SubtractGreenResource(_unit._GreenResourceGain);
+        }
+    }
+
+    public void AddResourceAnimation(bool _isGreen, int _numbertoSpawn, Transform _SpawnPoint)
+    {
+        StartCoroutine(SpawnResource(_isGreen, _numbertoSpawn, _SpawnPoint));
     }
 
     IEnumerator SpawnResource(bool _isGreen, int _numbertoSpawn, Transform _SpawnPoint)
@@ -289,7 +296,6 @@ public class VFX2Manager : Singleton<VFX2Manager>
         {
             GameObject prefab = _isGreen ? _greenPrefab : _yellowPrefab;
 
-            // Instantiate at the spawn point's world position, no parent needed
             GameObject go = Instantiate(prefab, _SpawnPoint.position, Quaternion.identity);
 
             DBCheckConditionsItem item = go.GetComponent<DBCheckConditionsItem>();

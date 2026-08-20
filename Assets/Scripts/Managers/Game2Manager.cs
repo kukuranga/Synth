@@ -51,6 +51,7 @@ public class Game2Manager : Singleton<Game2Manager>
     public DBContainerManager _ContainerManager;
     public DBShop _shop;
     public Camera _CameraMain;
+    public GameObject _CenterPoint;
 
     public DBAbilityTypes _CurrentAbility;
     public DBUnit _TempUnit;
@@ -399,19 +400,24 @@ public class Game2Manager : Singleton<Game2Manager>
             case 0:
                 break;
             case 1:
-                _YellowResource += 1;
+                VFX2Manager.Instance.AddResourceAnimation(false, 1, _CenterPoint.transform);
+                AddYellowResource(1);
                 break;
             case 2:
-                _YellowResource += 2;
+                VFX2Manager.Instance.AddResourceAnimation(false, 2, _CenterPoint.transform);
+                AddYellowResource(2);
                 break;
             case 3:
-                _YellowResource += 9;
+                VFX2Manager.Instance.AddResourceAnimation(false, 9, _CenterPoint.transform);
+                AddYellowResource(9);
                 break;
             case 4:
-                _YellowResource += 16;
+                VFX2Manager.Instance.AddResourceAnimation(false, 16, _CenterPoint.transform);
+                AddYellowResource(16);
                 break;
             default:
-                _YellowResource += 16;
+                VFX2Manager.Instance.AddResourceAnimation(false, 16, _CenterPoint.transform);
+                AddYellowResource(16);
                 break;
         }
     }
