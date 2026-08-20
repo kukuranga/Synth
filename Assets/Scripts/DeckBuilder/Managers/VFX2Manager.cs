@@ -35,17 +35,14 @@ public class VFX2Manager : Singleton<VFX2Manager>
 
     public void StopOrbitals()
     {
-        InnerOrbitalSpeed = _InnerCircleRotate.orbitSpeed;
-        OuterOrbitalSpeed = _OuterCircleRotate.orbitSpeed;
-
-        _InnerCircleRotate.orbitSpeed = 0;
-        _OuterCircleRotate.orbitSpeed = 0;
+        _InnerCircleRotate.Rotate = false;
+        _OuterCircleRotate.Rotate = false;
     }
 
     public void StartOrbitals()
     {
-        _InnerCircleRotate.orbitSpeed = InnerOrbitalSpeed;
-        _OuterCircleRotate.orbitSpeed = OuterOrbitalSpeed;
+        _InnerCircleRotate.Rotate = true;
+        _OuterCircleRotate.Rotate = true;
     }
 
     IEnumerator changeEvery1sec(Renderer matRenderer, Material changeMat)
@@ -256,7 +253,8 @@ public class VFX2Manager : Singleton<VFX2Manager>
             yield return new WaitForSeconds(_FadeRate);
 
         }
-        
+
+        StartOrbitals();
         Game2Manager.Instance.UpdateGameState(GameState.RoundStart);
 
         yield return null;

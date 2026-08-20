@@ -48,11 +48,13 @@ public class DBCheckConditionsItem : MonoBehaviour
         }
 
         transform.position = end;
+        SFXManager.Instance.PlaySound("PopSFX");
         yield return StartCoroutine(PopAndDestroy());
     }
 
     private IEnumerator PopAndDestroy()
     {
+
         Vector3 startScale = transform.localScale;
         Vector3 bigScale = startScale * 1.3f;
         float half = _popDuration * 0.5f;
@@ -68,13 +70,13 @@ public class DBCheckConditionsItem : MonoBehaviour
             yield return null;
         }
 
-        // TODO: hook this up to your actual resource system
+
         if (_IsYellow)
             Game2Manager.Instance.AddYellowResource(1);
         else
             Game2Manager.Instance.AddGreenResource(1);
 
-
+        
         Destroy(gameObject);
     }
 }

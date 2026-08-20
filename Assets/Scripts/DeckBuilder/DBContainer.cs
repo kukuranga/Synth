@@ -284,8 +284,10 @@ public class DBContainer : MonoBehaviour , IPointerClickHandler
                         //the effects of the activated ability will trigger here.
                         _Activated = false;
                         _unit._Ability.ActivateAbility();
-                        _AbilityCont.FadeBurnOut();
+                        //_AbilityCont.FadeBurnOut();
                     }
+
+                FullRotateCoin();
                 break;
 
             case GameState.SelectUnit:

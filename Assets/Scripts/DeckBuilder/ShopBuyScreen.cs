@@ -13,8 +13,10 @@ public class ShopBuyScreen : MonoBehaviour
     public TextMeshProUGUI _Green;
     public SpriteRenderer _SpriteRend;
     public SpriteRenderer _AbilityRender;
-    public TextMeshProUGUI _AbilityDesc; 
-    public DBShopContainer _ShopCont;
+    public TextMeshProUGUI _AbilityDesc;
+    public TextMeshProUGUI _ShopCount;
+    public TextMeshProUGUI _ShopCost;
+    [HideInInspector] public DBShopContainer _ShopCont;
 
 
     public void SetUnit(DBUnit _U, DBShopContainer _SC)
@@ -24,6 +26,8 @@ public class ShopBuyScreen : MonoBehaviour
         _Desc.text = _Unit._Description;
         _SpriteRend.sprite = _Unit._sprite;
         _ShopCont = _SC;
+        _ShopCount.text = _Unit._NumberOfBuys.ToString();
+        _ShopCost.text = _Unit._ShopCost.ToString();
 
         if (_Unit._YellowResourceGain > 0)
             _Yellow.text = _Unit._YellowResourceGain.ToString();
@@ -60,6 +64,7 @@ public class ShopBuyScreen : MonoBehaviour
             Game2Manager.Instance._YellowResource -= _Unit._ShopCost;
             Game2Manager.Instance.AddUnitToDeck(_Unit);
             _ShopCont._CurrentAvailableBuys--;
+            _ShopCount.text = _Unit._NumberOfBuys.ToString();
             Debug.Log("unit added");
         }
         else

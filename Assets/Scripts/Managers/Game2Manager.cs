@@ -72,6 +72,7 @@ public class Game2Manager : Singleton<Game2Manager>
     private void Start()
     {
         _CameraOriginalPosition = _CameraMain.transform.position;
+        _ = SFXManager.Instance;
     }
 
     public void UpdateGameState(GameState newState)
@@ -125,6 +126,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 //check any post party special abilities
                 if (!CheckIfAnyActivesLeft())
                 {
+                    VFX2Manager.Instance.StopOrbitals();
                     _CheckBanner.SetActive(true);
                     StartCoroutine(CheckConditions());
                 }
