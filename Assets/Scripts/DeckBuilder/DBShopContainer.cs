@@ -4,6 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 
+public enum ShopType
+{
+    Yellow,
+    Green,
+    Star,
+    Danger,
+    Unique
+}
+
 public class DBShopContainer : MonoBehaviour , IPointerClickHandler
 {
     //Container for each unit type
@@ -12,31 +21,64 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
     //make a variable to hold the number of units you can buy
     public int _CurrentAvailableBuys;
     public GameObject _Container;
+    public TextMeshPro _UnlockCostTMP;
     public TextMeshPro _YellowTMP;
     public TextMeshPro _GreenTMP;
     public SpriteRenderer _AbilityRend;
     public GameObject _DangerGO;
     public GameObject _StarGO;
+    public ShopType _shopType;
+    public bool _Unlocked;
+    public bool _Visible;
 
     //todo: add elements for visual components here
     //: also make the grab not bring repeats
     public SpriteRenderer _Sprite;
+    public SpriteRenderer _LockedSprite;
+
+    public Sprite _YellowLockSprite;
+    public Sprite _GreenLockSprite;
+    public Sprite _DangerLockSprite;
+    public Sprite _StarLockSprite;
+    public Sprite _UniqueLockSprite;
 
     private void Update()
     {
+        if(_Unlocked)
+        {
+            _Container.SetActive(true);
+            _LockedSprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            _Container.SetActive(false);
+            _LockedSprite.gameObject.SetActive(true);
+            _UnlockCostTMP.text = Game2Manager.Instance._shop._UnlockCost.ToString();
+            switch(_shopType)
+            {
+                case ShopType.Yellow:
+                    _LockedSprite.sprite = _YellowLockSprite;
+                    break;
+                case ShopType.Green:
+                    _LockedSprite.sprite = _GreenLockSprite;
+                    break;
+                case ShopType.Danger:
+                    _LockedSprite.sprite = _DangerLockSprite;
+                    break;
+                case ShopType.Star:
+                    _LockedSprite.sprite = _StarLockSprite;
+                    break;
+                case ShopType.Unique:
+                    _LockedSprite.sprite = _UniqueLockSprite;
+                    break;
+            }
+        }
     }
 
     public void Init()
     {
         //set the unit here
         _CurrentAvailableBuys = _unit._NumberOfBuys;
-        //_CostTmp.text = _DBCont._unit._ShopCost.ToString();
-        //_DescTMP.text = _DBCont._unit._Description;
-
-        //if (_DBCont._unit._Ability != null)
-        //    _AbilityDescTMP.text = _DBCont._unit._Ability.Description;
-        //else
-        //    _AbilityDescTMP.text = "";
 
         _Sprite.sprite = _unit._sprite;
         //_BuysTMP.text = _unit._NumberOfBuys.ToString();
@@ -47,6 +89,7 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
         
         if (_unit._Danger) _DangerGO.SetActive(true); else _DangerGO.SetActive(false);
         if (_unit._Star) _StarGO.SetActive(true); else _StarGO.SetActive(false);
+
     }
 
     public void SetUnit(DBUnit _U)
@@ -61,17 +104,26 @@ public class DBShopContainer : MonoBehaviour , IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //if (_CurrentAvailableBuys > 0 && Game2Manager.Instance._YellowResource >= _DBCont._unit._ShopCost)
-        //{
-        //    Game2Manager.Instance._YellowResource -= _DBCont._unit._ShopCost;
-        //    Game2Manager.Instance.AddUnitToDeck(_DBCont._unit);
-        //    _CurrentAvailableBuys--;
-        //    Debug.Log("Unit Added");
-        //}
-        //else
-        //    Debug.Log("Cant Buy Anymore");
-        _Container.SetActive(false);
-        Game2Manager.Instance.OpenShopBuyScreen(_unit, this);
+        if (_Unlocked)
+        {
+            _Container.SetActive(false);
+            Game2Manager.Instance.OpenShopBuyScreen(_unit, this);
+        }
+        else
+        {
+            //code for unlocking
+            if(Game2Manager.Instance._GreenResource >= Game2Manager.Instance._shop._UnlockCost)
+            {
+                Game2Manager.Instance.SubtractGreenResource(Game2Manager.Instance._shop._UnlockCost);
+                Game2Manager.Instance._shop._UnlockCost += 2;
+                _Unlocked = true;
+            }
+            else
+            {
+                Debug.Log("Not enough green");
+            }
+        }
+
     }
 
     public void ActivateVisuals()

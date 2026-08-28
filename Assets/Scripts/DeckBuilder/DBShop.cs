@@ -11,7 +11,14 @@ public class DBShop : MonoBehaviour
     //display each of them in a list of units
     //public GameObject _DBShopContainerPrefab;
     public GameObject _ContainerParent;
-    public List<DBShopContainer> _ShopContainers;
+    public List<DBShopContainer> _ShopContainers;//Might be useless
+    public DBUnitList _YellowContainers;
+    public DBUnitList _GreenContainers;
+    public DBUnitList _DangerContainers;
+    public DBUnitList _StarContainers;
+    public DBUnitList _UniqueContainers;
+    public List<ShopOrientation> _ShopOrientations;
+    public int _UnlockCost;
 
     private void Awake()          
     {
@@ -25,38 +32,79 @@ public class DBShop : MonoBehaviour
 
     public void Init() //Called once during pregame
     {
-        
+        _UnlockCost = 2;
         AddUnitListToPool(_BasePack);
     }
 
     public void SetUpShop(int NumberOfOptions)
     {
+        ShopOrientation _SelectedShop = _ShopOrientations[0];
+
+        List<DBUnit> _yelowPull = PullFromList(_YellowContainers, _SelectedShop._yellowCount);
+        List<DBUnit> _greenPull = PullFromList(_GreenContainers , _SelectedShop._greenCount);
+        List<DBUnit> _dangerPull = PullFromList(_DangerContainers , _SelectedShop._dangerCount);
+        List<DBUnit> _starPull = PullFromList(_StarContainers , _SelectedShop._starCount);
+        List<DBUnit> _uniquePull = PullFromList(_UniqueContainers , _SelectedShop._uniqueCount);
+
+        int i = 0;
         foreach(DBShopContainer _u in _ShopContainers)
         {
-            int i = 0;
-            if (i < NumberOfOptions)
+            _u._shopType = _SelectedShop._shopTypes[i];
+            _u._Unlocked = _SelectedShop._isUnlocked[i];
+            _u._Visible = _SelectedShop._isVisible[i];
+            i++;
+
+            _u.ActivateVisuals();
+
+            switch (_u._shopType)
             {
-                _u.ActivateVisuals();
-                _u.SetUnit(PullForShop());
-                //ToDo: add conditions to check for rarity etc
+                case ShopType.Yellow:
+                    _u.SetUnit(_yelowPull[0]);
+                    _yelowPull.RemoveAt(0);
+                    break;
+                case ShopType.Green:
+                    _u.SetUnit(_greenPull[0]);
+                    _greenPull.RemoveAt(0);
+                    break;
+                case ShopType.Star:
+                    _u.SetUnit(_dangerPull[0]);
+                    _dangerPull.RemoveAt(0);
+                    break;
+                case ShopType.Danger:
+                    _u.SetUnit(_starPull[0]);
+                    _starPull.RemoveAt(0);
+                    break;
+                case ShopType.Unique:
+                    _u.SetUnit(_uniquePull[0]);
+                    _uniquePull.RemoveAt(0);
+                    break;
             }
-            else
-                _u.gameObject.SetActive(false);
+
         }
     }
 
-    public DBUnit PullForShop()
+    public List<DBUnit> PullFromList(DBUnitList _List, int _num)
     {
+        List<DBUnit> _rand = new List<DBUnit>();
 
-        DBUnit _U = _ShopPool._UnitList[Random.Range(0, _ShopPool._UnitList.Count)];
-
-        foreach(DBShopContainer _cont in _ShopContainers)
+        if (_List == null || _List._UnitList == null || _List._UnitList.Count < _num)
         {
-            if (_cont._unit == _U)
-                _U = PullForShop();
+            Debug.LogWarning("PullFromList: list is empty or null, returning empty result.");
+            return _rand;
         }
 
-        return _U;
+        List<DBUnit> _pool = new List<DBUnit>(_List._UnitList); // copy so we don't touch the original
+
+        _num = Mathf.Min(_num, _pool.Count);
+
+        for (int i = 0; i < _num; i++)
+        {
+            int index = Random.Range(0, _pool.Count);
+            _rand.Add(_pool[index]);
+            _pool.RemoveAt(index);
+        }
+
+        return _rand;
     }
 
     public void AddUnitListToPool(DBUnitList _list)

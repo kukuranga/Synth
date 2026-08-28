@@ -95,6 +95,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 _shop.Init();
                 _CheckBanner.SetActive(false);
                 UpdateGameState(GameState.GamePlay);
+                _shop.SetUpShop(_NumberOfShopContainersToOpen);
                 break;
             case GameState.RoundStart:
                 DisableUI();
@@ -137,7 +138,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 //players can buy units to add to their deck or increase the size of the galaxy
                 //reset a suspended unit if applicible
                 VFX2Manager.Instance.OpenShopVFX();
-                _shop.SetUpShop(_NumberOfShopContainersToOpen);
+                //_shop.SetUpShop(_NumberOfShopContainersToOpen);
                 break;
             case GameState.Gamewon:
                 DisableUI();
