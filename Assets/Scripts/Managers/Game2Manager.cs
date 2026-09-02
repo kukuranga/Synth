@@ -95,7 +95,7 @@ public class Game2Manager : Singleton<Game2Manager>
                 _shop.Init();
                 _CheckBanner.SetActive(false);
                 UpdateGameState(GameState.GamePlay);
-                _shop.SetUpShop(_NumberOfShopContainersToOpen);
+                _shop.SetUpShop();
                 break;
             case GameState.RoundStart:
                 DisableUI();

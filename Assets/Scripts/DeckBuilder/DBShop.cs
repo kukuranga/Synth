@@ -36,7 +36,7 @@ public class DBShop : MonoBehaviour
         AddUnitListToPool(_BasePack);
     }
 
-    public void SetUpShop(int NumberOfOptions)
+    public void SetUpShop()
     {
         ShopOrientation _SelectedShop = _ShopOrientations[0];
 
@@ -67,12 +67,12 @@ public class DBShop : MonoBehaviour
                     _greenPull.RemoveAt(0);
                     break;
                 case ShopType.Star:
-                    _u.SetUnit(_dangerPull[0]);
-                    _dangerPull.RemoveAt(0);
-                    break;
-                case ShopType.Danger:
                     _u.SetUnit(_starPull[0]);
                     _starPull.RemoveAt(0);
+                    break;
+                case ShopType.Danger:
+                    _u.SetUnit(_dangerPull[0]);
+                    _dangerPull.RemoveAt(0);
                     break;
                 case ShopType.Unique:
                     _u.SetUnit(_uniquePull[0]);
@@ -113,5 +113,14 @@ public class DBShop : MonoBehaviour
         {
             _ShopPool._UnitList.Add(_u);
         }
+    }
+
+    public void RefreshShop()
+    {
+        _ShopPool._UnitList.Clear();
+        _ShopContainers.Clear();
+        _ShopContainers = new List<DBShopContainer>(_ContainerParent.GetComponentsInChildren<DBShopContainer>());
+
+        SetUpShop();
     }
 }
