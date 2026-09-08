@@ -7,6 +7,5 @@ public class DBBackToGameButton : MonoBehaviour
     public void OnClick()
     {
         VFX2Manager.Instance.CloseShopVFX();
-        //Game2Manager.Instance.UpdateGameState(GameState.RoundStart);
     }
 }

@@ -175,8 +175,7 @@ public class Game2Manager : Singleton<Game2Manager>
             UpdateGameState(GameState.GamePlay);
             return true;
         }
-
-        //TODO: figure out how to check the gamestate and bring it back to check conditions after an ability is used        
+       
         return false;
     }
 
@@ -191,7 +190,6 @@ public class Game2Manager : Singleton<Game2Manager>
         _ActiveContainers = _DBContMan._StartingContainers;
     }
 
-    //Call this after the unit has been placed into the scene from the deck
     public bool CheckDanger()
     {
         int i = _ContainerManager.GetNumberOfDangerActive();
@@ -517,10 +515,6 @@ public class Game2Manager : Singleton<Game2Manager>
         _ShopBuyUI.SetActive(true);
         _ShopBuyUI.GetComponent<ShopBuyScreen>().SetUnit(_Unit, _ShopCont);
         _shop.gameObject.SetActive(false);
-
-        // Set Shop UI Unit here
-        //update the info
-        //
 
     }
 
